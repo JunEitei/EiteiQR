@@ -1,5 +1,7 @@
 # EiteiQR
 
+![CocoaPods](https://img.shields.io/cocoapods/v/EiteiQR.svg)
+
 EiteiQR 是一個輕量級的 iOS 二維碼生成與掃描庫，旨在為開發者提供一個簡單易用的接口，來集成二維碼生成與掃描功能。它支持多種二維碼格式，並且具有高效的掃描性能，適用於各種 iOS 應用開發場景。
 
 ## 功能特點
@@ -17,7 +19,7 @@ EiteiQR 是一個輕量級的 iOS 二維碼生成與掃描庫，旨在為開發�
 pod 'EiteiQR'
 
 
-### 使用
+## 使用
 
 import UIKit
 import EiteiQR
