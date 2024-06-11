@@ -16,7 +16,8 @@ EiteiQR 是一個輕量級的 iOS 二維碼生成與掃描庫，旨在為開發�
 ### 將以下代碼添加到您的 `Podfile` 中：
 
 ```ruby
-pod 'EiteiQR'
+pod 'EiteiQR', :git => 'https://github.com/JunEitei/EiteiQR'
+
 ```
 
 ## 使用
