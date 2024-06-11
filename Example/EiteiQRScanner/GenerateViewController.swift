@@ -7,8 +7,6 @@
 
 import UIKit
 import EiteiQR
-import QRCode
-import SnapKit
 
 class GenerateViewController: UIViewController, UITextFieldDelegate {
     
