@@ -20,7 +20,7 @@ pod 'EiteiQR', :git => 'https://github.com/JunEitei/EiteiQR'
 
 ```
 
-## 使用
+## 使用只需2行代碼
 
 1. **導入庫**：
    ```swift
@@ -32,6 +32,4 @@ pod 'EiteiQR', :git => 'https://github.com/JunEitei/EiteiQR'
    window?.rootViewController = ViewController()
    ```
 
-EiteiQR 的安裝與使用極其簡單，只需2行代碼即可集成強大的二維碼生成與掃描功能。讓您的應用更加智能和高效！
-
-### 參考EiteiQRScanner
+### 請參考EiteiQRScanner
