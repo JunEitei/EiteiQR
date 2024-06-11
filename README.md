@@ -3,9 +3,6 @@
 ![CocoaPods](https://img.shields.io/cocoapods/v/EiteiQR.svg)
 
 ## 安裝
-
-### 將以下代碼添加到您的 `Podfile` 中：
-
 ```ruby
 pod 'EiteiQR', :git => 'https://github.com/JunEitei/EiteiQR'
 
