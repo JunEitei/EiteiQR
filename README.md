@@ -33,4 +33,4 @@ pod 'EiteiQR'
 
 EiteiQR 的安裝與使用極其簡單，只需2行代碼即可集成強大的二維碼生成與掃描功能。讓您的應用更加智能和高效！
 
-## Example
+## 提供Example:EiteiQRScanner
