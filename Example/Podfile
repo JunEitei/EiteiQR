@@ -2,8 +2,6 @@ use_frameworks!
 
 target 'EiteiQRScanner' do
 
-pod 'EiteiQR'
-pod 'DSF_QRCode', '~> 19.0.0'
-pod 'SnapKit', '~> 5.7.0'
+pod 'EiteiQR', :git => 'https://github.com/JunEitei/EiteiQR'
 
 end
