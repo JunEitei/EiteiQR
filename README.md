@@ -1,4 +1,4 @@
-# EiteiQR
+# EiteiQR V2
 
 ![CocoaPods](https://img.shields.io/cocoapods/v/EiteiQR.svg)
 
@@ -17,36 +17,18 @@ EiteiQR 是一個輕量級的 iOS 二維碼生成與掃描庫，旨在為開發�
 
 ```ruby
 pod 'EiteiQR'
-
+```
 
 ## 使用
 
-import UIKit
-import EiteiQR
+1. **導入庫**：
+   ```swift
+   import EiteiQR
+   ```
 
-class ViewController: UIViewController {
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
-        // 二維碼生成示例
-        let qrCodeImage = EiteiQR.generateQRCode(from: "https://example.com", size: CGSize(width: 200, height: 200))
-        let imageView = UIImageView(image: qrCodeImage)
-        imageView.center = view.center
-        view.addSubview(imageView)
-        
-        // 二維碼掃描示例
-        let scannerButton = UIButton(type: .system)
-        scannerButton.setTitle("掃描二維碼", for: .normal)
-        scannerButton.addTarget(self, action: #selector(scanQRCode), for: .touchUpInside)
-        scannerButton.frame = CGRect(x: 100, y: 400, width: 200, height: 50)
-        view.addSubview(scannerButton)
-    }
-    
-    @objc func scanQRCode() {
-        let scanner = EiteiQRScannerViewController()
-        scanner.didFindCode = { code in
-            print("掃描結果：\(code)")
-        }
-        present(scanner, animated: true, completion: nil)
-    }
-}
+2. **設置根視圖控制器**：
+   ```swift
+   window?.rootViewController = ViewController()
+   ```
+
+EiteiQR 的安裝與使用極其簡單，只需2行代碼即可集成強大的二維碼生成與掃描功能。讓您的應用更加智能和高效！

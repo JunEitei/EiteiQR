@@ -1,6 +1,6 @@
 //
-//  EiteiQRScanner.swift
-//  EiteiQRScanner
+//  EiteiQR.swift
+//  EiteiQR
 //
 //  Created by damao on 2024/6/6.
 //
