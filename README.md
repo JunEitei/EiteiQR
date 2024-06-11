@@ -8,7 +8,7 @@ pod 'EiteiQR', :git => 'https://github.com/JunEitei/EiteiQR'
 
 ```
 
-## 使用只需2行代碼（可參考EiteiQRScanner）
+## 使用
 
 1. **導入庫**：
    ```swift
