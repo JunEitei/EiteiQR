@@ -7,9 +7,9 @@
 #if canImport(UIKit)
 import UIKit
 
-class ViewController: UITabBarController {
+public class ViewController: UITabBarController {
 
-    override func viewDidLoad() {
+    public override func viewDidLoad() {
         super.viewDidLoad()
         // 註冊其他自定義邏輯，例如設置 TabBar 預設屬性
         let generateViewController = GenerateViewController()

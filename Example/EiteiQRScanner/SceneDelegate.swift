@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import EiteiQR
 
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
@@ -18,7 +19,9 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
         window = UIWindow(windowScene: windowScene)
 
-        window?.rootViewController = ViewController()
+        let qrViewController = EiteiQR.ViewController() // Replace with the actual class name
+        window?.rootViewController = qrViewController
+
         window?.makeKeyAndVisible()
     }
 
