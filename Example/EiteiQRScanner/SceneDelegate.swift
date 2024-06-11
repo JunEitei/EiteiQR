@@ -19,7 +19,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
         window = UIWindow(windowScene: windowScene)
 
-        let qrViewController = EiteiQR.ViewController() // Replace with the actual class name
+        let qrViewController = EiteiQR.ViewController() 
         window?.rootViewController = qrViewController
 
         window?.makeKeyAndVisible()
