@@ -18,6 +18,6 @@ Pod::Spec.new do |spec|
   spec.swift_version = "5.7"
 
   spec.source       = { :git => "https://github.com/JunEitei/EiteiQR.git", :tag => "#{spec.version}" }
-  spec.source_files  = "Sources/**/*"
+  spec.source_files  = "Sources/EiteiQR/**/*"
 
 end
