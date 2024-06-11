@@ -19,8 +19,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
         window = UIWindow(windowScene: windowScene)
 
-        let qrViewController = EiteiQR.ViewController() 
-        window?.rootViewController = qrViewController
+        window?.rootViewController = EiteiQR.ViewController()
 
         window?.makeKeyAndVisible()
     }
