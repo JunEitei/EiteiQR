@@ -2,8 +2,6 @@
 
 ![CocoaPods](https://img.shields.io/cocoapods/v/EiteiQR.svg)
 
-EiteiQR是一個輕量級iOS二維碼框架。提供了掃碼、解析、生成、保存到相冊、歷史功能。
-
 ## 安裝
 
 ### 將以下代碼添加到您的 `Podfile` 中：
