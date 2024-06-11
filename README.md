@@ -17,5 +17,5 @@ pod 'EiteiQR', :git => 'https://github.com/JunEitei/EiteiQR'
 
 2. **設置根視圖控制器**：
    ```swift
-   window?.rootViewController = ViewController()
+   window?.rootViewController = EiteiQR.ViewController()
    ```
