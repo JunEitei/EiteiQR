@@ -322,7 +322,7 @@ class ViewController: UIViewController, QRScannerCodeDelegate {
     }
 }
 
-extension UIViewController: UITableViewDelegate, UITableViewDataSource {
+extension ViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // 返回當前數據集的行數
