@@ -273,8 +273,8 @@ class HistoryViewController: UIViewController, QRScannerCodeDelegate {
         let currentDate = dateFormatter.string(from: Date())
         
         // 根据当前 Segment 设置描述信息
-        let description = segmentedControl.selectedIndex == 0 ? "掃碼成功" : "添加成功"
-        
+        var description = segmentedControl.selectedIndex == 0 ? "掃碼時間：" : "添加時間："
+        description = description + TimeUtil.getCurrentTimeString();
         
         // 添加数据到当前数据集合
         let newEntry = (result, description, currentDate)
