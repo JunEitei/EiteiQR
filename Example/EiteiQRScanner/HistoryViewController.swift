@@ -62,7 +62,7 @@ class HistoryViewController: UIViewController, QRScannerCodeDelegate {
     
     private func setupView() {
         // 設置背景顏色
-        self.view.backgroundColor = UIColor(hex: "#303030")
+        self.view.backgroundColor = UIColor.eiteiGray
         
         // 自定義頂部標題視圖
         let customTitleView = UIView()
@@ -90,9 +90,9 @@ class HistoryViewController: UIViewController, QRScannerCodeDelegate {
     private func setupSegmentedControl() {
         // 配置 SegmentedControl
         segmentedControl.items = ["Scan", "Create"]
-        segmentedControl.textDefaultColor = UIColor(hex: "#feb600")
-        segmentedControl.textSelectedColor = UIColor(hex: "#feb600")
-        segmentedControl.underlineColor = UIColor(hex: "#feb600")
+        segmentedControl.textDefaultColor = UIColor.eiteiOrange
+        segmentedControl.textSelectedColor = UIColor.eiteiOrange
+        segmentedControl.underlineColor = UIColor.eiteiOrange
         segmentedControl.backgroundColor = UIColor.clear
         self.view.addSubview(segmentedControl)
         
@@ -107,7 +107,7 @@ class HistoryViewController: UIViewController, QRScannerCodeDelegate {
     
     private func setupTableView() {
         // 設置表格視圖
-        tableView.backgroundColor = UIColor(hex: "#303030")
+        tableView.backgroundColor = UIColor.eiteiGray
         tableView.separatorStyle = .none
         tableView.showsVerticalScrollIndicator = false
         tableView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
@@ -164,7 +164,7 @@ class HistoryViewController: UIViewController, QRScannerCodeDelegate {
         // History 標籤按鈕
         let historyTabButton = UIButton()
         historyTabButton.setTitle("History", for: .normal)
-        historyTabButton.setTitleColor(UIColor(hex: "#ffffff"), for: .normal)
+        historyTabButton.setTitleColor(UIColor.white, for: .normal)
         bottomBarView.addSubview(historyTabButton)
         
         let historyIcon = UIImageView(image: UIImage(named: "icon_history"))
@@ -185,7 +185,7 @@ class HistoryViewController: UIViewController, QRScannerCodeDelegate {
         
         let createTabButton = UIButton()
         createTabButton.setTitle("Create", for: .normal)
-        createTabButton.setTitleColor(UIColor(hex: "#ffffff"), for: .normal)
+        createTabButton.setTitleColor(UIColor.white, for: .normal)
         bottomBarView.addSubview(createTabButton)
         
         let createIcon = UIImageView(image: UIImage(named: "icon_create"))
