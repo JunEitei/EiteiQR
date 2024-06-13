@@ -1,5 +1,5 @@
 //
-//  HistoryViewController.swift
+//  HistoryCell.swift
 //  EiteiQRScanner
 //
 //  Created by damao on 2024/6/13.
@@ -20,7 +20,7 @@ class HistoryCell: UITableViewCell {
     private let iconImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.backgroundColor = .blue // 示例圖標背景色
-        imageView.layer.cornerRadius = 30
+        imageView.layer.cornerRadius = 10
         imageView.clipsToBounds = true
         return imageView
     }()
@@ -63,9 +63,9 @@ class HistoryCell: UITableViewCell {
         }
         
         iconImageView.snp.makeConstraints { make in
-            make.top.equalTo(cardView).offset(10)
+            make.size.equalTo(CGSize(width: 60, height: 60)) // 設置為方形
+            make.top.equalTo(cardView).offset(7)
             make.leading.equalTo(cardView).offset(15)
-            make.width.height.equalTo(60)
         }
         
         urlLabel.snp.makeConstraints { make in
@@ -81,10 +81,8 @@ class HistoryCell: UITableViewCell {
         }
         
         dateLabel.snp.makeConstraints { make in
-            make.top.equalTo(descriptionLabel.snp.bottom).offset(5)
-            make.leading.equalTo(iconImageView.snp.trailing).offset(15)
+            make.centerY.equalTo(descriptionLabel)
             make.trailing.equalTo(cardView).offset(-15)
-            make.bottom.equalTo(cardView).offset(-10)
         }
     }
     

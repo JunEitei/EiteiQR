@@ -1,5 +1,5 @@
 //
-//  HistoryCell.swift
+//  HistoryViewController.swift
 //  EiteiQRScanner
 //
 //  Created by damao on 2024/6/13.
@@ -69,7 +69,7 @@ class HistoryViewController: UIViewController {
         
         // 使用 SnapKit 設置底部欄視圖的佈局
         bottomBarView.snp.makeConstraints { make in
-            make.height.equalTo(100)
+            make.height.equalTo(120) // 增加高度
             make.leading.trailing.bottom.equalTo(self.view)
         }
         
@@ -79,11 +79,23 @@ class HistoryViewController: UIViewController {
         historyTabButton.setTitleColor(UIColor(hex: "#ffffff"), for: .normal)
         bottomBarView.addSubview(historyTabButton)
         
-        // 使用 SnapKit 設置 History 標籤按鈕的佈局
+        // 添加 History 圖標
+        let historyIcon = UIImageView(image: UIImage(named: "icon_history"))
+        bottomBarView.addSubview(historyIcon)
+        
+        // 使用 SnapKit 設置 History 圖標和按鈕的佈局
+        historyIcon.snp.makeConstraints { make in
+            make.centerX.equalTo(historyTabButton.snp.centerX)
+            make.bottom.equalTo(historyTabButton.snp.top).offset(-5)
+            make.width.height.equalTo(30)
+        }
+        
         historyTabButton.snp.makeConstraints { make in
             make.centerY.equalTo(bottomBarView)
             make.leading.equalTo(bottomBarView).offset(50)
         }
+        
+        historyTabButton.titleLabel?.font = UIFont.systemFont(ofSize: 14, weight: .bold)
         
         // 中間的大按鈕
         let scanTabButton = UIButton()
@@ -96,7 +108,7 @@ class HistoryViewController: UIViewController {
         
         // 使用 SnapKit 設置中間的大按鈕的佈局
         scanTabButton.snp.makeConstraints { make in
-            make.centerY.equalTo(bottomBarView.snp.top).offset(50)
+            make.centerY.equalTo(bottomBarView.snp.top).offset(60)
             make.centerX.equalTo(bottomBarView)
             make.width.height.equalTo(60)
         }
@@ -107,11 +119,23 @@ class HistoryViewController: UIViewController {
         createTabButton.setTitleColor(UIColor(hex: "#ffffff"), for: .normal)
         bottomBarView.addSubview(createTabButton)
         
-        // 使用 SnapKit 設置 Create 標籤按鈕的佈局
+        // 添加 Create 圖標
+        let createIcon = UIImageView(image: UIImage(named: "icon_create"))
+        bottomBarView.addSubview(createIcon)
+        
+        // 使用 SnapKit 設置 Create 圖標和按鈕的佈局
+        createIcon.snp.makeConstraints { make in
+            make.centerX.equalTo(createTabButton.snp.centerX)
+            make.bottom.equalTo(createTabButton.snp.top).offset(-5)
+            make.width.height.equalTo(30)
+        }
+        
         createTabButton.snp.makeConstraints { make in
             make.centerY.equalTo(bottomBarView)
             make.trailing.equalTo(bottomBarView).offset(-50)
         }
+        
+        createTabButton.titleLabel?.font = UIFont.systemFont(ofSize: 14, weight: .bold)
         
         // 更新表格視圖樣式
         tableView.reloadData()
@@ -174,3 +198,4 @@ extension UIColor {
         self.init(red: red, green: green, blue: blue, alpha: 1.0)
     }
 }
+
