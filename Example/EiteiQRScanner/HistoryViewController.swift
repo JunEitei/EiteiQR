@@ -3,6 +3,8 @@ import EiteiQR
 
 class HistoryViewController: UIViewController, QRScannerCodeDelegate {
     
+    // MARK: - QRScannerCodeDelegate Methods
+    
     func qrScanner(_ controller: UIViewController, didScanQRCodeWithResult result: String) {
         print("掃描結果：\(result)")
         controller.dismiss(animated: true, completion: nil)
@@ -18,11 +20,25 @@ class HistoryViewController: UIViewController, QRScannerCodeDelegate {
         controller.dismiss(animated: true, completion: nil)
     }
     
+    // MARK: - Properties
+    
     let tableView = UITableView()
+    let segmentedControl = EiteiSegmentedControl()
+    
+    // MARK: - Lifecycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        setupView()
+        setupSegmentedControl()
+        setupTableView()
+        setupBottomBarView()
+    }
+    
+    // MARK: - Setup Methods
+    
+    private func setupView() {
         // 設置背景顏色
         self.view.backgroundColor = UIColor(hex: "#303030")
         
@@ -47,16 +63,34 @@ class HistoryViewController: UIViewController, QRScannerCodeDelegate {
         titleLabel.snp.makeConstraints { make in
             make.center.equalTo(customTitleView)
         }
+    }
+    
+    private func setupSegmentedControl() {
+        // 配置 SegmentedControl
+        segmentedControl.items = ["Scan", "Create"]
+        segmentedControl.textDefaultColor = UIColor(hex: "#feb600")
+        segmentedControl.textSelectedColor = UIColor(hex: "#feb600")
+        segmentedControl.underlineColor = UIColor(hex: "#feb600")
+        segmentedControl.backgroundColor = UIColor.clear
+        self.view.addSubview(segmentedControl)
         
+        segmentedControl.snp.makeConstraints { make in
+            make.top.equalTo(self.view.safeAreaLayoutGuide.snp.top).offset(70)  // 調整位置
+            make.leading.trailing.equalTo(self.view)
+            make.height.equalTo(40)
+        }
+    }
+    
+    private func setupTableView() {
         // 設置表格視圖
         tableView.backgroundColor = UIColor(hex: "#303030")
         tableView.separatorStyle = .none
         tableView.showsVerticalScrollIndicator = false
-        tableView.contentInset = UIEdgeInsets(top: 20, left: 0, bottom: 0, right: 0)
+        tableView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)  // 調整偏移量
         self.view.addSubview(tableView)
         
         tableView.snp.makeConstraints { make in
-            make.top.equalTo(customTitleView.snp.bottom).offset(10)
+            make.top.equalTo(segmentedControl.snp.bottom).offset(10)
             make.leading.equalTo(self.view).offset(10)
             make.trailing.equalTo(self.view).offset(-10)
             make.bottom.equalTo(self.view).offset(-100)
@@ -65,7 +99,9 @@ class HistoryViewController: UIViewController, QRScannerCodeDelegate {
         tableView.delegate = self
         tableView.dataSource = self
         tableView.register(HistoryCell.self, forCellReuseIdentifier: "CustomCell")
-        
+    }
+    
+    private func setupBottomBarView() {
         // 設置底部欄視圖
         let bottomBarView = UIView()
         bottomBarView.backgroundColor = UIColor(hex: "#333333")
@@ -167,9 +203,9 @@ class HistoryViewController: UIViewController, QRScannerCodeDelegate {
         }
         
         createTabButton.titleLabel?.font = UIFont.systemFont(ofSize: 14, weight: .bold)
-        
-        tableView.reloadData()
     }
+    
+    // MARK: - Actions
     
     @objc func scanQRCodeButtonTapped(sender: UIButton) {
         // 添加動畫效果
@@ -220,16 +256,19 @@ class HistoryViewController: UIViewController, QRScannerCodeDelegate {
 extension HistoryViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        // 返回數據行數
         return 4
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "CustomCell", for: indexPath) as! HistoryCell
+        // 配置表格單元格
         cell.configure(with: "https://www.google.com.tw", subtitle: "Foraging for wild food", date: "2023-09-10")
         return cell
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        // 設置單元格高度
         return 85
     }
     
@@ -240,13 +279,17 @@ extension HistoryViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        // 設置表頭高度
         return 10
     }
     
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        // 設置選擇樣式
         cell.selectionStyle = .none
     }
 }
+
+// MARK: - UIColor Extension
 
 extension UIColor {
     convenience init(hex: String) {
