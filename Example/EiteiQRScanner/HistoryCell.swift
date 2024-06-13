@@ -1,17 +1,10 @@
-//
-//  HistoryCell.swift
-//  EiteiQR
-//
-//  Created by damao on 2024/6/13.
-//
-
 import UIKit
 
 class HistoryCell: UITableViewCell {
     
     // MARK: - Views
     
-    // 卡片视图，作为单元格的背景
+    // 卡片视图，作为单元格的背景，使用深灰色背景和圆角
     private let cardView: UIView = {
         let view = UIView()
         view.backgroundColor = UIColor(hex: "#555555") // 设置背景颜色为深灰色
@@ -20,16 +13,15 @@ class HistoryCell: UITableViewCell {
         return view
     }()
     
-    // 图标视图，显示二维码或相关图标
+    // 图标视图，显示二维码或相关图标，设置圆角和裁剪
     private let iconImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.layer.cornerRadius = 10 // 设置圆角
         imageView.clipsToBounds = true // 超出部分裁剪
-        
         return imageView
     }()
     
-    // URL 标签，显示URL的文本
+    // URL 标签，显示URL的文本，使用加粗的16号字体
     private let urlLabel: UILabel = {
         let label = UILabel()
         label.font = UIFont.systemFont(ofSize: 16, weight: .bold) // 设置字体为加粗的16号
@@ -37,7 +29,7 @@ class HistoryCell: UITableViewCell {
         return label
     }()
     
-    // 描述标签，显示简短描述文本
+    // 描述标签，显示简短描述文本，使用常规的14号字体
     private let descriptionLabel: UILabel = {
         let label = UILabel()
         label.font = UIFont.systemFont(ofSize: 14, weight: .regular) // 设置字体为常规的14号
@@ -45,7 +37,7 @@ class HistoryCell: UITableViewCell {
         return label
     }()
     
-    // 日期标签，显示日期信息
+    // 日期标签，显示日期信息，使用常规的12号字体
     private let dateLabel: UILabel = {
         let label = UILabel()
         label.font = UIFont.systemFont(ofSize: 12, weight: .regular) // 设置字体为常规的12号
@@ -79,7 +71,8 @@ class HistoryCell: UITableViewCell {
         iconImageView.snp.makeConstraints { make in
             make.size.equalTo(CGSize(width: 60, height: 60)) // 设置图标为方形
             make.top.equalTo(cardView).offset(7) // 上边距为7
-            make.leading.equalTo(cardView).offset(15) // 左边距为15
+            make.leading.equalTo(cardView).offset(21) // 左边距为21
+            make.centerY.equalTo(cardView) // 垂直居中于卡片视图
         }
         
         // 设置URL标签的约束
@@ -115,28 +108,19 @@ class HistoryCell: UITableViewCell {
         descriptionLabel.text = subtitle // 设置描述标签文本
         dateLabel.text = date // 设置日期标签文本
         
-        // 设置随机颜色给图标，调用生成随机颜色的函数
-        iconImageView.backgroundColor = generateRandomColor()
+        // 设置颜色给图标
+        iconImageView.backgroundColor = UIColor(hex: "#feb600")
         
-        // 按鈕圖標取決於二維碼內容是否為URL
-        iconImageView.image = UIImage(named: isValidURL(url) ? "icon_website" : "icon_text")
-        
+        // 按钮图标取决于二维码内容是否为URL
+        iconImageView.image = UIImage(named: isValidURL(url) ? "icon_website" : "icon_text")?.withRenderingMode(.alwaysOriginal)
     }
     
     // MARK: - Helpers
     
-    
-    // 判斷是否是URL
+    // 判断是否是URL
     private func isValidURL(_ string: String) -> Bool {
         guard let url = URL(string: string) else { return false }
         return UIApplication.shared.canOpenURL(url)
     }
     
-    /// 生成随机颜色，确保颜色不会太亮
-    private func generateRandomColor() -> UIColor {
-        let red = CGFloat.random(in: 0.3...0.7) // 随机生成红色值
-        let green = CGFloat.random(in: 0.3...0.7) // 随机生成绿色值
-        let blue = CGFloat.random(in: 0.3...0.7) // 随机生成蓝色值
-        return UIColor(red: red, green: green, blue: blue, alpha: 1.0)
-    }
 }
