@@ -64,7 +64,7 @@ public class EiteiSegmentedControl: UIControl {
     // MARK: - Public Properties
     
     /// 當前所選的索引
-    public private(set) var selectedIndex = 0
+    public var selectedIndex = 0
     
     /// 分段控制元件的項目
     public var items: [String] = [] {

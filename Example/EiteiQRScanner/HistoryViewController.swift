@@ -99,6 +99,10 @@ class HistoryViewController: UIViewController, QRScannerCodeDelegate {
         tableView.delegate = self
         tableView.dataSource = self
         tableView.register(HistoryCell.self, forCellReuseIdentifier: "CustomCell")
+        
+        // 設置選中回調
+        segmentedControl.addTarget(self, action: #selector(segmentedControlValueChanged), for: .valueChanged)
+        
     }
     
     private func setupBottomBarView() {
@@ -207,6 +211,21 @@ class HistoryViewController: UIViewController, QRScannerCodeDelegate {
     
     // MARK: - Actions
     
+    // 切換選項卡回調
+    @objc func segmentedControlValueChanged(_ sender: EiteiSegmentedControl) {
+        switch sender.selectedIndex {
+        case 0:
+            print("掃描選項被選中")
+            // TODO
+        case 1:
+            print("創建選項被選中")
+            // TODO
+        default:
+            break
+        }
+    }
+    
+    // 掃瞄按鈕點擊
     @objc func scanQRCodeButtonTapped(sender: UIButton) {
         // 添加動畫效果
         UIView.animate(withDuration: 0.1, animations: {
