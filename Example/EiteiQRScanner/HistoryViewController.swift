@@ -35,15 +35,14 @@ class HistoryViewController: UIViewController {
         // 設置表格視圖
         tableView.backgroundColor = UIColor(hex: "#303030")
         tableView.separatorStyle = .none
-        tableView.showsVerticalScrollIndicator = false // 隱藏垂直滾動條
-        tableView.contentInset = UIEdgeInsets(top: 20, left: 0, bottom: 0, right: 0) // 上部填充
+        tableView.showsVerticalScrollIndicator = false
+        tableView.contentInset = UIEdgeInsets(top: 20, left: 0, bottom: 0, right: 0)
         self.view.addSubview(tableView)
         
-        // 使用 SnapKit 設置表格視圖的佈局
         tableView.snp.makeConstraints { make in
             make.top.equalTo(customTitleView.snp.bottom).offset(10)
-            make.leading.equalTo(self.view).offset(10) // 左邊距設置為10
-            make.trailing.equalTo(self.view).offset(-10) // 右邊距設置為10
+            make.leading.equalTo(self.view).offset(10)
+            make.trailing.equalTo(self.view).offset(-10)
             make.bottom.equalTo(self.view).offset(-100)
         }
         
@@ -60,23 +59,31 @@ class HistoryViewController: UIViewController {
         bottomBarView.layer.shadowRadius = 10
         self.view.addSubview(bottomBarView)
         
-        // 使用 SnapKit 設置底部欄視圖的佈局
         bottomBarView.snp.makeConstraints { make in
-            make.height.equalTo(120) // 增加高度
+            make.height.equalTo(120)
             make.leading.trailing.bottom.equalTo(self.view)
         }
         
         // 添加凹進去的半圓形曲線
         let curveLayer = CAShapeLayer()
         let path = UIBezierPath()
+        
+        // 左半邊曲線
         path.move(to: CGPoint(x: 0, y: 0))
-        path.addQuadCurve(to: CGPoint(x: self.view.frame.width, y: 0), controlPoint: CGPoint(x: self.view.frame.width / 2, y: -40))
+        path.addQuadCurve(to: CGPoint(x: self.view.frame.width / 2, y: 100), controlPoint: CGPoint(x: self.view.frame.width / 4, y: -90))
+        
+        // 右半邊曲線
+        path.addQuadCurve(to: CGPoint(x: self.view.frame.width, y: 0), controlPoint: CGPoint(x: self.view.frame.width * 3 / 4, y: -90))
         path.addLine(to: CGPoint(x: self.view.frame.width, y: 120))
         path.addLine(to: CGPoint(x: 0, y: 120))
         path.close()
+        
         curveLayer.path = path.cgPath
         curveLayer.fillColor = UIColor(hex: "#333333").cgColor
         bottomBarView.layer.addSublayer(curveLayer)
+        
+        // 确保曲线位于底部视图的最底层
+        bottomBarView.layer.insertSublayer(curveLayer, at: 0)
         
         // History 標籤按鈕
         let historyTabButton = UIButton()
@@ -84,11 +91,9 @@ class HistoryViewController: UIViewController {
         historyTabButton.setTitleColor(UIColor(hex: "#ffffff"), for: .normal)
         bottomBarView.addSubview(historyTabButton)
         
-        // 添加 History 圖標
         let historyIcon = UIImageView(image: UIImage(named: "icon_history"))
         bottomBarView.addSubview(historyIcon)
         
-        // 使用 SnapKit 設置 History 圖標和按鈕的佈局
         historyIcon.snp.makeConstraints { make in
             make.centerX.equalTo(historyTabButton.snp.centerX)
             make.bottom.equalTo(historyTabButton.snp.top).offset(-5)
@@ -106,18 +111,17 @@ class HistoryViewController: UIViewController {
         let scanTabButton = UIButton()
         scanTabButton.backgroundColor = UIColor(hex: "#feb600")
         scanTabButton.layer.cornerRadius = 45
-        scanTabButton.layer.masksToBounds = false
+        scanTabButton.layer.masksToBounds = true
         scanTabButton.layer.borderColor = UIColor(hex: "#feb600").cgColor
         bottomBarView.addSubview(scanTabButton)
         
-        let scanImageView = UIImageView(image: UIImage(named: "scan")) // 使用 scan 圖片
+        let scanImageView = UIImageView(image: UIImage(named: "scan"))
         scanImageView.contentMode = .scaleAspectFit
         scanTabButton.addSubview(scanImageView)
         
-        // 使用 SnapKit 設置中間的大按鈕的佈局
         scanImageView.snp.makeConstraints { make in
             make.center.equalTo(scanTabButton)
-            make.width.height.equalTo(90) // 適當放大圖片
+            make.width.height.equalTo(60)
         }
         
         scanTabButton.snp.makeConstraints { make in
@@ -126,17 +130,14 @@ class HistoryViewController: UIViewController {
             make.width.height.equalTo(90)
         }
         
-        // Create 標籤按鈕
         let createTabButton = UIButton()
         createTabButton.setTitle("Create", for: .normal)
         createTabButton.setTitleColor(UIColor(hex: "#ffffff"), for: .normal)
         bottomBarView.addSubview(createTabButton)
         
-        // 添加 Create 圖標
         let createIcon = UIImageView(image: UIImage(named: "icon_create"))
         bottomBarView.addSubview(createIcon)
         
-        // 使用 SnapKit 設置 Create 圖標和按鈕的佈局
         createIcon.snp.makeConstraints { make in
             make.centerX.equalTo(createTabButton.snp.centerX)
             make.bottom.equalTo(createTabButton.snp.top).offset(-5)
@@ -150,7 +151,6 @@ class HistoryViewController: UIViewController {
         
         createTabButton.titleLabel?.font = UIFont.systemFont(ofSize: 14, weight: .bold)
         
-        // 更新表格視圖樣式
         tableView.reloadData()
     }
 }
@@ -158,18 +158,17 @@ class HistoryViewController: UIViewController {
 extension HistoryViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 4 // 示例數據的數量
+        return 4
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "CustomCell", for: indexPath) as! HistoryCell
-        // 配置 cell 與示例數據
         cell.configure(with: "https://www.google.com.tw", subtitle: "Foraging for wild food", date: "2023-09-10")
         return cell
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 85 // 增加 cell 高度以適應圓角和間距
+        return 85
     }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
@@ -179,21 +178,19 @@ extension HistoryViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return 10 // 設置 Cell 之間的間距
+        return 10
     }
     
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-        cell.selectionStyle = .none // 關閉選中效果
+        cell.selectionStyle = .none
     }
 }
 
-
-// UIColor 擴展，用於從十六進制代碼初始化
 extension UIColor {
     convenience init(hex: String) {
         var hexString = hex.trimmingCharacters(in: .whitespacesAndNewlines).uppercased()
         
-        if hexString.hasPrefix ("#") {
+        if hexString.hasPrefix("#") {
             hexString.remove(at: hexString.startIndex)
         }
         
@@ -212,4 +209,3 @@ extension UIColor {
         self.init(red: red, green: green, blue: blue, alpha: 1.0)
     }
 }
-
