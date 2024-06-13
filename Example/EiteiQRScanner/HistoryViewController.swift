@@ -68,14 +68,15 @@ class HistoryViewController: UIViewController {
         let curveLayer = CAShapeLayer()
         let path = UIBezierPath()
         
-        // 左半邊曲線
+        // 左曲線
         path.move(to: CGPoint(x: 0, y: 0))
-        path.addQuadCurve(to: CGPoint(x: self.view.frame.width / 2, y: 100), controlPoint: CGPoint(x: self.view.frame.width / 4, y: -90))
+        path.addQuadCurve(to: CGPoint(x: self.view.frame.width / 2, y: 90), controlPoint: CGPoint(x: self.view.frame.width / 2, y: -90))
         
-        // 右半邊曲線
-        path.addQuadCurve(to: CGPoint(x: self.view.frame.width, y: 0), controlPoint: CGPoint(x: self.view.frame.width * 3 / 4, y: -90))
-        path.addLine(to: CGPoint(x: self.view.frame.width, y: 120))
-        path.addLine(to: CGPoint(x: 0, y: 120))
+        // 右曲線
+        path.addQuadCurve(to: CGPoint(x: self.view.frame.width / 2, y: 100), controlPoint: CGPoint(x: self.view.frame.width / 2, y: 150))
+        path.addQuadCurve(to: CGPoint(x: self.view.frame.width, y: 0), controlPoint: CGPoint(x: self.view.frame.width / 2, y: -90))
+        
+        
         path.close()
         
         curveLayer.path = path.cgPath
@@ -109,7 +110,6 @@ class HistoryViewController: UIViewController {
         
         // 中間的大按鈕
         let scanTabButton = UIButton()
-        scanTabButton.backgroundColor = UIColor(hex: "#feb600")
         scanTabButton.layer.cornerRadius = 45
         scanTabButton.layer.masksToBounds = true
         scanTabButton.layer.borderColor = UIColor(hex: "#feb600").cgColor
@@ -121,7 +121,7 @@ class HistoryViewController: UIViewController {
         
         scanImageView.snp.makeConstraints { make in
             make.center.equalTo(scanTabButton)
-            make.width.height.equalTo(60)
+            make.width.height.equalTo(90)
         }
         
         scanTabButton.snp.makeConstraints { make in
