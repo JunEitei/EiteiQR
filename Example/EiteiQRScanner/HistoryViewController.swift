@@ -1,3 +1,10 @@
+//
+//  HistoryViewController.swift
+//  EiteiQR
+//
+//  Created by damao on 2024/6/13.
+//
+
 import UIKit
 import EiteiQR
 
@@ -75,7 +82,7 @@ class HistoryViewController: UIViewController, QRScannerCodeDelegate {
         self.view.addSubview(segmentedControl)
         
         segmentedControl.snp.makeConstraints { make in
-            make.top.equalTo(self.view.safeAreaLayoutGuide.snp.top).offset(70)  // 調整位置
+            make.top.equalTo(self.view.safeAreaLayoutGuide.snp.top).offset(70)
             make.leading.trailing.equalTo(self.view)
             make.height.equalTo(40)
         }
@@ -86,7 +93,7 @@ class HistoryViewController: UIViewController, QRScannerCodeDelegate {
         tableView.backgroundColor = UIColor(hex: "#303030")
         tableView.separatorStyle = .none
         tableView.showsVerticalScrollIndicator = false
-        tableView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)  // 調整偏移量
+        tableView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
         self.view.addSubview(tableView)
         
         tableView.snp.makeConstraints { make in
@@ -102,7 +109,6 @@ class HistoryViewController: UIViewController, QRScannerCodeDelegate {
         
         // 設置選中回調
         segmentedControl.addTarget(self, action: #selector(segmentedControlValueChanged), for: .valueChanged)
-        
     }
     
     private func setupBottomBarView() {
@@ -161,31 +167,7 @@ class HistoryViewController: UIViewController, QRScannerCodeDelegate {
             make.leading.equalTo(bottomBarView).offset(50)
         }
         
-        historyTabButton.titleLabel?.font = UIFont.systemFont(ofSize: 14, weight: .bold)
-        
-        // 中間的大按鈕
-        let scanTabButton = UIButton()
-        scanTabButton.layer.cornerRadius = 45
-        scanTabButton.layer.masksToBounds = true
-        scanTabButton.layer.borderColor = UIColor(hex: "#feb600").cgColor
-        bottomBarView.addSubview(scanTabButton)
-        
-        let scanImageView = UIImageView(image: UIImage(named: "scan"))
-        scanImageView.contentMode = .scaleAspectFit
-        scanTabButton.addSubview(scanImageView)
-        
-        scanImageView.snp.makeConstraints { make in
-            make.center.equalTo(scanTabButton)
-            make.width.height.equalTo(90)
-        }
-        
-        scanTabButton.snp.makeConstraints { make in
-            make.centerY.equalTo(bottomBarView.snp.top).offset(-30)
-            make.centerX.equalTo(bottomBarView)
-            make.width.height.equalTo(90)
-        }
-        
-        scanTabButton.addTarget(self, action: #selector(scanQRCodeButtonTapped), for: .touchUpInside)
+        historyTabButton.titleLabel?.font = UIFont.systemFont(ofSize: 15, weight: .bold)
         
         let createTabButton = UIButton()
         createTabButton.setTitle("Create", for: .normal)
@@ -206,35 +188,34 @@ class HistoryViewController: UIViewController, QRScannerCodeDelegate {
             make.trailing.equalTo(bottomBarView).offset(-50)
         }
         
-        createTabButton.titleLabel?.font = UIFont.systemFont(ofSize: 14, weight: .bold)
+        createTabButton.titleLabel?.font = UIFont.systemFont(ofSize: 15, weight: .bold)
+        
+        
+        // 中間的大按鈕
+        let scanButton = EiteiScanButton()
+        scanButton.onScanButtonTapped = { [weak self] in
+            self?.presentQRCodeScanner()
+        }
+        bottomBarView.addSubview(scanButton)
+        
+        // 設置按鈕的約束
+        scanButton.snp.makeConstraints { make in
+            make.centerX.equalToSuperview()
+            make.bottom.equalToSuperview().offset(-100)
+            make.width.height.equalTo(90)
+        }
+        
+        
     }
     
-    // MARK: - Actions
-    
-    // 切換選項卡回調
-    @objc func segmentedControlValueChanged(_ sender: EiteiSegmentedControl) {
-        switch sender.selectedIndex {
-        case 0:
-            print("掃描選項被選中")
-            // TODO
-        case 1:
-            print("創建選項被選中")
-            // TODO
-        default:
-            break
-        }
+    @objc private func segmentedControlValueChanged() {
+        // 根據選中的選項進行相應處理
+        let selectedIndex = segmentedControl.selectedIndex
+        print("選擇了 \(segmentedControl.items[selectedIndex])")
+        // 可在此處實現對應的邏輯
     }
     
-    // 掃瞄按鈕點擊
-    @objc func scanQRCodeButtonTapped(sender: UIButton) {
-        // 添加動畫效果
-        UIView.animate(withDuration: 0.1, animations: {
-            sender.transform = CGAffineTransform(scaleX: 0.9, y: 0.9)
-        }) { _ in
-            UIView.animate(withDuration: 0.1) {
-                sender.transform = CGAffineTransform.identity
-            }
-        }
+    private func presentQRCodeScanner() {
         
         // 設置 QR 碼掃描器的配置對象
         var configuration = QRScannerConfiguration()
@@ -266,10 +247,13 @@ class HistoryViewController: UIViewController, QRScannerCodeDelegate {
         // 設置取消按鈕標題
         configuration.cancelButtonTitle = "取消"
         
-        let scanner = QRCodeScannerController(qrScannerConfiguration: configuration)
-        scanner.delegate = self
-        self.present(scanner, animated: true, completion: nil)
+        let scanner = QRCodeScannerController(qrScannerConfiguration: configuration) // 創建掃描器視圖控制器
+        scanner.delegate = self // 設置委託對象，實現掃描結果的回調
+        self.present(scanner, animated: true, completion: nil) // 顯示掃描器視圖控制器
+        
+        
     }
+    
 }
 
 extension HistoryViewController: UITableViewDelegate, UITableViewDataSource {

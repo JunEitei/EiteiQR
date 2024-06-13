@@ -1,3 +1,10 @@
+//
+//  EiteiSegmentedControl.swift
+//  EiteiQR
+//
+//  Created by damao on 2024/6/13.
+//
+
 import UIKit
 import EiteiQR
 
