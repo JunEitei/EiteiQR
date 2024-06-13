@@ -1,5 +1,4 @@
 import UIKit
-import EiteiQR
 
 class ViewController: UIViewController, QRScannerCodeDelegate {
     
@@ -323,7 +322,7 @@ class ViewController: UIViewController, QRScannerCodeDelegate {
     }
 }
 
-extension HistoryViewController: UITableViewDelegate, UITableViewDataSource {
+extension UIViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // 返回當前數據集的行數
