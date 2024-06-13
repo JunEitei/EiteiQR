@@ -1,5 +1,4 @@
 import UIKit
-import EiteiQR
 
 public class ViewController: UIViewController, QRScannerCodeDelegate {
     

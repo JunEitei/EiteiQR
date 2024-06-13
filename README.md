@@ -4,7 +4,7 @@
 
 ## 安裝
 ```ruby
-pod 'EiteiQR', :git => 'https://github.com/JunEitei/EiteiQR'
+pod 'EiteiQR', :git => 'https://github.com/JunEitei/EiteiQR', :tag => '2.0.0'
 
 ```
 
@@ -19,3 +19,11 @@ pod 'EiteiQR', :git => 'https://github.com/JunEitei/EiteiQR'
    ```swift
    window?.rootViewController = EiteiQR.ViewController()
    ```
+
+## 更新
+```ruby
+pod cache clean EiteiQR
+pod deintegrate
+pod install --repo-update
+```
+
