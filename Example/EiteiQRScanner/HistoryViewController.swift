@@ -1,3 +1,10 @@
+//
+//  HistoryCell.swift
+//  EiteiQRScanner
+//
+//  Created by damao on 2024/6/13.
+//
+
 import UIKit
 
 class HistoryViewController: UIViewController {
@@ -49,7 +56,7 @@ class HistoryViewController: UIViewController {
         
         tableView.delegate = self
         tableView.dataSource = self
-        tableView.register(CustomTableViewCell.self, forCellReuseIdentifier: "CustomCell")
+        tableView.register(HistoryCell.self, forCellReuseIdentifier: "CustomCell")
         
         // 設置底部欄視圖
         let bottomBarView = UIView()
@@ -112,14 +119,15 @@ class HistoryViewController: UIViewController {
 }
 
 extension HistoryViewController: UITableViewDelegate, UITableViewDataSource {
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return 4 // 示例數據的數量
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "CustomCell", for: indexPath) as! CustomTableViewCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: "CustomCell", for: indexPath) as! HistoryCell
         // 配置 cell 與示例數據
-        cell.configure(with: "URL \(indexPath.row)", subtitle: "Description \(indexPath.row)", date: "2024-06-13")
+        cell.configure(with: "https://www.google.com.tw", subtitle: "Foraging for wild food", date: "2023-09-10")
         return cell
     }
     
