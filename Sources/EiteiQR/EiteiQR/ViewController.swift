@@ -1,6 +1,6 @@
 import UIKit
 
-class ViewController: UIViewController, QRScannerCodeDelegate {
+public class ViewController: UIViewController, QRScannerCodeDelegate {
     
     // MARK: - QRScannerCodeDelegate Methods
     
