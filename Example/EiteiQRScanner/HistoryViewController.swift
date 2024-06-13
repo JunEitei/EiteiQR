@@ -1,6 +1,22 @@
 import UIKit
+import EiteiQR
 
-class HistoryViewController: UIViewController {
+class HistoryViewController: UIViewController, QRScannerCodeDelegate {
+    
+    func qrScanner(_ controller: UIViewController, didScanQRCodeWithResult result: String) {
+        print("掃描結果：\(result)")
+        controller.dismiss(animated: true, completion: nil)
+    }
+    
+    func qrScanner(_ controller: UIViewController, didFailWithError error: EiteiQR.QRCodeError) {
+        print("掃描錯誤：\(error.localizedDescription)")
+        controller.dismiss(animated: true, completion: nil)
+    }
+    
+    func qrScannerDidCancel(_ controller: UIViewController) {
+        print("QR 掃描器已取消")
+        controller.dismiss(animated: true, completion: nil)
+    }
     
     let tableView = UITableView()
     
@@ -76,7 +92,6 @@ class HistoryViewController: UIViewController {
         path.addQuadCurve(to: CGPoint(x: self.view.frame.width / 2, y: 100), controlPoint: CGPoint(x: self.view.frame.width / 2, y: 150))
         path.addQuadCurve(to: CGPoint(x: self.view.frame.width, y: 0), controlPoint: CGPoint(x: self.view.frame.width / 2, y: -90))
         
-        
         path.close()
         
         curveLayer.path = path.cgPath
@@ -125,10 +140,12 @@ class HistoryViewController: UIViewController {
         }
         
         scanTabButton.snp.makeConstraints { make in
-            make.centerY.equalTo(bottomBarView.snp.top).offset(0)
+            make.centerY.equalTo(bottomBarView.snp.top).offset(-30)
             make.centerX.equalTo(bottomBarView)
             make.width.height.equalTo(90)
         }
+        
+        scanTabButton.addTarget(self, action: #selector(scanQRCodeButtonTapped), for: .touchUpInside)
         
         let createTabButton = UIButton()
         createTabButton.setTitle("Create", for: .normal)
@@ -152,6 +169,51 @@ class HistoryViewController: UIViewController {
         createTabButton.titleLabel?.font = UIFont.systemFont(ofSize: 14, weight: .bold)
         
         tableView.reloadData()
+    }
+    
+    @objc func scanQRCodeButtonTapped(sender: UIButton) {
+        // 添加動畫效果
+        UIView.animate(withDuration: 0.1, animations: {
+            sender.transform = CGAffineTransform(scaleX: 0.9, y: 0.9)
+        }) { _ in
+            UIView.animate(withDuration: 0.1) {
+                sender.transform = CGAffineTransform.identity
+            }
+        }
+        
+        // 設置 QR 碼掃描器的配置對象
+        var configuration = QRScannerConfiguration()
+        
+        // 設置相機按鈕的圖示
+        configuration.cameraImage = UIImage(named: "camera")
+        
+        // 設置閃光燈開啟按鈕的圖示
+        configuration.flashOnImage = UIImage(named: "flash-on")
+        
+        // 設置相冊按鈕的圖示
+        configuration.galleryImage = UIImage(named: "photos")
+        
+        // 設置掃描界面的標題
+        configuration.title = "掃描二維碼"
+        
+        // 設置掃描提示文字
+        configuration.hint = "請對準二維碼，進行掃描"
+        
+        // 設置從相冊選取二維碼的按鈕標題
+        configuration.uploadFromPhotosTitle = "從相簿選取"
+        
+        // 設置無效二維碼的提示框標題
+        configuration.invalidQRCodeAlertTitle = "無效的二維碼"
+        
+        // 設置無效二維碼提示框的確定按鈕標題
+        configuration.invalidQRCodeAlertActionTitle = "確定"
+        
+        // 設置取消按鈕標題
+        configuration.cancelButtonTitle = "取消"
+        
+        let scanner = QRCodeScannerController(qrScannerConfiguration: configuration)
+        scanner.delegate = self
+        self.present(scanner, animated: true, completion: nil)
     }
 }
 
