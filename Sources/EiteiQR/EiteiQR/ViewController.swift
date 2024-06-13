@@ -1,21 +1,22 @@
 import UIKit
+import EiteiQR
 
 public class ViewController: UIViewController, QRScannerCodeDelegate {
     
     // MARK: - QRScannerCodeDelegate Methods
     
-    func qrScanner(_ controller: UIViewController, didScanQRCodeWithResult result: String) {
+    public func qrScanner(_ controller: UIViewController, didScanQRCodeWithResult result: String) {
         print("掃描結果：\(result)")
         addScanResultToData(result: result)
         controller.dismiss(animated: true, completion: nil)
     }
     
-    func qrScanner(_ controller: UIViewController, didFailWithError error: EiteiQR.QRCodeError) {
+    public func qrScanner(_ controller: UIViewController, didFailWithError error: EiteiQR.QRCodeError) {
         print("掃描錯誤：\(error.localizedDescription)")
         controller.dismiss(animated: true, completion: nil)
     }
     
-    func qrScannerDidCancel(_ controller: UIViewController) {
+    public func qrScannerDidCancel(_ controller: UIViewController) {
         print("掃描器已取消")
         controller.dismiss(animated: true, completion: nil)
     }
@@ -45,7 +46,7 @@ public class ViewController: UIViewController, QRScannerCodeDelegate {
     
     // MARK: - Lifecycle
     
-    override func viewDidLoad() {
+    public override func viewDidLoad() {
         super.viewDidLoad()
         
         loadDataFromUserDefaults() // 從本地加载数据
@@ -324,12 +325,12 @@ public class ViewController: UIViewController, QRScannerCodeDelegate {
 
 extension ViewController: UITableViewDelegate, UITableViewDataSource {
     
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    public func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // 返回當前數據集的行數
         return currentData.count
     }
     
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "CustomCell", for: indexPath) as! HistoryCell
         // 配置表格單元格
         let data = currentData[indexPath.row]
@@ -339,23 +340,23 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
         return cell
     }
     
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+    public func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         // 設置單元格高度
         return 85
     }
     
-    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+    public func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let headerView = UIView()
         headerView.backgroundColor = UIColor.clear
         return headerView
     }
     
-    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+    public func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         // 設置表頭高度
         return 10
     }
     
-    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+    public func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         // 設置選擇樣式
         cell.selectionStyle = .none
     }
