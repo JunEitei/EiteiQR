@@ -26,25 +26,30 @@ class HistoryViewController: UIViewController, QRScannerCodeDelegate {
     let tableView = UITableView()
     let segmentedControl = EiteiSegmentedControl()
     
-    // 数据集
-    var scanData = [
-        ("https://www.google.com.tw", "Foraging for wild food", "2023-09-10"),
-        ("https://www.example.com", "Example website", "2023-08-15"),
-        ("https://www.e.com", "Example website", "2023-08-15")
-    ]
+    // 掃碼数据集
+    var scanData: [(String, String, String)] = [] {
+        didSet {
+            saveDataToUserDefaults()
+        }
+    }
     
-    var createData = [
-        ("https://www.apple.com", "Apple website", "2023-06-20"),
-        ("https://www.microsoft.com", "Microsoft website", "2023-05-30")
-    ]
+    // 生成二維碼数据集
+    var createData: [(String, String, String)] = [] {
+        didSet {
+            saveDataToUserDefaults()
+        }
+    }
     
+    // 當前Table的數據源
     var currentData: [(String, String, String)] = []
+    
     
     // MARK: - Lifecycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        loadDataFromUserDefaults() // 從本地加载数据
         currentData = scanData // 初始化数据为 scanData
         
         setupView()
@@ -273,14 +278,48 @@ class HistoryViewController: UIViewController, QRScannerCodeDelegate {
         // 添加数据到当前数据集合
         let newEntry = (result, description, currentDate)
         
+        // 如果掃碼的Segment，那麼就把數據添加到掃碼的數組裡
         if segmentedControl.selectedIndex == 0 {
             scanData.append(newEntry)
         } else {
+            // 如果生成的Segment，那麼就把數據添加到生成碼的數組裡
             createData.append(newEntry)
         }
         
+        // 添加到表格數據中
         currentData.append(newEntry)
+        
+        // 更新表格
         tableView.reloadData()
+    }
+    
+    
+    // 把數據存放到本地
+    private func saveDataToUserDefaults() {
+        let defaults = UserDefaults.standard
+        
+        // 映射出來
+        let scanDataArray = scanData.map { [$0.0, $0.1, $0.2] }
+        let createDataArray = createData.map { [$0.0, $0.1, $0.2] }
+        
+        // 如果是掃碼的數據，放到這裡
+        defaults.set(scanDataArray, forKey: "scanData")
+        
+        // 如果是生成二維碼的數據，放到這裡
+        defaults.set(createDataArray, forKey: "createData")
+    }
+    
+    // 從本地讀取歷史數據
+    private func loadDataFromUserDefaults() {
+        let defaults = UserDefaults.standard
+        
+        if let scanDataArray = defaults.array(forKey: "scanData") as? [[String]] {
+            scanData = scanDataArray.map { ($0[0], $0[1], $0[2]) }
+        }
+        
+        if let createDataArray = defaults.array(forKey: "createData") as? [[String]] {
+            createData = createDataArray.map { ($0[0], $0[1], $0[2]) }
+        }
     }
 }
 
