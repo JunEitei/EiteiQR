@@ -19,7 +19,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
         window = UIWindow(windowScene: windowScene)
 
-        window?.rootViewController = EiteiQR.ViewController()
+        window?.rootViewController = HistoryViewController()
 
         window?.makeKeyAndVisible()
     }
