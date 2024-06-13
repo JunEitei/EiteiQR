@@ -1,10 +1,3 @@
-//
-//  HistoryViewController.swift
-//  EiteiQRScanner
-//
-//  Created by damao on 2024/6/13.
-//
-
 import UIKit
 
 class HistoryViewController: UIViewController {
@@ -73,6 +66,18 @@ class HistoryViewController: UIViewController {
             make.leading.trailing.bottom.equalTo(self.view)
         }
         
+        // 添加凹進去的半圓形曲線
+        let curveLayer = CAShapeLayer()
+        let path = UIBezierPath()
+        path.move(to: CGPoint(x: 0, y: 0))
+        path.addQuadCurve(to: CGPoint(x: self.view.frame.width, y: 0), controlPoint: CGPoint(x: self.view.frame.width / 2, y: -40))
+        path.addLine(to: CGPoint(x: self.view.frame.width, y: 120))
+        path.addLine(to: CGPoint(x: 0, y: 120))
+        path.close()
+        curveLayer.path = path.cgPath
+        curveLayer.fillColor = UIColor(hex: "#333333").cgColor
+        bottomBarView.layer.addSublayer(curveLayer)
+        
         // History 標籤按鈕
         let historyTabButton = UIButton()
         historyTabButton.setTitle("History", for: .normal)
@@ -100,17 +105,25 @@ class HistoryViewController: UIViewController {
         // 中間的大按鈕
         let scanTabButton = UIButton()
         scanTabButton.backgroundColor = UIColor(hex: "#feb600")
-        scanTabButton.layer.cornerRadius = 30
-        scanTabButton.layer.masksToBounds = true
-        scanTabButton.layer.borderWidth = 4
+        scanTabButton.layer.cornerRadius = 45
+        scanTabButton.layer.masksToBounds = false
         scanTabButton.layer.borderColor = UIColor(hex: "#feb600").cgColor
         bottomBarView.addSubview(scanTabButton)
         
+        let scanImageView = UIImageView(image: UIImage(named: "scan")) // 使用 scan 圖片
+        scanImageView.contentMode = .scaleAspectFit
+        scanTabButton.addSubview(scanImageView)
+        
         // 使用 SnapKit 設置中間的大按鈕的佈局
+        scanImageView.snp.makeConstraints { make in
+            make.center.equalTo(scanTabButton)
+            make.width.height.equalTo(90) // 適當放大圖片
+        }
+        
         scanTabButton.snp.makeConstraints { make in
-            make.centerY.equalTo(bottomBarView.snp.top).offset(60)
+            make.centerY.equalTo(bottomBarView.snp.top).offset(0)
             make.centerX.equalTo(bottomBarView)
-            make.width.height.equalTo(60)
+            make.width.height.equalTo(90)
         }
         
         // Create 標籤按鈕
@@ -174,12 +187,13 @@ extension HistoryViewController: UITableViewDelegate, UITableViewDataSource {
     }
 }
 
+
 // UIColor 擴展，用於從十六進制代碼初始化
 extension UIColor {
     convenience init(hex: String) {
         var hexString = hex.trimmingCharacters(in: .whitespacesAndNewlines).uppercased()
         
-        if hexString.hasPrefix("#") {
+        if hexString.hasPrefix ("#") {
             hexString.remove(at: hexString.startIndex)
         }
         
