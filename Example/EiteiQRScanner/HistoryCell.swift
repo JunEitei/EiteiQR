@@ -25,6 +25,7 @@ class HistoryCell: UITableViewCell {
         let imageView = UIImageView()
         imageView.layer.cornerRadius = 10 // 设置圆角
         imageView.clipsToBounds = true // 超出部分裁剪
+        
         return imageView
     }()
     
@@ -116,9 +117,20 @@ class HistoryCell: UITableViewCell {
         
         // 设置随机颜色给图标，调用生成随机颜色的函数
         iconImageView.backgroundColor = generateRandomColor()
+        
+        // 按鈕圖標取決於二維碼內容是否為URL
+        iconImageView.image = UIImage(named: isValidURL(url) ? "icon_website" : "icon_text")
+        
     }
     
     // MARK: - Helpers
+    
+    
+    // 判斷是否是URL
+    private func isValidURL(_ string: String) -> Bool {
+        guard let url = URL(string: string) else { return false }
+        return UIApplication.shared.canOpenURL(url)
+    }
     
     /// 生成随机颜色，确保颜色不会太亮
     private func generateRandomColor() -> UIColor {

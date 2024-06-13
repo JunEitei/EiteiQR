@@ -275,6 +275,7 @@ class HistoryViewController: UIViewController, QRScannerCodeDelegate {
         // 根据当前 Segment 设置描述信息
         let description = segmentedControl.selectedIndex == 0 ? "掃碼成功" : "添加成功"
         
+        
         // 添加数据到当前数据集合
         let newEntry = (result, description, currentDate)
         
@@ -292,7 +293,6 @@ class HistoryViewController: UIViewController, QRScannerCodeDelegate {
         // 更新表格
         tableView.reloadData()
     }
-    
     
     // 把數據存放到本地
     private func saveDataToUserDefaults() {
@@ -334,6 +334,8 @@ extension HistoryViewController: UITableViewDelegate, UITableViewDataSource {
         let cell = tableView.dequeueReusableCell(withIdentifier: "CustomCell", for: indexPath) as! HistoryCell
         // 配置表格單元格
         let data = currentData[indexPath.row]
+        
+        
         cell.configure(with: data.0, subtitle: data.1, date: data.2)
         return cell
     }
