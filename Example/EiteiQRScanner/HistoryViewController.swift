@@ -1,10 +1,3 @@
-//
-//  HistoryViewController.swift
-//  EiteiQR
-//
-//  Created by damao on 2024/6/13.
-//
-
 import UIKit
 import EiteiQR
 
@@ -14,6 +7,7 @@ class HistoryViewController: UIViewController, QRScannerCodeDelegate {
     
     func qrScanner(_ controller: UIViewController, didScanQRCodeWithResult result: String) {
         print("掃描結果：\(result)")
+        addScanResultToData(result: result)
         controller.dismiss(animated: true, completion: nil)
     }
     
@@ -23,7 +17,7 @@ class HistoryViewController: UIViewController, QRScannerCodeDelegate {
     }
     
     func qrScannerDidCancel(_ controller: UIViewController) {
-        print("QR 掃描器已取消")
+        print("掃描器已取消")
         controller.dismiss(animated: true, completion: nil)
     }
     
@@ -32,10 +26,26 @@ class HistoryViewController: UIViewController, QRScannerCodeDelegate {
     let tableView = UITableView()
     let segmentedControl = EiteiSegmentedControl()
     
+    // 数据集
+    var scanData = [
+        ("https://www.google.com.tw", "Foraging for wild food", "2023-09-10"),
+        ("https://www.example.com", "Example website", "2023-08-15"),
+        ("https://www.e.com", "Example website", "2023-08-15")
+    ]
+    
+    var createData = [
+        ("https://www.apple.com", "Apple website", "2023-06-20"),
+        ("https://www.microsoft.com", "Microsoft website", "2023-05-30")
+    ]
+    
+    var currentData: [(String, String, String)] = []
+    
     // MARK: - Lifecycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        currentData = scanData // 初始化数据为 scanData
         
         setupView()
         setupSegmentedControl()
@@ -86,6 +96,8 @@ class HistoryViewController: UIViewController, QRScannerCodeDelegate {
             make.leading.trailing.equalTo(self.view)
             make.height.equalTo(40)
         }
+        
+        segmentedControl.addTarget(self, action: #selector(segmentedControlValueChanged), for: .valueChanged)
     }
     
     private func setupTableView() {
@@ -106,9 +118,6 @@ class HistoryViewController: UIViewController, QRScannerCodeDelegate {
         tableView.delegate = self
         tableView.dataSource = self
         tableView.register(HistoryCell.self, forCellReuseIdentifier: "CustomCell")
-        
-        // 設置選中回調
-        segmentedControl.addTarget(self, action: #selector(segmentedControlValueChanged), for: .valueChanged)
     }
     
     private func setupBottomBarView() {
@@ -190,7 +199,6 @@ class HistoryViewController: UIViewController, QRScannerCodeDelegate {
         
         createTabButton.titleLabel?.font = UIFont.systemFont(ofSize: 15, weight: .bold)
         
-        
         // 中間的大按鈕
         let scanButton = EiteiScanButton()
         scanButton.onScanButtonTapped = { [weak self] in
@@ -204,19 +212,20 @@ class HistoryViewController: UIViewController, QRScannerCodeDelegate {
             make.bottom.equalToSuperview().offset(-100)
             make.width.height.equalTo(90)
         }
-        
-        
     }
     
     @objc private func segmentedControlValueChanged() {
         // 根據選中的選項進行相應處理
         let selectedIndex = segmentedControl.selectedIndex
-        print("選擇了 \(segmentedControl.items[selectedIndex])")
-        // 可在此處實現對應的邏輯
+        if selectedIndex == 0 {
+            currentData = scanData
+        } else {
+            currentData = createData
+        }
+        tableView.reloadData() // 刷新表格视图
     }
     
     private func presentQRCodeScanner() {
-        
         // 設置 QR 碼掃描器的配置對象
         var configuration = QRScannerConfiguration()
         
@@ -250,23 +259,43 @@ class HistoryViewController: UIViewController, QRScannerCodeDelegate {
         let scanner = QRCodeScannerController(qrScannerConfiguration: configuration) // 創建掃描器視圖控制器
         scanner.delegate = self // 設置委託對象，實現掃描結果的回調
         self.present(scanner, animated: true, completion: nil) // 顯示掃描器視圖控制器
-        
-        
     }
     
+    private func addScanResultToData(result: String) {
+        // 获取当前日期
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd"
+        let currentDate = dateFormatter.string(from: Date())
+        
+        // 根据当前 Segment 设置描述信息
+        let description = segmentedControl.selectedIndex == 0 ? "掃碼成功" : "添加成功"
+        
+        // 添加数据到当前数据集合
+        let newEntry = (result, description, currentDate)
+        
+        if segmentedControl.selectedIndex == 0 {
+            scanData.append(newEntry)
+        } else {
+            createData.append(newEntry)
+        }
+        
+        currentData.append(newEntry)
+        tableView.reloadData()
+    }
 }
 
 extension HistoryViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // 返回數據行數
-        return 4
+        // 返回當前數據集的行數
+        return currentData.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "CustomCell", for: indexPath) as! HistoryCell
         // 配置表格單元格
-        cell.configure(with: "https://www.google.com.tw", subtitle: "Foraging for wild food", date: "2023-09-10")
+        let data = currentData[indexPath.row]
+        cell.configure(with: data.0, subtitle: data.1, date: data.2)
         return cell
     }
     
