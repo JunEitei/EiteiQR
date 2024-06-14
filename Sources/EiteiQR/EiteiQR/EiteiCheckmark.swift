@@ -1,3 +1,10 @@
+//
+//  EiteiCheckmark.swift
+//  EiteiQR
+//
+//  Created by damao on 2024/6/14.
+//
+
 import UIKit
 
 open class EiteiCheckmark: UIControl {
@@ -63,21 +70,25 @@ open class EiteiCheckmark: UIControl {
     
     // 計算控件大小，考慮圓形間距和邊框寬度
     override open func sizeThatFits(_ size: CGSize) -> CGSize {
-        let sectionWidth = (size.width - CGFloat(options.count - 1) * 11) / CGFloat(options.count) // 設置間距為11
-        return CGSize(width: sectionWidth * CGFloat(options.count) + 11 * CGFloat(options.count - 1), height: EiteiCheckmark.minCheckmarkHeight)
+        let totalSpacing = CGFloat(options.count - 1) * 11
+        let availableWidth = size.width - totalSpacing
+        let sectionWidth = availableWidth / CGFloat(options.count)
+        return CGSize(width: sectionWidth * CGFloat(options.count) + totalSpacing, height: EiteiCheckmark.minCheckmarkHeight)
     }
     
     // 繪製視圖，包含圓形和勾勾的動畫
     override open func draw(_ rect: CGRect) {
-        let sectionWidth: CGFloat = (rect.width - CGFloat(options.count - 1) * 11) / CGFloat(options.count) // 計算每個圓形的寬度，考慮間距
-        let sectionSize: CGSize = CGSize(width: sectionWidth, height: rect.height)
+        let totalSpacing = CGFloat(options.count - 1) * 11
+        let availableWidth = rect.width - totalSpacing
+        let sectionWidth = availableWidth / CGFloat(options.count)
         
         self.layer.sublayers = nil
         
+        //使用更精確的間距計算邏輯，確保每個圓形的寬度和間距正確
         for index in 0..<options.count {
             let option = options[index]
-            let xOffset = (sectionWidth + 11) * CGFloat(index) // 設置圓形的X偏移，考慮間距
-            let containerFrame = CGRect(x: xOffset, y: 0, width: sectionWidth, height: sectionSize.height).integral
+            let xOffset = CGFloat(index) * (sectionWidth + 11)
+            let containerFrame = CGRect(x: xOffset, y: 0, width: sectionWidth, height: rect.height).integral
             let remainingContainerFrame = containerFrame.insetBy(dx: 0, dy: EiteiCheckmark.minCheckmarkHeight / 2).integral
             let borderLayer = createCircleLayer(remainingContainerFrame, option: option)
             layer.addSublayer(borderLayer)
@@ -86,7 +97,7 @@ open class EiteiCheckmark: UIControl {
             if index == selectedIndex {
                 animateCircleBorder(borderLayer)
                 
-                let tickLayer = createTick(borderLayer.frame, strokeColor: UIColor.white)
+                let tickLayer = createTick(borderLayer.frame, strokeColor: strokeColor)
                 layer.addSublayer(tickLayer)
             }
         }
@@ -161,15 +172,20 @@ open class EiteiCheckmark: UIControl {
     
     // 處理觸摸事件，更新選中的索引並通知代理
     open override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        guard let touch: UITouch = touches.first else { return }
+        guard let touch = touches.first else { return }
         
         let location = touch.location(in: self)
         
         if bounds.contains(location) {
-            let sectionWidth = (self.bounds.width - CGFloat(options.count - 1) * 11) / CGFloat(options.count) // 考慮間距
-            let index = Int(location.x / sectionWidth)
+            let totalSpacing = CGFloat(options.count - 1) * 11
+            let availableWidth = bounds.width - totalSpacing
+            let sectionWidth = availableWidth / CGFloat(options.count)
             
-            if selectedIndex != index {
+            //將 location.x 减去總間距，以確保正確計算每個圓形的索引
+            let index = Int((location.x - totalSpacing) / sectionWidth)
+            
+            // 檢查索引是否在範圍內
+            if index >= 0 && index < options.count {
                 selectedIndex = index
                 sendActions(for: .valueChanged)
             }
