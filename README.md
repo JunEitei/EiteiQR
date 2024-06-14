@@ -4,7 +4,7 @@
 
 ## 安裝
 ```ruby
-pod 'EiteiQR', :git => 'https://github.com/JunEitei/EiteiQR', :tag => '2.0.0'
+pod 'EiteiQR', :git => 'https://github.com/JunEitei/EiteiQR', :tag => '3.0.0'
 
 ```
 
@@ -27,15 +27,3 @@ pod install --repo-update
    ```swift
    window?.rootViewController = ViewController()
    ```
-   
-## Info.plist設置項
-```swift
-    <key>NSAppleMusicUsageDescription</key>
-    <string>Used to scan QR code</string>
-    <key>NSCameraUsageDescription</key>
-    <string>Used to scan QR code</string>
-    <key>NSPhotoLibraryAddUsageDescription</key>
-    <string>Used to scan QR code</string>
-    <key>NSPhotoLibraryUsageDescription</key>
-    <string>Used to scan QR code</string>
-```
