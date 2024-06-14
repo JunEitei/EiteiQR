@@ -39,18 +39,23 @@ extension UIColor {
         self.init(red: red, green: green, blue: blue, alpha: 1.0)
     }
     
-    // 返回主題橙色
+    // 返回Eitei主題橙色
     static var eiteiOrange: UIColor {
         return UIColor(hex: "#feb600")
     }
     
-    // 返回主題淺灰色
+    // 返回Eitei主題淺灰色
     static var eiteiGray: UIColor {
         return UIColor(hex: "#303030")
     }
     
+    // 返回Eitei主題背景深灰色
+    static var eiteiBackground: UIColor {
+        return UIColor(hex: "#303030")
+    }
     
-    // 返回主題深灰色
+    
+    // 返回Eitei主題深灰色
     static var eiteiDarkGray: UIColor {
         return UIColor(hex: "#555555")
     }

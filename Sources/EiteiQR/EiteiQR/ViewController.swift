@@ -127,7 +127,7 @@ public class ViewController: UIViewController, QRScannerCodeDelegate {
     private func setupBottomBarView() {
         // 設置底部欄視圖
         let bottomBarView = UIView()
-        bottomBarView.backgroundColor = UIColor(hex: "#333333")
+        bottomBarView.backgroundColor = UIColor.eiteiBackground
         bottomBarView.layer.shadowColor = UIColor.black.cgColor
         bottomBarView.layer.shadowOpacity = 0.5
         bottomBarView.layer.shadowOffset = CGSize(width: 0, height: -5)
