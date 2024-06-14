@@ -8,14 +8,6 @@ pod 'EiteiQR', :git => 'https://github.com/JunEitei/EiteiQR', :tag => '3.0.0'
 
 ```
 
-
-## 更新
-```ruby
-pod cache clean EiteiQR
-pod deintegrate
-pod install --repo-update
-```
-
 ## 使用
 
 1. **導入庫**：
@@ -27,3 +19,10 @@ pod install --repo-update
    ```swift
    window?.rootViewController = ViewController()
    ```
+
+## 更新
+```ruby
+pod cache clean EiteiQR
+pod deintegrate
+pod install --repo-update
+```
