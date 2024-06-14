@@ -69,15 +69,33 @@ public class CreatorViewController: UIViewController {
     let checkmarkControl: EiteiCheckmark = {
         let control = EiteiCheckmark()
         control.options = [
-            CheckmarkOption(borderColor: UIColor.white, fillColor: UIColor.red),
-            CheckmarkOption(borderColor: UIColor.white, fillColor: UIColor.orange),
-            CheckmarkOption(borderColor: UIColor.white, fillColor: UIColor.yellow),
-            CheckmarkOption(borderColor: UIColor.white, fillColor: UIColor.green),
-            CheckmarkOption(borderColor: UIColor.white, fillColor: UIColor.blue)
+            CheckmarkOption(borderColor: .white, fillColor: .eiteiRed),
+            CheckmarkOption(borderColor: .white, fillColor: .eiteiSuperOrange),
+            CheckmarkOption(borderColor: .white, fillColor: .eiteiYellow),
+            CheckmarkOption(borderColor: .white, fillColor: .eiteiGreen),
+            CheckmarkOption(borderColor: .white, fillColor: .eiteiBlue)
         ]
         control.selectedIndex = 0
         control.addTarget(nil, action: #selector(checkmarkControlValueChanged(_:)), for: .valueChanged)
         return control
+    }()
+    
+    // 顯示 "Website URL"
+    let websiteLabel: UILabel = {
+        let label = UILabel()
+        label.text = "Website URL"
+        label.textColor = .white
+        label.font = UIFont.systemFont(ofSize: 16, weight: .bold)
+        return label
+    }()
+    
+    // 顯示 "Color"
+    let colorLabel: UILabel = {
+        let label = UILabel()
+        label.text = "Color"
+        label.textColor = .white
+        label.font = UIFont.systemFont(ofSize: 16, weight: .bold)
+        return label
     }()
     
     override public func viewDidLoad() {
@@ -93,8 +111,10 @@ public class CreatorViewController: UIViewController {
         view.addSubview(titleLabel)
         view.addSubview(iconImageView)
         view.addSubview(qrImageView)
+        view.addSubview(websiteLabel)  // 添加Website URL的Label
         view.addSubview(urlCardView)
         urlCardView.addSubview(urlTextField)
+        view.addSubview(colorLabel)    // 添加Color的Label
         view.addSubview(colorCardView)
         colorCardView.addSubview(checkmarkControl)
         
@@ -118,9 +138,15 @@ public class CreatorViewController: UIViewController {
             make.size.equalTo(CGSize(width: 200, height: 200))
         }
         
+        // 設置Website Label的約束，介於文本框和colorCardView之間
+        websiteLabel.snp.makeConstraints { make in
+            make.top.equalTo(qrImageView.snp.bottom).offset(20)
+            make.leading.equalTo(urlCardView.snp.leading).offset(10)
+        }
+        
         // 設置網址卡片的約束
         urlCardView.snp.makeConstraints { make in
-            make.top.equalTo(qrImageView.snp.bottom).offset(20)
+            make.top.equalTo(websiteLabel.snp.bottom).offset(10)
             make.centerX.equalToSuperview()
             make.width.equalToSuperview().multipliedBy(0.9)
             make.height.equalTo(50)  // 減小高度
@@ -131,9 +157,15 @@ public class CreatorViewController: UIViewController {
             make.edges.equalToSuperview().inset(10)
         }
         
+        // 設置Color Label的約束，與Website Label保持一致的邊距
+        colorLabel.snp.makeConstraints { make in
+            make.top.equalTo(urlCardView.snp.bottom).offset(20)
+            make.leading.equalTo(colorCardView.snp.leading).offset(10)
+        }
+        
         // 設置顏色卡片的約束
         colorCardView.snp.makeConstraints { make in
-            make.top.equalTo(urlCardView.snp.bottom).offset(20)
+            make.top.equalTo(colorLabel.snp.bottom).offset(10)  // 將 colorCardView 的上邊緣放置在 Color Label 下方
             make.centerX.equalToSuperview()
             make.width.equalTo(urlCardView)
             make.height.equalTo(75)
