@@ -114,18 +114,9 @@ class HistoryCell: UITableViewCell {
         descriptionLabel.text = subtitle // 设置描述标签文本
         dateLabel.text = date // 设置日期标签文本
         
-        // 设置随机颜色给图标，调用生成随机颜色的函数
-        iconImageView.backgroundColor = UIColor.orange
+        // 设置默認顏色！
+        iconImageView.backgroundColor = .eiteiSuperOrange
         
-        // 按鈕圖標取決於二維碼內容是否為URL
-        iconImageView.image = UIImage(named: isValidURL(url) ? "icon_website" : "icon_text")
     }
     
-    // MARK: - Helpers
-    
-    // 判斷是否是URL
-    private func isValidURL(_ string: String) -> Bool {
-        guard let url = URL(string: string) else { return false }
-        return UIApplication.shared.canOpenURL(url)
-    }
 }

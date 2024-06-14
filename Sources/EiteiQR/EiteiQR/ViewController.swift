@@ -434,6 +434,10 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
             cell.dateLabel.text = dateOnlyFormatter.string(from: date)
             // 同時把date中時間截取出來並且展示
             cell.descriptionLabel.text = "生成時間：" + timeOnlyFormatter.string(from: date)
+            
+            
+            // 按鈕圖標取決於二維碼內容是否為URL
+            cell.iconImageView.image = UIImage(named: isValidURL(data.0) ? "icon_website" : "icon_text")
         }
         
         return cell
@@ -460,6 +464,13 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
         cell.selectionStyle = .none
     }
     
+    // 通過正則判斷是否是URL
+    func isValidURL(_ urlString: String) -> Bool {
+        let urlPattern = "^(https?:\\/\\/)?([\\da-z\\.-]+)\\.([a-z\\.]{2,6})([\\/\\w \\.-]*)*\\/?$"
+        let urlPredicate = NSPredicate(format: "SELF MATCHES %@", urlPattern)
+        return urlPredicate.evaluate(with: urlString)
+    }
+    
     func didSaveQRCode(url: String, color: String, date: String) {
         
         // 把數據更新進Create對應的數據源
@@ -471,7 +482,8 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
         
         // 把數據更新進表格的數據源
         currentData.append(newEntry)
-        // 更新UI或進行其他操作
+        
+        // 刷新表格
         tableView.reloadData()
         
     }

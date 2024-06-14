@@ -172,6 +172,12 @@ public class CreatorViewController: UIViewController, UITextFieldDelegate {
         delegate?.didSaveQRCode(url: urlTextField.text!, color: selectedColorHexString!, date: currentDate)
     }
     
+    // 判斷是否是URL
+    private func isValidURL(_ string: String) -> Bool {
+        guard let url = URL(string: string) else { return false }
+        return UIApplication.shared.canOpenURL(url)
+    }
+    
     
     deinit {
         // 移除鍵盤通知
