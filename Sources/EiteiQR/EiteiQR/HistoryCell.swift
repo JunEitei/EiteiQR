@@ -14,7 +14,7 @@ class HistoryCell: UITableViewCell {
     // 卡片视图，作为单元格的背景
     private let cardView: UIView = {
         let view = UIView()
-        view.backgroundColor = UIColor.eiteiDarkGray // 设置背景颜色为深灰色
+        view.backgroundColor = .eiteiLightGray // 设置背景颜色为深灰色
         view.layer.cornerRadius = 10 // 设置圆角
         view.clipsToBounds = true // 超出部分裁剪
         return view

@@ -61,7 +61,7 @@ public class ViewController: UIViewController, QRScannerCodeDelegate {
     
     private func setupView() {
         // 設置背景顏色
-        self.view.backgroundColor = UIColor.eiteiGray
+        self.view.backgroundColor = .eiteiGray
         
         // 自定義頂部標題視圖
         let customTitleView = UIView()
@@ -89,9 +89,9 @@ public class ViewController: UIViewController, QRScannerCodeDelegate {
     private func setupSegmentedControl() {
         // 配置 SegmentedControl
         segmentedControl.items = ["Scan", "Create"]
-        segmentedControl.textDefaultColor = UIColor.eiteiOrange
-        segmentedControl.textSelectedColor = UIColor.eiteiOrange
-        segmentedControl.underlineColor = UIColor.eiteiOrange
+        segmentedControl.textDefaultColor = .eiteiOrange
+        segmentedControl.textSelectedColor = .eiteiOrange
+        segmentedControl.underlineColor = .eiteiOrange
         segmentedControl.backgroundColor = UIColor.clear
         self.view.addSubview(segmentedControl)
         
@@ -106,7 +106,7 @@ public class ViewController: UIViewController, QRScannerCodeDelegate {
     
     private func setupTableView() {
         // 設置表格視圖
-        tableView.backgroundColor = UIColor.eiteiGray
+        tableView.backgroundColor = .eiteiGray
         tableView.separatorStyle = .none
         tableView.showsVerticalScrollIndicator = false
         tableView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
@@ -127,7 +127,7 @@ public class ViewController: UIViewController, QRScannerCodeDelegate {
     private func setupBottomBarView() {
         // 設置底部欄視圖
         let bottomBarView = UIView()
-        bottomBarView.backgroundColor = UIColor.eiteiBackground
+        bottomBarView.backgroundColor = .eiteiBackground
         bottomBarView.layer.shadowColor = UIColor.black.cgColor
         bottomBarView.layer.shadowOpacity = 0.5
         bottomBarView.layer.shadowOffset = CGSize(width: 0, height: -5)

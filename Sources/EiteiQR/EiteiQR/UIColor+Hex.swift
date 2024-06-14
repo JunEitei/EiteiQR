@@ -44,7 +44,7 @@ extension UIColor {
         return UIColor(hex: "#feb600")
     }
     
-    // 返回Eitei主題淺灰色
+    // 返回Eitei主題灰色
     static var eiteiGray: UIColor {
         return UIColor(hex: "#303030")
     }
@@ -55,8 +55,8 @@ extension UIColor {
     }
     
     
-    // 返回Eitei主題深灰色
-    static var eiteiDarkGray: UIColor {
+    // 返回Eitei主題淺灰色
+    static var eiteiLightGray: UIColor {
         return UIColor(hex: "#555555")
     }
 

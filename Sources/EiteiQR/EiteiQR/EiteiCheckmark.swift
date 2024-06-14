@@ -84,19 +84,17 @@ open class EiteiCheckmark: UIControl {
         
         self.layer.sublayers = nil
         
-        //使用更精確的間距計算邏輯，確保每個圓形的寬度和間距正確
+        // 使用更精確的間距計算邏輯，確保每個圓形的寬度和間距正確
         for index in 0..<options.count {
             let option = options[index]
             let xOffset = CGFloat(index) * (sectionWidth + 11)
-            let containerFrame = CGRect(x: xOffset, y: 0, width: sectionWidth, height: rect.height).integral
-            let remainingContainerFrame = containerFrame.insetBy(dx: 0, dy: EiteiCheckmark.minCheckmarkHeight / 2).integral
-            let borderLayer = createCircleLayer(remainingContainerFrame, option: option)
+            let containerFrame = CGRect(x: xOffset, y: 0, width: sectionWidth, height: rect.height)
+            let borderLayer = createCircleLayer(containerFrame, option: option)
             layer.addSublayer(borderLayer)
             
             // 如果是選中的索引，添加動畫和勾勾
             if index == selectedIndex {
                 animateCircleBorder(borderLayer)
-                
                 let tickLayer = createTick(borderLayer.frame, strokeColor: strokeColor)
                 layer.addSublayer(tickLayer)
             }
@@ -181,7 +179,7 @@ open class EiteiCheckmark: UIControl {
             let availableWidth = bounds.width - totalSpacing
             let sectionWidth = availableWidth / CGFloat(options.count)
             
-            //將 location.x 减去總間距，以確保正確計算每個圓形的索引
+            // 將 location.x 減去總間距，以確保正確計算每個圓形的索引
             let index = Int((location.x - totalSpacing) / sectionWidth)
             
             // 檢查索引是否在範圍內
