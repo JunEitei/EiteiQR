@@ -50,6 +50,7 @@ public class CreatorViewController: UIViewController, UITextFieldDelegate {
         textField.layer.cornerRadius = 10
         textField.layer.masksToBounds = true
         textField.keyboardAppearance = .dark
+        textField.returnKeyType = .done
         textField.placeholder = "Enter Website URL"
         return textField
     }()
@@ -117,7 +118,7 @@ public class CreatorViewController: UIViewController, UITextFieldDelegate {
     // 虚线框
     let dashedBorderLayer: CAShapeLayer = {
         let layer = CAShapeLayer()
-        layer.strokeColor = UIColor.lightGray.cgColor
+        layer.strokeColor = UIColor.eiteiLightGray.cgColor
         layer.lineDashPattern = [4, 2]
         layer.fillColor = nil
         layer.lineWidth = 2
@@ -129,6 +130,15 @@ public class CreatorViewController: UIViewController, UITextFieldDelegate {
         setupUI()
         setupTapGesture()
         urlTextField.delegate = self
+        
+        // 註冊鍵盤通知
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(_:)), name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide(_:)), name: UIResponder.keyboardWillHideNotification, object: nil)
+    }
+    
+    deinit {
+        // 移除鍵盤通知
+        NotificationCenter.default.removeObserver(self)
     }
     
     override public func viewDidLayoutSubviews() {
@@ -223,9 +233,9 @@ public class CreatorViewController: UIViewController, UITextFieldDelegate {
             make.bottom.equalTo(colorCardView.snp.bottom).offset(-10)
         }
         
-        // 設置保存按鈕的約束，加大50%，與Title水平對齊
+        // 設置保存按鈕的約束，與Title水平對齊
         saveButton.snp.makeConstraints { make in
-            make.top.equalTo(view.safeAreaLayoutGuide.snp.top).offset(2) // 確保與標題水平對齊
+            make.top.equalTo(view.safeAreaLayoutGuide.snp.top).offset(2)
             make.trailing.equalTo(view.safeAreaLayoutGuide.snp.trailing).offset(-7)
             make.size.equalTo(CGSize(width: 60, height: 60))
         }
@@ -243,7 +253,7 @@ public class CreatorViewController: UIViewController, UITextFieldDelegate {
         generateQRCode()
     }
     
-    // UITextFieldDelegate方法，處理返回鍵點擊事件
+    // 處理返回鍵點擊事件
     public func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         textField.resignFirstResponder()
         generateQRCode()
@@ -294,6 +304,29 @@ public class CreatorViewController: UIViewController, UITextFieldDelegate {
         
         alert.addAction(UIAlertAction(title: "OK", style: .default))
         present(alert, animated: true)
+    }
+    
+    // 鍵盤顯示事件
+    @objc private func keyboardWillShow(_ notification: Notification) {
+        guard let userInfo = notification.userInfo,
+              let keyboardFrame = userInfo[UIResponder.keyboardFrameEndUserInfoKey] as? CGRect else {
+            return
+        }
+        
+        let keyboardHeight = keyboardFrame.height
+        let inset = UIEdgeInsets(top: 0, left: 0, bottom: keyboardHeight, right: 0)
+        
+        // 移動視圖以便textField不被遮擋
+        UIView.animate(withDuration: 0.3) {
+            self.view.frame.origin.y = -keyboardHeight
+        }
+    }
+    
+    // 鍵盤隱藏事件
+    @objc private func keyboardWillHide(_ notification: Notification) {
+        UIView.animate(withDuration: 0.3) {
+            self.view.frame.origin.y = 0
+        }
     }
 }
 
