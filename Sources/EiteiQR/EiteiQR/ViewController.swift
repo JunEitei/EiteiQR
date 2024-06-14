@@ -348,6 +348,17 @@ public class ViewController: UIViewController, QRScannerCodeDelegate {
                 // 展示 CreatorViewController
                 
                 self?.present(self!.creatorViewController, animated: true, completion: {
+                    
+                    // 預處理
+                    // 隱藏 QRCode View
+                    self!.creatorViewController.qrCodeView.isHidden = true
+                    self!.creatorViewController.dashedBorderLayer.isHidden = false
+                    
+                    // 清除 URL 文本框內容
+                    self!.creatorViewController.urlTextField.text = ""
+                    
+                    // 重置顏色控件
+                    self!.creatorViewController.checkmarkControl.selectedIndex = 2
                     // 恢復動畫效果
                     UIView.animate(withDuration: 0.3) {
                         self?.createIcon.transform = CGAffineTransform.identity

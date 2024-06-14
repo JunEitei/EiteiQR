@@ -136,21 +136,6 @@ public class CreatorViewController: UIViewController, UITextFieldDelegate {
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide(_:)), name: UIResponder.keyboardWillHideNotification, object: nil)
     }
     
-    // 每次進來先把二維碼隱藏，文本框清除，Color控件復位
-    override public func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        
-        // 隱藏 QRCode View
-        qrCodeView.isHidden = true
-        dashedBorderLayer.isHidden = false
-        
-        // 清除 URL 文本框內容
-        urlTextField.text = ""
-        
-        // 重置顏色控件
-        checkmarkControl.selectedIndex = 2
-    }
-    
     
     deinit {
         // 移除鍵盤通知
