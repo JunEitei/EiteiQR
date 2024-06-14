@@ -161,7 +161,7 @@ public class ViewController: UIViewController, QRScannerCodeDelegate {
         path.close()
         
         curveLayer.path = path.cgPath
-        curveLayer.fillColor = UIColor(hex: "#333333").cgColor
+        curveLayer.fillColor = UIColor.eiteiGray.cgColor
         bottomBarView.layer.addSublayer(curveLayer)
         
         // 确保曲线位于底部视图的最底层
