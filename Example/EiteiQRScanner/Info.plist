@@ -20,12 +20,12 @@
 		</dict>
 	</dict>
 	<key>NSAppleMusicUsageDescription</key>
-	<string>Used to scan images</string>
+	<string>Used to scan QR code</string>
 	<key>NSCameraUsageDescription</key>
 	<string>Used to scan QR code</string>
 	<key>NSPhotoLibraryAddUsageDescription</key>
-	<string>Used to scan images</string>
+	<string>Used to scan QR code</string>
 	<key>NSPhotoLibraryUsageDescription</key>
-	<string>Used to scan images</string>
+	<string>Used to scan QR code</string>
 </dict>
 </plist>
