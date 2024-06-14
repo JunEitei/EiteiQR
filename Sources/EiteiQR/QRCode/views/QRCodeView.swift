@@ -404,6 +404,7 @@ internal class QRCodeItemProvider: NSObject, NSItemProviderWriting {
 	}
 }
 
+
 #endif
 
 #endif
