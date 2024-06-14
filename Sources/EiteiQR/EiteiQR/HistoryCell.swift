@@ -71,34 +71,34 @@ class HistoryCell: UITableViewCell {
         
         // 设置卡片视图的约束
         cardView.snp.makeConstraints { make in
-            make.edges.equalToSuperview().inset(5) // 四边边距为5
+            make.edges.equalToSuperview().inset(5) // 四边边距为多少
         }
         
         // 设置图标视图的约束
         iconImageView.snp.makeConstraints { make in
             make.size.equalTo(CGSize(width: 60, height: 60)) // 设置图标为方形
-            make.top.equalTo(cardView).offset(7) // 上边距为7
-            make.leading.equalTo(cardView).offset(15) // 左边距为15
+            make.top.equalTo(cardView).offset(7) // 上边距为多少
+            make.leading.equalTo(cardView).offset(15) // 左边距为多少
         }
         
         // 设置URL标签的约束
         urlLabel.snp.makeConstraints { make in
-            make.top.equalTo(cardView).offset(15) // 上边距为15
-            make.leading.equalTo(iconImageView.snp.trailing).offset(15) // 左边距为图标视图右侧的15
-            make.trailing.equalTo(cardView).offset(-15) // 右边距为15
+            make.top.equalTo(cardView).offset(15) // 上边距为多少
+            make.leading.equalTo(iconImageView.snp.trailing).offset(15) // 左边距为图标视图右侧的多少
+            make.trailing.equalTo(cardView).offset(-15) // 右边距为多少
         }
         
         // 设置描述标签的约束
         descriptionLabel.snp.makeConstraints { make in
-            make.top.equalTo(urlLabel.snp.bottom).offset(5) // 上边距为URL标签底部的5
-            make.leading.equalTo(iconImageView.snp.trailing).offset(15) // 左边距为图标视图右侧的15
-            make.trailing.equalTo(cardView).offset(-15) // 右边距为15
+            make.top.equalTo(urlLabel.snp.bottom).offset(9) // 上边距为URL标签底部的多少
+            make.leading.equalTo(iconImageView.snp.trailing).offset(15) // 左边距为图标视图右侧的多少
+            make.trailing.equalTo(cardView).offset(-15) // 右边距为多少
         }
         
         // 设置日期标签的约束
         dateLabel.snp.makeConstraints { make in
-            make.bottom.equalTo(cardView).offset(-10) // 底部边距为10
-            make.trailing.equalTo(cardView).offset(-10) // 右边距为10
+            make.bottom.equalTo(cardView).offset(-10) // 底部边距为多少
+            make.trailing.equalTo(cardView).offset(-10) // 右边距为多少
         }
     }
     

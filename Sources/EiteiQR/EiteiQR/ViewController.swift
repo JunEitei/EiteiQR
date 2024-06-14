@@ -1,3 +1,10 @@
+//
+//  ViewController.swift
+//  EiteiQR
+//
+//  Created by damao on 2024/6/13.
+//
+
 import UIKit
 
 public class ViewController: UIViewController, QRScannerCodeDelegate ,CreatorViewControllerDelegate {
@@ -278,9 +285,8 @@ public class ViewController: UIViewController, QRScannerCodeDelegate ,CreatorVie
         dateFormatter.dateFormat = "yyyy-MM-dd"
         let currentDate = dateFormatter.string(from: Date())
         
-        // 根据当前 Segment 设置描述信息
-        var description = segmentedControl.selectedIndex == 0 ? "掃碼時間：" : "添加時間："
-        description = description + TimeUtil.getCurrentTimeString();
+        // 设置描述信息：時間
+        let description = "掃碼時間：" + TimeUtil.getCurrentTimeString()
         
         // 添加数据到当前数据集合
         let newEntry = (result, description, currentDate)
@@ -384,13 +390,34 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
         // 配置表格單元格
         let data = currentData[indexPath.row]
         
-        // 先利用Cell內部的方法來配置
+        // 先利用Cell自身內部方法來配置
         cell.configure(with: data.0, subtitle: data.1, date: data.2)
         
         // 如果是來自生成的話，那麼展示出彩色
         if segmentedControl.selectedIndex == 1 {
             
             cell.iconImageView.backgroundColor = UIColor.init(hexString: cell.descriptionLabel.text!)
+            
+            
+            let dateFormatter = DateFormatter()
+            dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
+            
+            // 將字符串重新解析為 Date 對象
+            guard let date = dateFormatter.date(from: data.2) else {
+                print("無法解析日期時間字符串")
+                return cell
+            }
+            
+            // 利用格式化函數來分離
+            let dateOnlyFormatter = DateFormatter()
+            dateOnlyFormatter.dateFormat = "yyyy-MM-dd"
+            let timeOnlyFormatter = DateFormatter()
+            timeOnlyFormatter.dateFormat = "HH:mm:ss"
+            
+            // 把date中日期截取出來並且展示
+            cell.dateLabel.text = dateOnlyFormatter.string(from: date)
+            // 同時把date中時間截取出來並且展示
+            cell.descriptionLabel.text = "生成時間：" + timeOnlyFormatter.string(from: date)
         }
         
         return cell
@@ -418,6 +445,8 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func didSaveQRCode(url: String, color: String, date: String) {
+        
+        // 把數據更新進Create對應的數據源
         let newEntry = (url, color, date)
         createData.append(newEntry)
         

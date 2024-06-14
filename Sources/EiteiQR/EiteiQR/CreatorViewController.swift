@@ -1,3 +1,10 @@
+//
+//  CreatorViewController.swift
+//  EiteiQR
+//
+//  Created by damao on 2024/6/14.
+//
+
 import UIKit
 
 public class CreatorViewController: UIViewController, UITextFieldDelegate {
@@ -121,7 +128,8 @@ public class CreatorViewController: UIViewController, UITextFieldDelegate {
     // 虚线框
     let dashedBorderLayer: CAShapeLayer = {
         let layer = CAShapeLayer()
-        layer.strokeColor = UIColor.eiteiLightGray.cgColor
+        //半透明效果
+        layer.strokeColor = UIColor.eiteiLightGray.withAlphaComponent(0.5).cgColor
         layer.lineDashPattern = [4, 2]
         layer.fillColor = nil
         layer.lineWidth = 2
@@ -147,11 +155,11 @@ public class CreatorViewController: UIViewController, UITextFieldDelegate {
         let selectedColorHexString = iconImageView.backgroundColor?.toHexString()
         // 获取当前日期
         let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "yyyy-MM-dd"
+        dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
         let currentDate = dateFormatter.string(from: Date())
         
         // 如果 URL 是空的，則不進行任何操作
-
+        
         guard let urlText = urlTextField.text, !urlText.isEmpty else {
             return
         }
