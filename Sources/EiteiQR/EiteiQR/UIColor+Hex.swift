@@ -59,5 +59,35 @@ extension UIColor {
     static var eiteiLightGray: UIColor {
         return UIColor(hex: "#555555")
     }
-
+    
+    // 返回Eitei主題紅色
+    static var eiteiLightGray: UIColor {
+        return UIColor(hex: "#C94640")
+    }
+    
+    // 返回Eitei主題紅色
+    static var eiteiLightGray: UIColor {
+        return UIColor(hex: "#C94640")
+    }
+    
+    // 返回Eitei主題深橙色
+    static var eiteiSuperOrange: UIColor {
+        return UIColor(hex: "#EF8B3A")
+    }
+    
+    // 返回Eitei主題綠
+    static var eiteiGreen: UIColor {
+        return UIColor(hex: "#72A637")
+    }
+    
+    // 返回Eitei主題藍
+    static var eiteiBlue: UIColor {
+        return UIColor(hex: "#489DC9")
+    }
+    
+    // 返回Eitei主題黃色
+    static var eiteiYellow: UIColor {
+        return UIColor(hex: "#F3B940")
+    }
 }
+
