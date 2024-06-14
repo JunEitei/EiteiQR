@@ -90,7 +90,7 @@ class HistoryCell: UITableViewCell {
         
         // 设置描述标签的约束
         descriptionLabel.snp.makeConstraints { make in
-            make.top.equalTo(urlLabel.snp.bottom).offset(9) // 上边距为URL标签底部的多少
+            make.top.equalTo(urlLabel.snp.bottom).offset(10) // 上边距为URL标签底部的多少
             make.leading.equalTo(iconImageView.snp.trailing).offset(15) // 左边距为图标视图右侧的多少
             make.trailing.equalTo(cardView).offset(-15) // 右边距为多少
         }
