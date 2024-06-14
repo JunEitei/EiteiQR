@@ -1,4 +1,4 @@
-# EiteiQR V2
+# EiteiQR V3
 
 ![CocoaPods](https://img.shields.io/cocoapods/v/EiteiQR.svg)
 
