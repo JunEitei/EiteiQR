@@ -314,7 +314,6 @@ public class CreatorViewController: UIViewController, UITextFieldDelegate {
         }
         
         let keyboardHeight = keyboardFrame.height
-        let inset = UIEdgeInsets(top: 0, left: 0, bottom: keyboardHeight, right: 0)
         
         // 移動視圖以便textField不被遮擋
         UIView.animate(withDuration: 0.3) {

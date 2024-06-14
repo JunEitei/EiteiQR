@@ -22,8 +22,11 @@ public class ViewController: UIViewController, QRScannerCodeDelegate {
     
     // MARK: - Properties
     
+    // 提前聲明一些變量
     let tableView = UITableView()
     let segmentedControl = EiteiSegmentedControl()
+    let createTabButton = UIButton()
+    
     
     // 掃碼数据集
     var scanData: [(String, String, String)] = [] {
@@ -182,9 +185,10 @@ public class ViewController: UIViewController, QRScannerCodeDelegate {
         
         historyTabButton.titleLabel?.font = UIFont.systemFont(ofSize: 15, weight: .bold)
         
-        let createTabButton = UIButton()
         createTabButton.setTitle("Create", for: .normal)
         createTabButton.setTitleColor(UIColor.white, for: .normal)
+        createTabButton.addTarget(self, action: #selector(createButtonTapped), for: .touchUpInside)
+        
         bottomBarView.addSubview(createTabButton)
         
         let createIcon = UIImageView(image: UIImage(named: "icon_create"))
@@ -319,6 +323,33 @@ public class ViewController: UIViewController, QRScannerCodeDelegate {
         if let createDataArray = defaults.array(forKey: "createData") as? [[String]] {
             createData = createDataArray.map { ($0[0], $0[1], $0[2]) }
         }
+    }
+    
+    
+    @objc private func createButtonTapped() {
+        animateButtonTap(sender: createTabButton) {
+            self.showCreator()
+        }
+    }
+    
+    // 展示生成器之前的動畫
+    private func animateButtonTap(sender: UIButton, completion: @escaping () -> Void) {
+        let originalScale = sender.transform
+        
+        UIView.animate(withDuration: 0.2, animations: {
+            sender.transform = originalScale.scaledBy(x: 0.7, y: 0.7)
+        }) { _ in
+            UIView.animate(withDuration: 0.2) {
+                sender.transform = originalScale
+            }
+            completion()
+        }
+    }
+    // 展示生成器
+    @objc private func showCreator() {
+        let creatorVC = CreatorViewController()
+        creatorVC.modalPresentationStyle = .formSheet // 選擇動態樣式
+        self.present(creatorVC, animated: true, completion: nil)
     }
 }
 
