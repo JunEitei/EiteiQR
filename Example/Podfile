@@ -1,9 +1,12 @@
+platform :ios, '13.0'
+
 use_frameworks!
 
 target 'EiteiQRScanner' do
-
-#pod 'EiteiQR', :git => 'https://github.com/JunEitei/EiteiQR', :tag => '2.0.0'
-
-pod 'EiteiQR', :path => '../'
-
+  
+  # これはうちが開発に使ってるもんや！
+  # pod 'EiteiQR', :git => 'https://github.com/JunEitei/EiteiQR', :tag => '2.0.0'ください
+  
+  pod 'EiteiQR', :path => '../'
+  
 end
