@@ -384,8 +384,15 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
         // 配置表格單元格
         let data = currentData[indexPath.row]
         
-        
+        // 先利用Cell內部的方法來配置
         cell.configure(with: data.0, subtitle: data.1, date: data.2)
+        
+        // 如果是來自生成的話，那麼展示出彩色
+        if segmentedControl.selectedIndex == 1 {
+            
+            cell.iconImageView.backgroundColor = UIColor.init(hexString: cell.descriptionLabel.text!)
+        }
+        
         return cell
     }
     

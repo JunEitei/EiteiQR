@@ -150,8 +150,9 @@ public class CreatorViewController: UIViewController, UITextFieldDelegate {
         dateFormatter.dateFormat = "yyyy-MM-dd"
         let currentDate = dateFormatter.string(from: Date())
         
+        // 如果 URL 是空的，則不進行任何操作
+
         guard let urlText = urlTextField.text, !urlText.isEmpty else {
-            // 如果 URL 是空的，則不進行任何操作
             return
         }
         

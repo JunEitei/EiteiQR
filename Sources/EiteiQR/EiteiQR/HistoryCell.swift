@@ -21,7 +21,7 @@ class HistoryCell: UITableViewCell {
     }()
     
     // 图标视图，显示二维码或相关图标
-    private let iconImageView: UIImageView = {
+    public let iconImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.layer.cornerRadius = 10 // 设置圆角
         imageView.clipsToBounds = true // 超出部分裁剪
@@ -29,7 +29,7 @@ class HistoryCell: UITableViewCell {
     }()
     
     // URL 标签，显示URL的文本
-    private let urlLabel: UILabel = {
+    public let urlLabel: UILabel = {
         let label = UILabel()
         label.font = UIFont.systemFont(ofSize: 16, weight: .bold) // 设置字体为加粗的16号
         label.textColor = .white // 设置文字颜色为白色
@@ -37,7 +37,7 @@ class HistoryCell: UITableViewCell {
     }()
     
     // 描述标签，显示简短描述文本
-    private let descriptionLabel: UILabel = {
+    public let descriptionLabel: UILabel = {
         let label = UILabel()
         label.font = UIFont.systemFont(ofSize: 14, weight: .regular) // 设置字体为常规的14号
         label.textColor = .lightGray // 设置文字颜色为浅灰色
@@ -45,7 +45,7 @@ class HistoryCell: UITableViewCell {
     }()
     
     // 日期标签，显示日期信息
-    private let dateLabel: UILabel = {
+    public let dateLabel: UILabel = {
         let label = UILabel()
         label.font = UIFont.systemFont(ofSize: 12, weight: .regular) // 设置字体为常规的12号
         label.textColor = .gray // 设置文字颜色为灰色
