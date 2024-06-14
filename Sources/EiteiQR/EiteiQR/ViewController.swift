@@ -118,16 +118,32 @@ public class ViewController: UIViewController, QRScannerCodeDelegate ,CreatorVie
         tableView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
         self.view.addSubview(tableView)
         
+        // 表格約束設置，保證表格剛好被遮擋一點點
         tableView.snp.makeConstraints { make in
-            make.top.equalTo(segmentedControl.snp.bottom).offset(10)
+            make.top.equalTo(segmentedControl.snp.bottom).offset(0)
             make.leading.equalTo(self.view).offset(10)
             make.trailing.equalTo(self.view).offset(-10)
-            make.bottom.equalTo(self.view).offset(-100)
+            make.bottom.equalTo(self.view).offset(-126)
         }
+        
         
         tableView.delegate = self
         tableView.dataSource = self
         tableView.register(HistoryCell.self, forCellReuseIdentifier: "CustomCell")
+        
+        
+    }
+    
+    private func updateTableViewHeight() {
+        let maxVisibleRows = 5
+        let rowHeight: CGFloat = 85 // 单元格高度
+        
+        // 计算表格视图的总高度
+        let tableHeight = CGFloat(min(currentData.count, maxVisibleRows)) * rowHeight
+        tableView.snp.updateConstraints { make in
+            make.height.equalTo(tableHeight)
+        }
+        tableView.layoutIfNeeded() // 更新布局
     }
     
     private func setupBottomBarView() {
@@ -436,7 +452,7 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
     
     public func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         // 設置表頭高度
-        return 10
+        return 0
     }
     
     public func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
