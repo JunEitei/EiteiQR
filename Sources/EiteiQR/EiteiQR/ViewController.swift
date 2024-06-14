@@ -1,6 +1,6 @@
 import UIKit
 
-public class ViewController: UIViewController, QRScannerCodeDelegate {
+public class ViewController: UIViewController, QRScannerCodeDelegate ,CreatorViewControllerDelegate {
     
     // MARK: - QRScannerCodeDelegate Methods
     
@@ -27,22 +27,14 @@ public class ViewController: UIViewController, QRScannerCodeDelegate {
     let segmentedControl = EiteiSegmentedControl()
     let createTabButton = UIButton()
     var createIcon : UIImageView!
-    // CreatorViewController的實例
+    // 聲明CreatorViewController的實例
     private var creatorViewController: CreatorViewController!
     
     // 掃碼数据集
-    var scanData: [(String, String, String)] = [] {
-        didSet {
-            saveDataToUserDefaults()
-        }
-    }
+    var scanData: [(String, String, String)] = []
     
     // 生成二維碼数据集
-    var createData: [(String, String, String)] = [] {
-        didSet {
-            saveDataToUserDefaults()
-        }
-    }
+    var createData: [(String, String, String)] = []
     
     // 當前Table的數據源
     var currentData: [(String, String, String)] = []
@@ -346,10 +338,11 @@ public class ViewController: UIViewController, QRScannerCodeDelegate {
                 self?.createIcon.alpha = 0.5
             }) { [self] _ in
                 // 展示 CreatorViewController
-                
                 self?.present(self!.creatorViewController, animated: true, completion: {
                     
-                    // 預處理
+                    // 作為代理
+                    self!.creatorViewController.delegate = self
+                    
                     // 隱藏 QRCode View
                     self!.creatorViewController.qrCodeView.isHidden = true
                     self!.creatorViewController.dashedBorderLayer.isHidden = false
@@ -421,4 +414,22 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
         // 設置選擇樣式
         cell.selectionStyle = .none
     }
+    
+    func didSaveQRCode(url: String, color: String, date: String) {
+        let newEntry = (url, color, date)
+        createData.append(newEntry)
+        
+        // 存儲到本地
+        saveDataToUserDefaults()
+        
+        // 更新UI或進行其他操作
+        tableView.reloadData()
+        
+    }
+}
+
+// 定義一個代理協議，這個協議包含Creator創建二維碼之後，將數據回傳的方法
+protocol CreatorViewControllerDelegate: AnyObject {
+    
+    func didSaveQRCode(url: String, color: String, date: String)
 }

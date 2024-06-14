@@ -85,5 +85,36 @@ extension UIColor {
     static var eiteiYellow: UIColor {
         return UIColor(hex: "#F3B940")
     }
+    
+    // UIColor 轉換為十六進制字串
+    func toHexString(includeAlpha: Bool = true) -> String {
+        var red: CGFloat = 0
+        var green: CGFloat = 0
+        var blue: CGFloat = 0
+        var alpha: CGFloat = 1
+        
+        getRed(&red, green: &green, blue: &blue, alpha: &alpha)
+        
+        if includeAlpha {
+            return String(format: "#%02lX%02lX%02lX%02lX", lroundf(Float(red * 255)), lroundf(Float(green * 255)), lroundf(Float(blue * 255)), lroundf(Float(alpha * 255)))
+        } else {
+            return String(format: "#%02lX%02lX%02lX", lroundf(Float(red * 255)), lroundf(Float(green * 255)), lroundf(Float(blue * 255)))
+        }
+    }
+    
+    // 將十六進制字串轉換回 UIColor
+    convenience init(hexString: String) {
+        var hexString = hexString.trimmingCharacters(in: .whitespacesAndNewlines)
+        hexString = hexString.replacingOccurrences(of: "#", with: "")
+        
+        var rgba: UInt64 = 0
+        Scanner(string: hexString).scanHexInt64(&rgba)
+        
+        let red = CGFloat((rgba & 0xFF000000) >> 24) / 255.0
+        let green = CGFloat((rgba & 0x00FF0000) >> 16) / 255.0
+        let blue = CGFloat((rgba & 0x0000FF00) >> 8) / 255.0
+        let alpha = CGFloat(rgba & 0x000000FF) / 255.0
+        
+        self.init(red: red, green: green, blue: blue, alpha: alpha)
+    }
 }
-

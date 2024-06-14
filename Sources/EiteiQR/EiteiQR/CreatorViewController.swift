@@ -2,6 +2,9 @@ import UIKit
 
 public class CreatorViewController: UIViewController, UITextFieldDelegate {
     
+    // 設置代理的引用。以便當視圖消失時，調用代理方法將數據回傳
+    weak var delegate: CreatorViewControllerDelegate?
+    
     // 顯示標題的Label
     let titleLabel: UILabel = {
         let label = UILabel()
@@ -134,6 +137,26 @@ public class CreatorViewController: UIViewController, UITextFieldDelegate {
         // 註冊鍵盤通知
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(_:)), name: UIResponder.keyboardWillShowNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide(_:)), name: UIResponder.keyboardWillHideNotification, object: nil)
+    }
+    
+    public override func viewDidDisappear(_ animated: Bool) {
+        
+        super.viewDidDisappear(animated)
+        
+        // 巧用icon
+        let selectedColorHexString = iconImageView.backgroundColor?.toHexString()
+        // 获取当前日期
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd"
+        let currentDate = dateFormatter.string(from: Date())
+        
+        guard let urlText = urlTextField.text, !urlText.isEmpty else {
+            // 如果 URL 是空的，則不進行任何操作
+            return
+        }
+        
+        // 如果有文字內容再回傳
+        delegate?.didSaveQRCode(url: urlTextField.text!, color: selectedColorHexString!, date: currentDate)
     }
     
     
