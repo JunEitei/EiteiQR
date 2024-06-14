@@ -464,6 +464,33 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
         cell.selectionStyle = .none
     }
     
+    // 添加右滑删除动作 TODO：deprecated in iOS 13.0
+    public func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
+        let deleteAction = UITableViewRowAction(style: .destructive, title: "删除") { [weak self] (action, indexPath) in
+            self?.deleteData(at: indexPath)
+        }
+        return [deleteAction]
+    }
+    
+    private func deleteData(at indexPath: IndexPath) {
+        // 从当前数据中删除
+        let itemToDelete = currentData[indexPath.row]
+        
+        if segmentedControl.selectedIndex == 0 {
+            scanData.removeAll { $0 == itemToDelete }
+            currentData = scanData
+        } else {
+            createData.removeAll { $0 == itemToDelete }
+            currentData = createData
+        }
+        
+        // 更新数据源并保存到 UserDefaults
+        saveDataToUserDefaults()
+        
+        // 刷新表格视图
+        tableView.deleteRows(at: [indexPath], with: .automatic)
+    }
+    
     // 通過正則判斷是否是URL
     func isValidURL(_ urlString: String) -> Bool {
         let urlPattern = "^(https?:\\/\\/)?([\\da-z\\.-]+)\\.([a-z\\.]{2,6})([\\/\\w \\.-]*)*\\/?$"
