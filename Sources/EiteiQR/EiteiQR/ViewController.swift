@@ -26,7 +26,9 @@ public class ViewController: UIViewController, QRScannerCodeDelegate {
     let tableView = UITableView()
     let segmentedControl = EiteiSegmentedControl()
     let createTabButton = UIButton()
-    
+    var createIcon : UIImageView!
+    // CreatorViewController的實例
+    private var creatorViewController: CreatorViewController!
     
     // 掃碼数据集
     var scanData: [(String, String, String)] = [] {
@@ -50,7 +52,9 @@ public class ViewController: UIViewController, QRScannerCodeDelegate {
     
     public override func viewDidLoad() {
         super.viewDidLoad()
-        
+        // 提前創建CreatorViewController實例
+        creatorViewController = CreatorViewController()
+        creatorViewController.modalPresentationStyle = .formSheet
         loadDataFromUserDefaults() // 從本地加载数据
         currentData = scanData // 初始化数据为 scanData
         
@@ -187,11 +191,12 @@ public class ViewController: UIViewController, QRScannerCodeDelegate {
         
         createTabButton.setTitle("Create", for: .normal)
         createTabButton.setTitleColor(UIColor.white, for: .normal)
-        createTabButton.addTarget(self, action: #selector(createButtonTapped), for: .touchUpInside)
+        createTabButton.addTarget(self, action: #selector(createIconTapped), for: .touchUpInside)
         
         bottomBarView.addSubview(createTabButton)
         
-        let createIcon = UIImageView(image: UIImage(named: "icon_create"))
+        // 初始化createIcon
+        createIcon = UIImageView(image: UIImage(named: "icon_create"))
         bottomBarView.addSubview(createIcon)
         
         createIcon.snp.makeConstraints { make in
@@ -199,6 +204,12 @@ public class ViewController: UIViewController, QRScannerCodeDelegate {
             make.bottom.equalTo(createTabButton.snp.top).offset(-5)
             make.width.height.equalTo(30)
         }
+        
+        
+        // 添加createIcon的點擊事件
+        let createIconTapGesture = UITapGestureRecognizer(target: self, action: #selector(createIconTapped))
+        createIcon.isUserInteractionEnabled = true
+        createIcon.addGestureRecognizer(createIconTapGesture)
         
         createTabButton.snp.makeConstraints { make in
             make.centerY.equalTo(bottomBarView)
@@ -325,10 +336,25 @@ public class ViewController: UIViewController, QRScannerCodeDelegate {
         }
     }
     
-    
-    @objc private func createButtonTapped() {
-        animateButtonTap(sender: createTabButton) {
-            self.showCreator()
+    // 點擊生成圖標的時候
+    @objc private func createIconTapped() {
+        // 先使用 animateButtonTap 開始動畫效果
+        animateButtonTap(sender: createTabButton) { [weak self] in
+            // 當動畫結束後，開始進一步動畫效果和展示 CreatorViewController
+            UIView.animate(withDuration: 0.3, animations: {
+                self?.createIcon.transform = CGAffineTransform(scaleX: 1.5, y: 1.5)
+                self?.createIcon.alpha = 0.5
+            }) { [self] _ in
+                // 展示 CreatorViewController
+                
+                self?.present(self!.creatorViewController, animated: true, completion: {
+                    // 恢復動畫效果
+                    UIView.animate(withDuration: 0.3) {
+                        self?.createIcon.transform = CGAffineTransform.identity
+                        self?.createIcon.alpha = 1.0
+                    }
+                })
+            }
         }
     }
     
@@ -344,12 +370,6 @@ public class ViewController: UIViewController, QRScannerCodeDelegate {
             }
             completion()
         }
-    }
-    // 展示生成器
-    @objc private func showCreator() {
-        let creatorVC = CreatorViewController()
-        creatorVC.modalPresentationStyle = .formSheet // 選擇動態樣式
-        self.present(creatorVC, animated: true, completion: nil)
     }
 }
 
