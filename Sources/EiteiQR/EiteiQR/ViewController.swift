@@ -285,15 +285,10 @@ public class ViewController: UIViewController, QRScannerCodeDelegate ,CreatorVie
         // 添加数据到当前数据集合
         let newEntry = (result, description, currentDate)
         
-        // 如果掃碼的Segment，那麼就把數據添加到掃碼的數組裡
-        if segmentedControl.selectedIndex == 0 {
-            scanData.append(newEntry)
-        } else {
-            // 如果生成的Segment，那麼就把數據添加到生成碼的數組裡
-            createData.append(newEntry)
-        }
+        // 那麼就把數據添加到掃碼的數組裡
+        scanData.append(newEntry)
         
-        // 添加到表格數據中
+        // 再添加到表格數據中
         currentData.append(newEntry)
         
         // 更新表格
@@ -422,6 +417,8 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
         // 存儲到本地
         saveDataToUserDefaults()
         
+        // 把數據更新進表格的數據源
+        currentData.append(newEntry)
         // 更新UI或進行其他操作
         tableView.reloadData()
         
