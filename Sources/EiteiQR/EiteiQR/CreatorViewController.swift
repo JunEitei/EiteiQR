@@ -140,8 +140,12 @@ public class CreatorViewController: UIViewController, UITextFieldDelegate {
         super.viewDidLoad()
         setupUI()
         setupTapGesture()
+        
+        // 設置文本輸入代理
         urlTextField.delegate = self
         
+        // 初始化图标颜色
+        iconImageView.backgroundColor = .eiteiYellow // 设置默认颜色
         // 註冊鍵盤通知
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(_:)), name: UIResponder.keyboardWillShowNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide(_:)), name: UIResponder.keyboardWillHideNotification, object: nil)
