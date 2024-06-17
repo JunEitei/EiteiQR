@@ -121,7 +121,9 @@ public class ViewController: UIViewController, QRScannerCodeDelegate ,CreatorVie
         
         // 表格約束設置，保證表格剛好被遮擋一點點
         tableView.snp.makeConstraints { make in
-            make.top.equalTo(segmentedControl.snp.bottom).offset(0)
+            
+            // 設置間距，防止Table遮擋Segment
+            make.top.equalTo(segmentedControl.snp.bottom).offset(3)
             make.leading.equalTo(self.view).offset(10)
             make.trailing.equalTo(self.view).offset(-10)
             make.bottom.equalTo(self.view).offset(-126)
