@@ -20,7 +20,7 @@ Pod::Spec.new do |spec|
   spec.source       = { :git => "https://github.com/JunEitei/EiteiQR.git", :tag => "#{spec.version}" }
   spec.source_files  = "Sources/EiteiQR/**/*"
   
-  spec.resource_bundles = { 'EiteiQR' => ['Assets/**/*'] }
+  spec.resource_bundles = { 'EiteiQR' => ['Assets.xcassets/**/*'] }
 
   
 end
