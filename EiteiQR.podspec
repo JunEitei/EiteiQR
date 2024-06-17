@@ -1,7 +1,6 @@
 
 Pod::Spec.new do |spec|
 
-
   spec.name         = "EiteiQR"
   spec.version      = "3.2.0"
   spec.summary      = "A QR Code Framework developed by Eitei."
@@ -16,12 +15,13 @@ Pod::Spec.new do |spec|
 
   spec.platform     = :ios, '13.0'
   spec.swift_version = "5.7"
-  spec.framework = "UIKit"
-
+  spec.frameworks = 'UIKit', 'Foundation'
+  
   spec.source       = { :git => "https://github.com/JunEitei/EiteiQR.git", :tag => "#{spec.version}" }
   spec.source_files  = "Sources/EiteiQR/**/*"
   
-  spec.resource_bundles = { 'EiteiQRAssets' => ['Assets.xcassets/*']}
+  spec.resource_bundles = { 'EiteiQRAssets' => ['Assets.xcassets/**/*']}
   
 
+  
 end

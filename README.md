@@ -22,7 +22,7 @@ pod 'EiteiQR', :git => 'https://github.com/JunEitei/EiteiQR', :tag => '3.0.0'
 
 ## 更新
 ```ruby
-pod cache clean EiteiQR
+pod cache clean --all
 pod deintegrate
 pod install --repo-update
 ```

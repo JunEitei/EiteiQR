@@ -196,7 +196,10 @@ public class ViewController: UIViewController, QRScannerCodeDelegate ,CreatorVie
         historyTabButton.setTitleColor(UIColor.white, for: .normal)
         bottomBarView.addSubview(historyTabButton)
         
-        let historyIcon = UIImageView(image: UIImage(named: "icon_history"))
+        // 從資源包中加載歷史圖標
+        let image = UIImage(named: "icon_history")
+        
+        let historyIcon = UIImageView(image: image)
         bottomBarView.addSubview(historyIcon)
         
         historyIcon.snp.makeConstraints { make in
