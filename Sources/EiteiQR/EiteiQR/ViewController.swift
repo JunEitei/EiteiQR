@@ -123,10 +123,12 @@ public class ViewController: UIViewController, QRScannerCodeDelegate ,CreatorVie
         tableView.snp.makeConstraints { make in
             
             // 設置間距，防止Table遮擋Segment
-            make.top.equalTo(segmentedControl.snp.bottom).offset(3)
-            make.leading.equalTo(self.view).offset(10)
-            make.trailing.equalTo(self.view).offset(-10)
-            make.bottom.equalTo(self.view).offset(-126)
+            make.top.equalTo(segmentedControl.snp.bottom).offset(5)
+            make.leading.equalTo(self.view).offset(11)
+            // 表格右邊距離
+            make.trailing.equalTo(self.view).offset(-5)
+            // 表格底部距離，關乎被遮擋多少（重要）
+            make.bottom.equalTo(self.view).offset(-130)
         }
         
         
@@ -142,7 +144,8 @@ public class ViewController: UIViewController, QRScannerCodeDelegate ,CreatorVie
         let rowHeight: CGFloat = 85 // 单元格高度
         
         // 计算表格视图的总高度
-        let tableHeight = CGFloat(min(currentData.count, maxVisibleRows)) * rowHeight
+        let tableHeight = CGFloat(min(currentData.count, maxVisibleRows)) * rowHeight - 100
+        
         tableView.snp.updateConstraints { make in
             make.height.equalTo(tableHeight)
         }
@@ -561,12 +564,17 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
         cell.selectionStyle = .none
     }
     
-    // 添加右滑删除动作 TODO：deprecated in iOS 13.0
-    public func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
-        let deleteAction = UITableViewRowAction(style: .destructive, title: "删除") { [weak self] (action, indexPath) in
+    
+    
+    public func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        let deleteAction = UIContextualAction(style: .destructive, title: "删除") { [weak self] (action, view, completionHandler) in
             self?.deleteData(at: indexPath)
+            completionHandler(true)
         }
-        return [deleteAction]
+        deleteAction.backgroundColor = .red
+        
+        let configuration = UISwipeActionsConfiguration(actions: [deleteAction])
+        return configuration
     }
     
     private func deleteData(at indexPath: IndexPath) {
@@ -587,6 +595,7 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
         // 刷新表格视图
         tableView.deleteRows(at: [indexPath], with: .automatic)
     }
+    
     
     // 通過正則判斷是否是URL
     func isValidURL(_ urlString: String) -> Bool {
