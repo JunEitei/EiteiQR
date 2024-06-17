@@ -51,6 +51,7 @@ public class ViewController: UIViewController, QRScannerCodeDelegate ,CreatorVie
     
     public override func viewDidLoad() {
         super.viewDidLoad()
+        
         // 提前創建CreatorViewController實例
         creatorViewController = CreatorViewController()
         creatorViewController.modalPresentationStyle = .formSheet
@@ -236,9 +237,17 @@ public class ViewController: UIViewController, QRScannerCodeDelegate ,CreatorVie
         // 中間的大按鈕
         let scanButton = EiteiScanButton()
         scanButton.onScanButtonTapped = { [weak self] in
-            self?.presentQRCodeScanner()
-        }
+            // 動畫效果
+            self?.animateScanButtonTap(scanButton: scanButton) {
+                // 彈出掃碼界面
+                self?.presentQRCodeScanner()
+            }        }
+        
+        // 添加掃碼按鈕
         bottomBarView.addSubview(scanButton)
+        
+        // 進一步發光
+        self.addGlowEffect(to: scanButton)
         
         // 設置按鈕的約束
         scanButton.snp.makeConstraints { make in
@@ -392,6 +401,62 @@ public class ViewController: UIViewController, QRScannerCodeDelegate ,CreatorVie
             completion()
         }
     }
+    
+    // Scan按鈕押しで效果
+    private func animateScanButtonTap(scanButton: UIButton, completion: @escaping () -> Void) {
+        UIView.animate(withDuration: 0.071, animations: {
+            
+            // 採用黃金分割比例
+            scanButton.transform = CGAffineTransform(scaleX: 0.68, y: 0.68)
+        }) { _ in
+            UIView.animate(withDuration: 0.071, animations: {
+                
+                // 押しで
+                scanButton.transform = CGAffineTransform.identity
+            }) { _ in
+                
+                
+                completion()
+            }
+        }
+    }
+    
+    // Scan按鈕正弦波發光效果
+    private func addGlowEffect(to button: UIButton) {
+        // 設置陰影顏色和偏移量
+        button.layer.shadowColor = UIColor.eiteiOrange.cgColor
+        button.layer.shadowOffset = CGSize.zero
+        button.layer.shadowOpacity = 0.9
+        button.layer.shadowRadius = 20
+        
+        // 創建動畫，使陰影半徑隨時間變化
+        let glowAnimation = CABasicAnimation(keyPath: "shadowRadius")
+        glowAnimation.fromValue = 0
+        glowAnimation.toValue = 30
+        glowAnimation.duration = 0.5
+        glowAnimation.autoreverses = true
+        glowAnimation.repeatCount = .infinity
+        
+        // 創建動畫，使透明度隨時間變化
+        let opacityAnimation = CABasicAnimation(keyPath: "shadowOpacity")
+        opacityAnimation.fromValue = 0.5
+        opacityAnimation.toValue = 1.0
+        opacityAnimation.duration = 0.5
+        opacityAnimation.autoreverses = true
+        opacityAnimation.repeatCount = .infinity
+        
+        // 組合動畫
+        let animationGroup = CAAnimationGroup()
+        animationGroup.duration = 0.5
+        animationGroup.repeatCount = .infinity
+        animationGroup.autoreverses = true
+        animationGroup.animations = [glowAnimation, opacityAnimation]
+        
+        // 添加動畫到按鈕層
+        button.layer.add(animationGroup, forKey: "glowEffect")
+    }
+    
+    
 }
 
 extension ViewController: UITableViewDelegate, UITableViewDataSource {
