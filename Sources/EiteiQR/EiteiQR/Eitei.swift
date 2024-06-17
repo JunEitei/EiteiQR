@@ -12,23 +12,21 @@ class Eitei {
     static let shared = Eitei()
     
     private init() { }
-
+    
+    // 封裝從Bundle中讀取圖片
     func loadImage(named name: String) -> UIImage? {
-        guard let bundlePath = Bundle(for: type(of: self)).path(forResource: "EiteiQRAssets", ofType: "bundle"),
-              let assetBundle = Bundle(path: bundlePath) else {
-            print("Failed to locate bundle or asset bundle path")
+        // 获取 CocoaPods 资源 bundle
+        guard let bundleURL = Bundle(for: Eitei.self).url(forResource: "EiteiQR", withExtension: "bundle"),
+              let bundle = Bundle(url: bundleURL) else {
+            print("讀取bundle失敗")
             return nil
         }
-
-        let imagePath = assetBundle.path(forResource: name, ofType: nil)
-        print("Attempting to load image: \(name) from bundle: \(assetBundle.bundlePath), image path: \(String(describing: imagePath))")
-
-        if let image = UIImage(named: name, in: assetBundle, compatibleWith: nil) {
-            print("Image \(name) loaded successfully")
-            return image
-        } else {
-            print("Failed to load image \(name)")
+        // 通过 bundle 载入图片
+        guard let image = UIImage(named: name, in: bundle, compatibleWith: nil) else {
+            print("從 \(bundle)讀取圖片 \(name)失敗")
             return nil
         }
+        
+        return image
     }
 }

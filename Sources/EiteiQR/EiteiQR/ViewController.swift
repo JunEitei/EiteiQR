@@ -197,7 +197,7 @@ public class ViewController: UIViewController, QRScannerCodeDelegate ,CreatorVie
         bottomBarView.addSubview(historyTabButton)
         
         // 從資源包中加載歷史圖標
-        let image = UIImage(named: "icon_history")
+        let image = Eitei.shared.loadImage(named: "icon_history") 
         
         let historyIcon = UIImageView(image: image)
         bottomBarView.addSubview(historyIcon)
