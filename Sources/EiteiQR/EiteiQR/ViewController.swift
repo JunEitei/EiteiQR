@@ -182,6 +182,8 @@ public class ViewController: UIViewController, QRScannerCodeDelegate ,CreatorVie
         
         // 确保曲线位于底部视图的最底层
         bottomBarView.layer.insertSublayer(curveLayer, at: 0)
+        // 设置 zPosition 防止遮擋掃碼按鈕
+        curveLayer.zPosition = -1
         
         // History 標籤按鈕
         let historyTabButton = UIButton()
@@ -249,12 +251,22 @@ public class ViewController: UIViewController, QRScannerCodeDelegate ,CreatorVie
         // 進一步發光
         self.addGlowEffect(to: scanButton)
         
+        // 剪裁成正圓
+        //        scanButton.clipsToBounds = false
+        
         // 設置按鈕的約束
         scanButton.snp.makeConstraints { make in
             make.centerX.equalToSuperview()
             make.bottom.equalToSuperview().offset(-100)
             make.width.height.equalTo(90)
         }
+        
+        // 把三個按钮放到最上层
+        bottomBarView.bringSubviewToFront(scanButton)
+        bottomBarView.bringSubviewToFront(createTabButton)
+        bottomBarView.bringSubviewToFront(historyTabButton)
+        
+        
     }
     
     @objc private func segmentedControlValueChanged() {
@@ -581,7 +593,12 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
         return urlPredicate.evaluate(with: urlString)
     }
     
+    // 成功保存二維碼之後
     func didSaveQRCode(url: String, color: String, date: String) {
+        
+        // 手動切換選項卡
+        segmentedControl.manualSelectSegment(at: 1)
+        
         
         // 把數據更新進Create對應的數據源
         let newEntry = (url, color, date)
@@ -592,6 +609,7 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
         
         // 把數據更新進表格的數據源
         currentData.append(newEntry)
+        
         
         // 刷新表格
         tableView.reloadData()

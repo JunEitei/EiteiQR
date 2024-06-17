@@ -9,7 +9,7 @@ import UIKit
 
 class EiteiScanButton: UIButton {
     
-    private let hitAreaPadding: CGFloat = 50  // 扩展热区的距离，用于增加按钮的点击区域
+    private let hitAreaPadding: CGFloat = 100  // 扩展热区的距离，用于增加按钮的点击区域
     var onScanButtonTapped: (() -> Void)?  // 按钮点击事件的闭包，外部可以通过此闭包处理点击事件
     
     // 初始化方法
@@ -37,7 +37,7 @@ class EiteiScanButton: UIButton {
         // 使用 SnapKit 设置 UIImageView 的约束，使其在按钮中心并且宽高为 90
         scanImageView.snp.makeConstraints { make in
             make.center.equalTo(self)  // UIImageView 位于按钮的中心
-            make.width.height.equalTo(90)  // 设置宽度和高度为 90
+            make.width.height.equalTo(100)  // 设置宽度和高度为 90
         }
         
         // 添加按钮点击事件的目标动作

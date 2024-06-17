@@ -208,4 +208,12 @@ public class EiteiSegmentedControl: UIControl {
             button.setAttributedTitle(NSAttributedString(string: button.currentAttributedTitle?.string ?? "Undefined", attributes: selectedAttrs), for: .selected)
         }
     }
+    
+    // 手動切換選項卡
+    @objc public func manualSelectSegment(at index: Int) {
+        guard index >= 0 && index < stackView.arrangedSubviews.count else { return }
+        guard let button = stackView.arrangedSubviews[index] as? UIButton else { return }
+        buttonPressed(button)
+    }
+    
 }

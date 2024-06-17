@@ -323,14 +323,47 @@ public class CreatorViewController: UIViewController, UITextFieldDelegate {
     // 處理勾選控制元件值變更事件
     @objc private func checkmarkControlValueChanged(_ sender: EiteiCheckmark) {
         let selectedOption = sender.options[sender.selectedIndex]
+        
+        
         qrCodeView.tintColor = selectedOption.fillColor
         iconImageView.backgroundColor = selectedOption.fillColor  // 更新圖標背景色
     }
     
+    // 炸裂效果動畫
+    private func animateSaveButtonExplosion(completion: @escaping () -> Void) {
+        let saveButton = self.saveButton
+        
+        // 動畫持續時間
+        let duration: TimeInterval = 0.4
+        
+        // 執行動畫
+        UIView.animate(withDuration: duration / 2, animations: {
+            // 按鈕放大並淡出
+            saveButton.transform = CGAffineTransform(scaleX: 1.8, y: 1.8)
+            saveButton.alpha = 0.5
+        }, completion: { _ in
+            // 還原按鈕大小並淡入
+            UIView.animate(withDuration: duration / 2, animations: {
+                saveButton.transform = CGAffineTransform.identity
+                saveButton.alpha = 1.0
+            }, completion: { _ in
+                // 動畫完成後調用完成處理程序
+                completion()
+            })
+        })
+    }
+    
+    
     // 保存按鈕點擊事件
     @objc private func saveButtonTapped() {
-        guard let qrCodeImage = qrCodeView.asImage() else { return }
-        UIImageWriteToSavedPhotosAlbum(qrCodeImage, self, #selector(image(_:didFinishSavingWithError:contextInfo:)), nil)
+        
+        // 先執行炸裂效果動畫
+        animateSaveButtonExplosion { [weak self] in
+            // 確保 QR Code 圖像轉換成功
+            guard let self = self, let qrCodeImage = self.qrCodeView.asImage() else { return }
+            // 保存圖像到相冊
+            UIImageWriteToSavedPhotosAlbum(qrCodeImage, self, #selector(self.image(_:didFinishSavingWithError:contextInfo:)), nil)
+        }
     }
     
     // 保存圖片回調
