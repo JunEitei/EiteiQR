@@ -19,6 +19,5 @@ Pod::Spec.new do |spec|
   
   spec.source       = { :git => "https://github.com/JunEitei/EiteiQR.git", :tag => "#{spec.version}" }
   spec.source_files  = "Sources/EiteiQR/**/*"
-  spec.resources = "Assets/**/*"
 
 end
