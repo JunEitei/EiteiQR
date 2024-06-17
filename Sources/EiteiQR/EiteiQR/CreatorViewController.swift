@@ -24,7 +24,7 @@ public class CreatorViewController: UIViewController, UITextFieldDelegate {
     
     // 顯示圖標的ImageView
     let iconImageView: UIImageView = {
-        let imageView = UIImageView(image: UIImage(named: "icon_website"))
+        let imageView = UIImageView(image: Eitei.shared.loadImage(named: "icon_website"))
         imageView.contentMode = .scaleAspectFit
         imageView.backgroundColor = .clear // 初始背景色
         imageView.layer.cornerRadius = 20 // 圓角處理
@@ -119,7 +119,7 @@ public class CreatorViewController: UIViewController, UITextFieldDelegate {
     // 保存按鈕
     let saveButton: UIButton = {
         let button = UIButton(type: .system)
-        button.setImage(UIImage(named: "icon_download"), for: .normal)
+        button.setImage(Eitei.shared.loadImage(named: "icon_download"), for: .normal)
         button.tintColor = .white
         button.addTarget(nil, action: #selector(saveButtonTapped), for: .touchUpInside)
         return button

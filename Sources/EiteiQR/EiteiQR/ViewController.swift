@@ -33,7 +33,7 @@ public class ViewController: UIViewController, QRScannerCodeDelegate ,CreatorVie
     let tableView = UITableView()
     let segmentedControl = EiteiSegmentedControl()
     let createTabButton = UIButton()
-    var createIcon : UIImageView!
+    var createIcon = UIImageView()
     // 聲明CreatorViewController的實例
     private var creatorViewController: CreatorViewController!
     
@@ -197,7 +197,8 @@ public class ViewController: UIViewController, QRScannerCodeDelegate ,CreatorVie
         bottomBarView.addSubview(historyTabButton)
         
         // 從資源包中加載歷史圖標
-        let image = Eitei.shared.loadImage(named: "icon_history") 
+        let image = Eitei.shared.loadImage(named: "icon_history")
+        
         
         let historyIcon = UIImageView(image: image)
         bottomBarView.addSubview(historyIcon)
@@ -222,7 +223,7 @@ public class ViewController: UIViewController, QRScannerCodeDelegate ,CreatorVie
         bottomBarView.addSubview(createTabButton)
         
         // 初始化createIcon
-        createIcon = UIImageView(image: UIImage(named: "icon_create"))
+        createIcon.image = Eitei.shared.loadImage(named: "icon_create")
         bottomBarView.addSubview(createIcon)
         
         createIcon.snp.makeConstraints { make in
@@ -293,13 +294,13 @@ public class ViewController: UIViewController, QRScannerCodeDelegate ,CreatorVie
         var configuration = QRScannerConfiguration()
         
         // 設置相機按鈕的圖示
-        configuration.cameraImage = UIImage(named: "camera")
+        configuration.cameraImage = Eitei.shared.loadImage(named: "camera")
         
         // 設置閃光燈開啟按鈕的圖示
-        configuration.flashOnImage = UIImage(named: "flash-on")
+        configuration.flashOnImage = Eitei.shared.loadImage(named: "flash-on")
         
         // 設置相冊按鈕的圖示
-        configuration.galleryImage = UIImage(named: "photos")
+        configuration.galleryImage = Eitei.shared.loadImage(named: "photos")
         
         // 設置掃描界面的標題
         configuration.title = "掃描二維碼"
@@ -540,7 +541,7 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
             
             
             // 按鈕圖標取決於二維碼內容是否為URL
-            cell.iconImageView.image = UIImage(named: isValidURL(data.0) ? "icon_website" : "icon_text")
+            cell.iconImageView.image = Eitei.shared.loadImage(named:  isValidURL(data.0) ? "icon_website" : "icon_text")
         }
         
         return cell

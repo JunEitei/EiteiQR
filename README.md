@@ -24,5 +24,7 @@ pod 'EiteiQR', :git => 'https://github.com/JunEitei/EiteiQR', :tag => '3.0.0'
 ```ruby
 pod cache clean --all
 pod deintegrate
+pod clean
+rm -rf ~/Library/Developer/Xcode/DerivedData/*
 pod install --repo-update
 ```

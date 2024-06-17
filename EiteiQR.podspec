@@ -15,12 +15,11 @@ Pod::Spec.new do |spec|
 
   spec.platform     = :ios, '13.0'
   spec.swift_version = "5.7"
-  spec.frameworks = 'UIKit', 'Foundation'
   
   spec.source       = { :git => "https://github.com/JunEitei/EiteiQR.git", :tag => "#{spec.version}" }
   spec.source_files  = "Sources/EiteiQR/**/*"
   
-  spec.resource_bundles = { 'EiteiQR' => ['Assets.xcassets/**/*'] }
+  spec.resource =  ["Sources/EiteiQR/Resource.bundle"]
 
-  
+
 end

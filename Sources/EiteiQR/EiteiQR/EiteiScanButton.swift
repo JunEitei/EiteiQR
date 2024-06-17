@@ -30,7 +30,7 @@ class EiteiScanButton: UIButton {
         self.backgroundColor = UIColor.clear  // 设置按钮的背景颜色为透明
         
         // 创建并添加一个 UIImageView 用于显示扫描图标
-        let scanImageView = UIImageView(image: UIImage(named: "scan"))
+        let scanImageView = UIImageView(image: Eitei.shared.loadImage(named: "scan"))
         scanImageView.contentMode = .scaleAspectFit  // 设置图片内容模式为按比例缩放以适应按钮
         self.addSubview(scanImageView)  // 将 UIImageView 添加到按钮视图中
         

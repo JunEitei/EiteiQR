@@ -16,7 +16,7 @@ class Eitei {
     // 封裝從Bundle中讀取圖片
     func loadImage(named name: String) -> UIImage? {
         // 获取 CocoaPods 资源 bundle
-        guard let bundleURL = Bundle(for: Eitei.self).url(forResource: "EiteiQR", withExtension: "bundle"),
+        guard let bundleURL = Bundle(for: Eitei.self).url(forResource: "Resource", withExtension: "bundle"),
               let bundle = Bundle(url: bundleURL) else {
             print("讀取bundle失敗")
             return nil
