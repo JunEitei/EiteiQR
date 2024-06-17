@@ -379,9 +379,21 @@ public class ViewController: UIViewController, QRScannerCodeDelegate ,CreatorVie
                     // 重置顏色控件
                     self!.creatorViewController.checkmarkControl.selectedIndex = 2
                     
-                    // 頂部圖標顏色淡出的特效
-                    UIView.animate(withDuration: 0.3, animations: {
-                        self!.creatorViewController.iconImageView.backgroundColor = .white
+                    // 設置初始顏色為白色
+                    self!.creatorViewController.iconImageView.backgroundColor = .white
+                    
+                    // 逐漸變為黃色
+                    UIView.animate(withDuration: 0.6, delay: 0.0, options: [.curveEaseInOut], animations: {
+                        // 頂部圖標顏色淡出的特效
+                        self!.creatorViewController.iconImageView.backgroundColor = .eiteiYellow
+                        
+                        // 顏色變化過程中稍微放大
+                        self!.creatorViewController.iconImageView.transform = CGAffineTransform(scaleX: 1.1, y: 1.1)
+                    }, completion: { _ in
+                        // 還原變換
+                        UIView.animate(withDuration: 0.3) {
+                            self!.creatorViewController.iconImageView.transform = .identity
+                        }
                     })
                     
                     // 恢復動畫效果
