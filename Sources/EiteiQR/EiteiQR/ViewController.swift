@@ -7,7 +7,7 @@
 
 import UIKit
 
-public class ViewController: UIViewController, QRScannerCodeDelegate ,CreatorViewControllerDelegate {
+public class ViewController: UIViewController, QRScannerCodeDelegate ,CreatorViewControllerDelegate,UIViewControllerTransitioningDelegate {
     
     // MARK: - QRScannerCodeDelegate Methods
     
@@ -35,7 +35,7 @@ public class ViewController: UIViewController, QRScannerCodeDelegate ,CreatorVie
     let createTabButton = UIButton()
     var createIcon = UIImageView()
     // 聲明CreatorViewController的實例
-    private var creatorViewController: CreatorViewController!
+    private var creatorViewController = CreatorViewController()
     
     // 掃碼数据集
     var scanData: [(String, String, String)] = []
@@ -52,8 +52,6 @@ public class ViewController: UIViewController, QRScannerCodeDelegate ,CreatorVie
     public override func viewDidLoad() {
         super.viewDidLoad()
         
-        // 提前創建CreatorViewController實例
-        creatorViewController = CreatorViewController()
         creatorViewController.modalPresentationStyle = .formSheet
         loadDataFromUserDefaults() // 從本地加载数据
         currentData = scanData // 初始化数据为 scanData
@@ -495,7 +493,22 @@ public class ViewController: UIViewController, QRScannerCodeDelegate ,CreatorVie
         button.layer.add(animationGroup, forKey: "glowEffect")
     }
     
+    // MARK: - UIViewControllerTransitioningDelegate
     
+    
+    func presentImageViewController(with image: UIImage) {
+        let imageVC = ImageViewController()
+        imageVC.image = image
+        imageVC.modalPresentationStyle = .custom
+        imageVC.transitioningDelegate = self
+        present(imageVC, animated: true, completion: nil)
+    }
+    
+    // MARK: - UIViewControllerTransitioningDelegate
+    
+    public func presentationController(forPresented presented: UIViewController, presenting: UIViewController?, source: UIViewController) -> UIPresentationController? {
+        return HalfSizePresentationController(presentedViewController: presented, presenting: presenting)
+    }
 }
 
 extension ViewController: UITableViewDelegate, UITableViewDataSource {
@@ -539,7 +552,6 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
             // 同時把date中時間截取出來並且展示
             cell.descriptionLabel.text = "生成時間：" + timeOnlyFormatter.string(from: date)
             
-            
             // 按鈕圖標取決於二維碼內容是否為URL
             cell.iconImageView.image = Eitei.shared.loadImage(named:  isValidURL(data.0) ? "icon_website" : "icon_text")
         }
@@ -568,6 +580,58 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
         cell.selectionStyle = .none
     }
     
+    // Cell點擊事件
+    public func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+        
+        // 獲取到Cell
+        let cell = tableView.cellForRow(at: indexPath) as! HistoryCell
+        
+        // 獲取到二維碼的內容
+        let qrCodeContent = cell.urlLabel.text!
+        
+        // 生成二維碼並展示
+        generateQRCode(from: qrCodeContent)
+        
+    }
+    
+    // MARK: - QR Code Generator
+    private func generateQRCode(from text: String) {
+        do {
+            let imagedata = try QRCode.build
+                .text(text)
+                .quietZonePixelCount(3)
+                .foregroundColor(UIColor.eiteiSuperOrange.cgColor)
+                .backgroundColor(UIColor.eiteiGray.cgColor)
+                .background.cornerRadius(3)
+                .onPixels.shape(QRCode.PixelShape.CurvePixel())
+                .eye.shape(QRCode.EyeShape.Teardrop())
+                .generate.image(dimension: 600, representation: .png())
+            
+            // 展示生成的圖片
+            presentImageViewController(with: UIImage(data: imagedata)!)
+            
+        } catch {
+            print("生成 QR Code 時發生錯誤：\(error.localizedDescription)")
+        }
+    }
+    
+    // 保存圖片回調
+    @objc private func image(_ image: UIImage, didFinishSavingWithError error: Error?, contextInfo: UnsafeRawPointer) {
+        
+        let alert = UIAlertController(title: nil, message: nil, preferredStyle: .alert)
+        
+        if let error = error {
+            alert.title = "Save error"
+            alert.message = error.localizedDescription
+        } else {
+            alert.title = "Saved!"
+            alert.message = "Your QR Code image has been saved to your photos."
+        }
+        
+        alert.addAction(UIAlertAction(title: "OK", style: .default))
+        present(alert, animated: true)
+    }
     
     
     public func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {

@@ -33,7 +33,7 @@ public class CreatorViewController: UIViewController, UITextFieldDelegate {
     }()
     
     // 顯示QR碼的QRCodeView
-    var qrCodeView: QRCodeView = {
+    public var qrCodeView: QRCodeView = {
         let view = QRCodeView()
         view.backgroundColor = .clear
         view.layer.masksToBounds = true
@@ -304,7 +304,7 @@ public class CreatorViewController: UIViewController, UITextFieldDelegate {
     }
     
     // 生成QRCode的方法
-    private func generateQRCode() {
+    public func generateQRCode() {
         guard let urlString = urlTextField.text, let url = URL(string: urlString), !urlString.isEmpty else {
             qrCodeView.isHidden = true
             dashedBorderLayer.isHidden = false
@@ -354,8 +354,8 @@ public class CreatorViewController: UIViewController, UITextFieldDelegate {
     }
     
     
-    // 保存按鈕點擊事件
-    @objc private func saveButtonTapped() {
+    // 下載按鈕點擊事件
+    @objc public func saveButtonTapped() {
         
         // 先執行炸裂效果動畫
         animateSaveButtonExplosion { [weak self] in
@@ -368,6 +368,7 @@ public class CreatorViewController: UIViewController, UITextFieldDelegate {
     
     // 保存圖片回調
     @objc private func image(_ image: UIImage, didFinishSavingWithError error: Error?, contextInfo: UnsafeRawPointer) {
+        
         let alert = UIAlertController(title: nil, message: nil, preferredStyle: .alert)
         
         if let error = error {
@@ -401,16 +402,6 @@ public class CreatorViewController: UIViewController, UITextFieldDelegate {
     @objc private func keyboardWillHide(_ notification: Notification) {
         UIView.animate(withDuration: 0.3) {
             self.view.frame.origin.y = 0
-        }
-    }
-}
-
-// 擴展QRCodeView以便將其轉換為UIImage
-extension UIView {
-    func asImage() -> UIImage? {
-        let renderer = UIGraphicsImageRenderer(bounds: bounds)
-        return renderer.image { rendererContext in
-            layer.render(in: rendererContext.cgContext)
         }
     }
 }
