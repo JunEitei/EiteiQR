@@ -19,7 +19,7 @@ pod 'EiteiQR', :git => 'https://github.com/JunEitei/EiteiQR', :tag => '3.2.0'
    ```swift
    window?.rootViewController = ViewController()
    ```
-3. **在Info.plist中添加**：
+3. **在Info.plist之中添加**：
    ```xml
     <key>NSAppleMusicUsageDescription</key>
     <string>Used to scan QR code</string>
