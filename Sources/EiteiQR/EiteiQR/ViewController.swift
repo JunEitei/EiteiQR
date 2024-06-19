@@ -291,6 +291,15 @@ public class ViewController: UIViewController, QRScannerCodeDelegate ,CreatorVie
         // 設置 QR 碼掃描器的配置對象
         var configuration = QRScannerConfiguration()
         
+        // 設置相機按鈕的圖示
+        configuration.cameraImage = Eitei.shared.loadImage(named: "camera")
+        
+        // 設置閃光燈開啟按鈕的圖示
+        configuration.flashOnImage = Eitei.shared.loadImage(named: "flash-on")
+        
+        // 設置相冊按鈕的圖示
+        configuration.galleryImage = Eitei.shared.loadImage(named: "photos")
+        
         // 設置掃描界面的標題
         configuration.title = "掃描二維碼"
         
