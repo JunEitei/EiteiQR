@@ -9,8 +9,6 @@ Pod::Spec.new do |spec|
                     A new generation of QR Code Scanner developed by Eitei.
                    DESC
   spec.homepage     = "https://github.com/JunEitei/EiteiQR"
-
-  spec.license      = { :type => "MIT", :file => "LICENSE" }
   spec.author             = { "Damao" => "jun.huang@eitei.co.jp" }
 
   spec.platform     = :ios, '13.0'
