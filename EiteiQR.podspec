@@ -2,7 +2,7 @@
 Pod::Spec.new do |spec|
 
   spec.name         = "EiteiQR"
-  spec.version      = "3.3.0"
+  spec.version      = "3.4.0"
   spec.summary      = "A QR Code Framework developed by Eitei."
 
   spec.description  = <<-DESC

@@ -1,3 +1,10 @@
+//
+//  ViewController.swift
+//  EiteiQR
+//
+//  Created by damao on 2024/6/20.
+//
+
 import UIKit
 
 public class ViewController: UITabBarController, UITabBarControllerDelegate {
