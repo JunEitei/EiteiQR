@@ -41,12 +41,12 @@ public class ViewController: UITabBarController, UITabBarControllerDelegate {
         guard let items = tabBar.items else { return }
         
         for item in items {
-            // 調整圖標和文字位置
-            item.imageInsets = UIEdgeInsets(top: -12, left: 0, bottom: 10, right: 0) // 調整圖標位置，使其向上移動
+            // 圖標文字位置微調
+            item.imageInsets = UIEdgeInsets(top: -22, left: 0, bottom: -5, right: 0) // 調整圖標位置，使其向上移動
             
             // 純手工放大圖標
             if let originalImage = item.image {
-                let newSize = CGSize(width: 30, height: 30) // 設定新的圖標大小
+                let newSize = CGSize(width: 33, height: 33) // 設定新的圖標大小
                 UIGraphicsBeginImageContextWithOptions(newSize, false, 0.0)
                 originalImage.draw(in: CGRect(origin: .zero, size: newSize))
                 item.image = UIGraphicsGetImageFromCurrentImageContext()
@@ -54,8 +54,8 @@ public class ViewController: UITabBarController, UITabBarControllerDelegate {
             }
             
             // 調整文字大小
-            item.setTitleTextAttributes([NSAttributedString.Key.font: UIFont.systemFont(ofSize: 17)], for: .normal) 
-            item.setTitleTextAttributes([NSAttributedString.Key.font: UIFont.systemFont(ofSize: 17)], for: .selected)
+            item.setTitleTextAttributes([NSAttributedString.Key.font: UIFont.systemFont(ofSize: 18)], for: .normal)
+            item.setTitleTextAttributes([NSAttributedString.Key.font: UIFont.systemFont(ofSize: 18)], for: .selected)
         }
     }
 }
