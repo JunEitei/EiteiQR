@@ -151,26 +151,18 @@ public class QRCreatorViewController: UIViewController, UITextFieldDelegate {
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide(_:)), name: UIResponder.keyboardWillHideNotification, object: nil)
     }
     
-    public override func viewDidDisappear(_ animated: Bool) {
+    public override func viewDidAppear(_ animated: Bool) {
+        // 隱藏 QRCode View
+        self.qrCodeView.isHidden = true
+        self.dashedBorderLayer.isHidden = false
         
-        super.viewDidDisappear(animated)
+        // 清除 URL 文本框內容
+        self.urlTextField.text = ""
         
-        // 巧用icon
-        let selectedColorHexString = iconImageView.backgroundColor?.toHexString()
-        // 获取当前日期
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
-        let currentDate = dateFormatter.string(from: Date())
-        
-        // 如果 URL 是空的，則不進行任何操作
-        
-        guard let urlText = urlTextField.text, !urlText.isEmpty else {
-            return
-        }
-        
-        // 如果有文字內容再回傳
-        delegate?.didSaveQRCode(url: urlTextField.text!, color: selectedColorHexString!, date: currentDate)
+        // 重置顏色控件
+        self.checkmarkControl.selectedIndex = 2
     }
+    
     
     // 判斷是否是URL
     private func isValidURL(_ string: String) -> Bool {
@@ -293,13 +285,45 @@ public class QRCreatorViewController: UIViewController, UITextFieldDelegate {
     // 點擊空白處收起鍵盤並生成QRCode
     @objc private func dismissKeyboard() {
         urlTextField.resignFirstResponder()
+        
+        //保存的操作
+        doSave();
+    }
+    
+    private func doSave(){
+        
+        // 生成二維碼
         generateQRCode()
+        
+        // 巧用icon，讀取顏色
+        let selectedColorHexString = iconImageView.backgroundColor?.toHexString()
+        // 获取当前日期
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
+        let currentDate = dateFormatter.string(from: Date())
+        
+        // 如果 URL 是空的，則不進行任何操作
+        
+        guard let urlText = urlTextField.text, !urlText.isEmpty else {
+            return
+        }
+        
+        // 如果有文字內容再回傳
+        delegate?.didSaveQRCode(url: urlTextField.text!, color: selectedColorHexString!, date: currentDate)
+        
+        // 切换到歷史視圖
+        if let tabBarController = self.tabBarController {
+            tabBarController.selectedIndex = 0
+        }
     }
     
     // 處理返回鍵點擊事件
     public func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        
+        // 取消焦點
         textField.resignFirstResponder()
-        generateQRCode()
+        // 保存的操作
+        doSave();
         return true
     }
     
@@ -375,8 +399,8 @@ public class QRCreatorViewController: UIViewController, UITextFieldDelegate {
             alert.title = "Save error"
             alert.message = error.localizedDescription
         } else {
-            alert.title = "Saved!"
-            alert.message = "Your QR Code image has been saved to your photos."
+            alert.title = "成功"
+            alert.message = "二維碼已保存至相冊"
         }
         
         alert.addAction(UIAlertAction(title: "OK", style: .default))
@@ -404,4 +428,10 @@ public class QRCreatorViewController: UIViewController, UITextFieldDelegate {
             self.view.frame.origin.y = 0
         }
     }
+}
+
+// 定義一個代理協議，這個協議包含Creator創建二維碼之後，將數據回傳的方法
+protocol CreatorViewControllerDelegate: AnyObject {
+    
+    func didSaveQRCode(url: String, color: String, date: String)
 }

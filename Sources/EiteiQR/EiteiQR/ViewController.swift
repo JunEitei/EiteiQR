@@ -28,6 +28,10 @@ public class ViewController: UITabBarController, UITabBarControllerDelegate {
         
         // 設置視圖控制器集合
         self.viewControllers = [historyViewController, creatorViewController]
+        
+        // 在這里統一設置代理
+        creatorViewController.delegate = historyViewController
+        
     }
     
     private func configureTabBar() {

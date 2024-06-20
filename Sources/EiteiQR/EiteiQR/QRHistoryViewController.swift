@@ -34,9 +34,7 @@ class QRHistoryViewController: UIViewController, QRScannerCodeDelegate ,CreatorV
     let segmentedControl = EiteiSegmentedControl()
     let createTabButton = UIButton()
     var createIcon = UIImageView()
-    // 聲明CreatorViewController的實例
-    private var creatorViewController = QRCreatorViewController()
-    
+
     // 掃碼数据集
     var scanData: [(String, String, String)] = []
     
@@ -52,7 +50,6 @@ class QRHistoryViewController: UIViewController, QRScannerCodeDelegate ,CreatorV
     public override func viewDidLoad() {
         super.viewDidLoad()
         
-        creatorViewController.modalPresentationStyle = .formSheet
         loadDataFromUserDefaults() // 從本地加载数据
         currentData = scanData // 初始化数据为 scanData
         
@@ -305,57 +302,6 @@ class QRHistoryViewController: UIViewController, QRScannerCodeDelegate ,CreatorV
         }
     }
     
-    // 點擊生成圖標的時候
-    @objc private func createIconTapped() {
-        // 先使用 animateButtonTap 開始動畫效果
-        animateButtonTap(sender: createTabButton) { [weak self] in
-            // 當動畫結束後，開始進一步動畫效果和展示 CreatorViewController
-            UIView.animate(withDuration: 0.3, animations: {
-                self?.createIcon.transform = CGAffineTransform(scaleX: 1.5, y: 1.5)
-                self?.createIcon.alpha = 0.5
-            }) { [self] _ in
-                // 展示 CreatorViewController
-                self?.present(self!.creatorViewController, animated: true, completion: {
-                    
-                    // 作為代理
-                    self!.creatorViewController.delegate = self
-                    
-                    // 隱藏 QRCode View
-                    self!.creatorViewController.qrCodeView.isHidden = true
-                    self!.creatorViewController.dashedBorderLayer.isHidden = false
-                    
-                    // 清除 URL 文本框內容
-                    self!.creatorViewController.urlTextField.text = ""
-                    
-                    // 重置顏色控件
-                    self!.creatorViewController.checkmarkControl.selectedIndex = 2
-                    
-                    // 設置初始顏色為白色
-                    self!.creatorViewController.iconImageView.backgroundColor = .white
-                    
-                    // 逐漸變為黃色
-                    UIView.animate(withDuration: 0.6, delay: 0.0, options: [.curveEaseInOut], animations: {
-                        // 頂部圖標顏色淡出的特效
-                        self!.creatorViewController.iconImageView.backgroundColor = .eiteiYellow
-                        
-                        // 顏色變化過程中稍微放大
-                        self!.creatorViewController.iconImageView.transform = CGAffineTransform(scaleX: 1.1, y: 1.1)
-                    }, completion: { _ in
-                        // 還原變換
-                        UIView.animate(withDuration: 0.3) {
-                            self!.creatorViewController.iconImageView.transform = .identity
-                        }
-                    })
-                    
-                    // 恢復動畫效果
-                    UIView.animate(withDuration: 0.3) {
-                        self?.createIcon.transform = CGAffineTransform.identity
-                        self?.createIcon.alpha = 1.0
-                    }
-                })
-            }
-        }
-    }
     
     // 展示生成器之前的動畫
     private func animateButtonTap(sender: UIButton, completion: @escaping () -> Void) {
@@ -626,10 +572,4 @@ extension QRHistoryViewController: UITableViewDelegate, UITableViewDataSource {
         tableView.reloadData()
         
     }
-}
-
-// 定義一個代理協議，這個協議包含Creator創建二維碼之後，將數據回傳的方法
-protocol CreatorViewControllerDelegate: AnyObject {
-    
-    func didSaveQRCode(url: String, color: String, date: String)
 }
