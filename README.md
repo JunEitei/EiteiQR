@@ -4,7 +4,7 @@
 
 ## 安裝
 ```ruby
-pod 'EiteiQR', :git => 'https://github.com/JunEitei/EiteiQR', :tag => '3.2.0'
+pod 'EiteiQR', :git => 'https://github.com/JunEitei/EiteiQR'
 
 ```
 ## 使用
