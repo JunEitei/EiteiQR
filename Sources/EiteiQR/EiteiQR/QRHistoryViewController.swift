@@ -209,7 +209,7 @@ class QRHistoryViewController: UIViewController, QRScannerCodeDelegate ,CreatorV
         scanButton.snp.makeConstraints { make in
             make.centerX.equalToSuperview()
             make.bottom.equalToSuperview().offset(-100)
-            make.width.height.equalTo(90)
+            make.width.height.equalTo(110)
         }
         
         // 把三個按钮放到最上层
@@ -231,15 +231,6 @@ class QRHistoryViewController: UIViewController, QRScannerCodeDelegate ,CreatorV
     private func presentQRCodeScanner() {
         // 設置 QR 碼掃描器的配置對象
         var configuration = QRScannerConfiguration()
-        
-        // 設置相機按鈕的圖示
-        configuration.cameraImage = Eitei.shared.loadImage(named: "switch-camera-button")
-        
-        // 設置閃光燈開啟按鈕的圖示
-        configuration.flashOnImage = Eitei.shared.loadImage(named: "flash")
-        
-        // 設置相冊按鈕的圖示
-        configuration.galleryImage = Eitei.shared.loadImage(named: "icon_history")
         
         // 設置掃描界面的標題
         configuration.title = "掃描二維碼"
