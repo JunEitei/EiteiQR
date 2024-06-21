@@ -1,0 +1,35 @@
+PODS:
+  - DSF_QRCode (20.0.0):
+    - SwiftImageReadWrite (~> 1.7.2)
+    - SwiftQRCodeGenerator (~> 2.0.2)
+  - EiteiQR (3.4.0):
+    - DSF_QRCode (~> 20.0.0)
+    - SnapKit (~> 5.7.0)
+  - SnapKit (5.7.1)
+  - SwiftImageReadWrite (1.7.2)
+  - SwiftQRCodeGenerator (2.0.2)
+
+DEPENDENCIES:
+  - EiteiQR (from `../`)
+
+SPEC REPOS:
+  trunk:
+    - DSF_QRCode
+    - SnapKit
+    - SwiftImageReadWrite
+    - SwiftQRCodeGenerator
+
+EXTERNAL SOURCES:
+  EiteiQR:
+    :path: "../"
+
+SPEC CHECKSUMS:
+  DSF_QRCode: 6558f9b71f29ddbedd546e524f6d5e505841c5c6
+  EiteiQR: f728183e804b061978fd072a5880aeff94537ed6
+  SnapKit: d612e99e678a2d3b95bf60b0705ed0a35c03484a
+  SwiftImageReadWrite: ef6dfb4a78a0142a62c89cacf549623b26961fd3
+  SwiftQRCodeGenerator: cc02fed209335064d0b0dd61b2a0874b9bc6bd5a
+
+PODFILE CHECKSUM: 17f95c72294be0d446af0f64b93302298918cdd2
+
+COCOAPODS: 1.14.2
