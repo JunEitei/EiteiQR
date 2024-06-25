@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import QRCode
 
 class QRHistoryViewController: UIViewController, QRScannerCodeDelegate ,CreatorViewControllerDelegate,UIViewControllerTransitioningDelegate {
     

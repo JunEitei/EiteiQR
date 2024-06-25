@@ -18,6 +18,8 @@ Pod::Spec.new do |spec|
   spec.source_files  = "Sources/EiteiQR/**/*"
   
   spec.resource =  ["Sources/EiteiQR/Resource.bundle"]
-
+  
+  spec.dependency 'SnapKit', '~> 5.7.0'
+  spec.dependency 'DSF_QRCode', '~> 20.0.0'
 
 end

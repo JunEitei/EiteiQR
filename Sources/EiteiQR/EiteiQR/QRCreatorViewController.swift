@@ -6,6 +6,8 @@
 //
 
 import UIKit
+import QRCode
+import SnapKit
 
 public class QRCreatorViewController: UIViewController, UITextFieldDelegate {
     
@@ -334,15 +336,17 @@ public class QRCreatorViewController: UIViewController, UITextFieldDelegate {
             dashedBorderLayer.isHidden = false
             return
         }
-        let doc = QRCode.Document(
-            url,
-            errorCorrection: .high
-        )
-        qrCodeView.document = doc
-        qrCodeView.rebuildQRCode()
-        qrCodeView.isHidden = false
-        dashedBorderLayer.isHidden = true
+        if let doc = try? QRCode.Document(url, errorCorrection: .high) {
+            qrCodeView.document = doc
+            qrCodeView.rebuildQRCode()
+            qrCodeView.isHidden = false
+            dashedBorderLayer.isHidden = true
+        } else {
+            qrCodeView.isHidden = true
+            dashedBorderLayer.isHidden = false
+        }
     }
+
     
     // 處理勾選控制元件值變更事件
     @objc private func checkmarkControlValueChanged(_ sender: EiteiCheckmark) {
