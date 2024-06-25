@@ -6,8 +6,13 @@
 //
 
 import UIKit
+#if canImport(QRCode)
 import QRCode
+#endif
+
+#if canImport(SnapKit)
 import SnapKit
+#endif
 
 public class QRCreatorViewController: UIViewController, UITextFieldDelegate {
     

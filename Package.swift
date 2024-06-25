@@ -5,6 +5,7 @@ import PackageDescription
 
 let package = Package(
     name: "EiteiQR",
+    defaultLocalization: "en",
     platforms: [
         .iOS(.v13)
     ],
@@ -13,9 +14,22 @@ let package = Package(
             name: "EiteiQR",
             targets: ["EiteiQR"]),
     ],
+    dependencies: [
+        .package(url: "https://github.com/dagronf/qrcode.git", from: "20.0.0"),
+        .package(url: "https://github.com/SnapKit/SnapKit.git", .upToNextMajor(from: "5.0.1"))
+    ],
     targets: [
         .target(
-            name: "EiteiQR")
+            name: "EiteiQR",
+            dependencies: [
+                .product(name: "QRCode", package: "qrcode"),
+                "SnapKit"
+            ],
+            path: "Sources/EiteiQR",
+            resources: [
+                .copy("Resource.bundle")
+            ]
+        )
     ],
     swiftLanguageVersions: [.v5]
 )

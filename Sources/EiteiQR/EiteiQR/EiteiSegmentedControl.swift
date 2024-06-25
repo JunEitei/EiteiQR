@@ -6,7 +6,9 @@
 //
 
 import UIKit
+#if canImport(SnapKit)
 import SnapKit
+#endif
 
 /// 一個自訂的分段控制元件，用於在不同選項之間切換
 public class EiteiSegmentedControl: UIControl {
