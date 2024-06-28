@@ -318,10 +318,6 @@ public class QRCreatorViewController: UIViewController, UITextFieldDelegate {
         // 如果有文字內容再回傳
         delegate?.didSaveQRCode(url: urlTextField.text!, color: selectedColorHexString!, date: currentDate)
         
-        // 切换到歷史視圖
-        if let tabBarController = self.tabBarController {
-            tabBarController.selectedIndex = 0
-        }
     }
     
     // 處理返回鍵點擊事件

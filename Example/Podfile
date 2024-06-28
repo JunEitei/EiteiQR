@@ -4,10 +4,10 @@ use_frameworks!
 
 target 'EiteiQRScanner' do
   
-    pod 'EiteiQR', :git => 'https://github.com/JunEitei/EiteiQR'
+#    pod 'EiteiQR', :git => 'https://github.com/JunEitei/EiteiQR'
 
    # 開発に使ってるもんや
-#    pod 'EiteiQR', :path => '../'
+    pod 'EiteiQR', :path => '../'
   
 end
 
