@@ -20,12 +20,11 @@ class Eitei {
         guard let bundleURL = Bundle(for: Eitei.self).url(forResource: "Resource", withExtension: "bundle"),
               let bundle = Bundle(url: bundleURL) else {
             print("讀取bundle失敗")
-            // 嘗試從文件夾裡直接讀取 （SPM）
-            
 #if SWIFT_PACKAGE
+            // 嘗試從文件夾裡直接讀取 （SPM）
             let bundle = Bundle.module
             
-            if let imageUrl = bundle.url(forResource: "imageName", withExtension: "png", subdirectory: "Resource") {
+            if let imageUrl = bundle.url(forResource: name, withExtension: "png", subdirectory: "Resource") {
                 if let image = UIImage(contentsOfFile: imageUrl.path) {
                     // 使用 image
                     return image
