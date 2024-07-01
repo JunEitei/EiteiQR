@@ -23,7 +23,7 @@ class Eitei {
 #if SWIFT_PACKAGE
             // 嘗試從文件夾裡直接讀取 （SPM）
             let bundle = Bundle.module
-            
+
             if let imageUrl = bundle.url(forResource: name, withExtension: "png", subdirectory: "Resource") {
                 if let image = UIImage(contentsOfFile: imageUrl.path) {
                     // 使用 image
