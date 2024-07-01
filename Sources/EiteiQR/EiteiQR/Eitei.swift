@@ -19,18 +19,9 @@ class Eitei {
         // 获取 CocoaPods 资源 bundle
         guard let bundleURL = Bundle(for: Eitei.self).url(forResource: "Resource", withExtension: "bundle"),
               let bundle = Bundle(url: bundleURL) else {
-            // 嘗試 SPM 直接讀取
-            if let bundleUrl = Bundle.main.url(forResource: "Resource", withExtension: "bundle") {
-                let bundle = Bundle(url: bundleUrl)
-                if let resourceUrl = bundle?.url(forResource: name, withExtension: "png") {
-                    if let image = UIImage(contentsOfFile: resourceUrl.path) {
-                        // 在這裡使用 SPM 導入的 image
-                        return image
-                    }
-                }
-            }
             print("讀取bundle失敗")
-            return nil
+            // 嘗試從文件夾裡直接讀取 （SPM）
+            return UIImage(named: name)
         }
         // 通过 CocoaPods 封裝的 bundle 载入图片
         guard let image = UIImage(named: name, in: bundle, compatibleWith: nil) else {
