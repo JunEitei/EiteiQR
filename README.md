@@ -10,7 +10,7 @@
 2. **把Main.storyboard和ViewController.swift刪掉，同時在Info.plist中把Storyboard Name = Main這一行刪除**
 
 
-3. **右鍵單擊Info.plist，選擇Open as source code，並在</dict>之前添加如下代碼**：
+3. **右鍵單擊Info.plist，選擇Open as source code，並在Dict標籤結束之前添加如下代碼**：
    ```xml
     <key>NSAppleMusicUsageDescription</key>
     <string>Used to scan QR code</string>
