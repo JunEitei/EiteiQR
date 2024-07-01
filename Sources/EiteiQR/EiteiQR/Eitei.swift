@@ -15,6 +15,10 @@ class Eitei {
     
     // 封裝從Bundle中讀取圖片
     func loadImage(named name: String) -> UIImage? {
+        
+#if SWIFT_PACKAGE
+        return UIImage(named: name, in: Bundle.module, compatibleWith: nil)
+#else
         // 获取 CocoaPods 资源 bundle
         guard let bundleURL = Bundle(for: Eitei.self).url(forResource: "Resource", withExtension: "bundle"),
               let bundle = Bundle(url: bundleURL) else {
@@ -28,7 +32,9 @@ class Eitei {
         }
         
         return image
+#endif
+
     }
     
-
+    
 }
