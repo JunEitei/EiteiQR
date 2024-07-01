@@ -16,23 +16,22 @@ class Eitei {
     // 封裝從Bundle中讀取圖片
     func loadImage(named name: String) -> UIImage? {
         
-#if SWIFT_PACKAGE
-        return UIImage(named: name, in: Bundle.module, compatibleWith: nil)
-#else
         // 获取 CocoaPods 资源 bundle
         guard let bundleURL = Bundle(for: Eitei.self).url(forResource: "Resource", withExtension: "bundle"),
               let bundle = Bundle(url: bundleURL) else {
             print("讀取bundle失敗")
-            return nil
+            // 嘗試 SPM 直接讀取
+            return UIImage(named: name, in: Bundle.module, compatibleWith: nil)
         }
         // 通过 bundle 载入图片
         guard let image = UIImage(named: name, in: bundle, compatibleWith: nil) else {
             print("從 \(bundle)讀取圖片 \(name)失敗")
-            return nil
+            
+            // 嘗試 SPM 直接讀取
+            return UIImage(named: name, in: Bundle.module, compatibleWith: nil)
         }
         
         return image
-#endif
 
     }
     
