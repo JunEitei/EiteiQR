@@ -37,8 +37,6 @@ end
 5. **在根目錄運行pod install，完成後打開Example-Cocoapods.xcworkspace（“Example-Cocoapods”替換為你的項目名稱）**
 
 6. **SceneDelegate.swift替換為如下代碼**
-   ```xml
-
 import UIKit
 import EiteiQR
 
@@ -58,7 +56,6 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     }
 
 }
-   ```
 7. （Optional）**有時在Build Settings裡需要將User Script Sandboxing設置為No**
 
 8. （Optional）**需要時可以執行下面的命令以清理緩存**：
