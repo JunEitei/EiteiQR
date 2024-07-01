@@ -22,7 +22,6 @@
     <string>Used to scan QR code</string>
    ```
 4. **在項目跟目錄放置Podfile，並添加如下內容（“Example-Cocoapods”替換為你的項目名稱）**
-   ```xml
 platform :ios, '12.0'
 
 use_frameworks!
@@ -32,7 +31,6 @@ target 'Example-Cocoapods' do
   pod 'EiteiQR',  :git => 'https://github.com/JunEitei/EiteiQR'
 
 end
-   ```
 5. **在根目錄運行pod install，完成後打開Example-Cocoapods.xcworkspace（“Example-Cocoapods”替換為你的項目名稱）**
 
 6. **SceneDelegate.swift替換為如下代碼**
