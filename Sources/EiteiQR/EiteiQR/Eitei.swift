@@ -36,7 +36,7 @@ class Eitei {
                 // 如果找不到圖片，可以返回默認圖片或者報錯
                 return UIImage(named: name)
             }
-        }
+        
         
 #endif
         // 保底選項
