@@ -2,7 +2,7 @@
 Pod::Spec.new do |spec|
 
   spec.name         = "EiteiQR"
-  spec.version      = "3.5.0"
+  spec.version      = "3.5.19"
   spec.summary      = "A QR Code Framework developed by Eitei."
 
   spec.description  = <<-DESC
@@ -17,7 +17,7 @@ Pod::Spec.new do |spec|
   spec.source       = { :git => "https://github.com/JunEitei/EiteiQR.git", :tag => "#{spec.version}" }
   spec.source_files  = "Sources/EiteiQR/**/*"
   
-  spec.resource =  ["Sources/EiteiQR/Resource.bundle"]
+  spec.resource =  ["Sources/EiteiQR/Resource"]
   
   spec.dependency 'SnapKit', '~> 5.7.0'
   spec.dependency 'DSF_QRCode', '~> 20.0.0'
