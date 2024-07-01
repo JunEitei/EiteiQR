@@ -1,0 +1,51 @@
+{
+  "originHash" : "6089e9b7ce339597c7e83e4a16813b0a1f1cbbcb1764b37db7903a948be4e0e1",
+  "pins" : [
+    {
+      "identity" : "eiteiqr",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/JunEitei/EiteiQR",
+      "state" : {
+        "revision" : "38a1a2f48b04234570dc9bed2fd345eb0cb88091",
+        "version" : "3.6.0"
+      }
+    },
+    {
+      "identity" : "qrcode",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/dagronf/qrcode.git",
+      "state" : {
+        "revision" : "6aec3d9c50f4c36798e2bb4c6dfbfd6b00bff96e",
+        "version" : "20.1.3"
+      }
+    },
+    {
+      "identity" : "snapkit",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/SnapKit/SnapKit.git",
+      "state" : {
+        "revision" : "2842e6e84e82eb9a8dac0100ca90d9444b0307f4",
+        "version" : "5.7.1"
+      }
+    },
+    {
+      "identity" : "swift-qrcode-generator",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/dagronf/swift-qrcode-generator",
+      "state" : {
+        "revision" : "2b1980b825f08a81ccc762b0c4d17fcde9d5e953",
+        "version" : "2.0.2"
+      }
+    },
+    {
+      "identity" : "swiftimagereadwrite",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/dagronf/SwiftImageReadWrite",
+      "state" : {
+        "revision" : "016a9cb842038e4078a91e506e35cef4f4ff76ff",
+        "version" : "1.7.2"
+      }
+    }
+  ],
+  "version" : 3
+}
