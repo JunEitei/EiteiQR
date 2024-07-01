@@ -22,7 +22,7 @@
     <string>Used to scan QR code</string>
    ```
 4. **在項目跟目錄放置Podfile，並添加如下內容（“Example-Cocoapods”替換為你的項目名稱）**：
-   ```ruby
+   ```swift
 platform :ios, '12.0'
 
 use_frameworks!
