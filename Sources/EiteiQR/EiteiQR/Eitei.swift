@@ -35,6 +35,7 @@ class Eitei {
         // 通过 CocoaPods 封裝的 bundle 载入图片
         guard let image = UIImage(named: name, in: bundle, compatibleWith: nil) else {
             print("從 \(bundle)讀取圖片 \(name)失敗")
+            return nil
         }
         return image
     }
