@@ -33,10 +33,11 @@ class Eitei {
                 // 使用 image
                 return image
             } else {
-                // 如果找不到圖片，可以返回默認圖片或者報錯
-                return UIImage(named: name)
+                // 使用 Bundle.module 訪問 SPM 中的資源
+                let bundle = Bundle.module
+                // 讀取
+                return UIImage(named: name, in: bundle, with: nil)
             }
-        
         
 #endif
         // 保底選項
