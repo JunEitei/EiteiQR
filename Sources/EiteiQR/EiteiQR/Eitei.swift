@@ -21,14 +21,14 @@ class Eitei {
               let bundle = Bundle(url: bundleURL) else {
             print("讀取bundle失敗")
             // 嘗試 SPM 直接讀取
-            return UIImage(named: name, in: Bundle.module, compatibleWith: nil)
+            return UIImage(named: name)
         }
         // 通过 bundle 载入图片
         guard let image = UIImage(named: name, in: bundle, compatibleWith: nil) else {
             print("從 \(bundle)讀取圖片 \(name)失敗")
             
             // 嘗試 SPM 直接讀取
-            return UIImage(named: name, in: Bundle.module, compatibleWith: nil)
+            return UIImage(named: name)
         }
         
         return image
