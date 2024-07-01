@@ -116,5 +116,35 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
    
 6. （Optional）**可適當增加你自己的應用程式圖標和其他信息。**
 
+7. **在根目錄添加Package.swift，並添加如下代碼（Example-SPM換成你自己的項目名稱）：**
+```ruby
+// swift-tools-version:5.9
+// The swift-tools-version declares the minimum version of Swift required to build this package.
 
-7. **運行項目即可！**
+import PackageDescription
+
+let package = Package(
+    name: "Example-SPM",
+    defaultLocalization: "en", 
+
+    platforms: [
+        .iOS(.v14),
+        .macOS(.v10_15),
+    ],
+    products: [
+        .library(
+            name: "Example-SPM",
+            targets: ["Example-SPM"]),
+    ],
+    dependencies: [
+        .package(path: "../"),
+    ],
+    targets: [
+        .target(
+            name: "Example-SPM",
+            dependencies: ["EiteiQR"], path: "Example-SPM")
+    ]
+)
+
+```
+9. **運行項目即可！**
