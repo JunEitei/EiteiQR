@@ -27,7 +27,7 @@ let package = Package(
             ],
             path: "Sources/EiteiQR",
             resources: [
-                .copy("Resource")
+                .copy("Resource.bundle")
             ]
         )
     ],
