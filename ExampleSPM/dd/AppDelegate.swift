@@ -1,3 +1,10 @@
+//
+//  AppDelegate.swift
+//  dd
+//
+//  Created by damao on 2024/7/1.
+//
+
 import UIKit
 
 @main

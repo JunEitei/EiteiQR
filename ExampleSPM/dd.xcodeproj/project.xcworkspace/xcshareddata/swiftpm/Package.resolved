@@ -1,5 +1,15 @@
 {
+  "originHash" : "6089e9b7ce339597c7e83e4a16813b0a1f1cbbcb1764b37db7903a948be4e0e1",
   "pins" : [
+    {
+      "identity" : "eiteiqr",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/JunEitei/EiteiQR",
+      "state" : {
+        "revision" : "1423234a8a725a8070d378b2e4743e325fe583cb",
+        "version" : "3.5.19"
+      }
+    },
     {
       "identity" : "qrcode",
       "kind" : "remoteSourceControl",
@@ -37,5 +47,5 @@
       }
     }
   ],
-  "version" : 2
+  "version" : 3
 }
