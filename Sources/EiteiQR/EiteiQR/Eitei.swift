@@ -31,7 +31,8 @@ class Eitei {
                 }
             }
 #endif
-            return nil
+            // 保底選項
+            return UIImage(named: name)
             
         }
         // 通过 CocoaPods 封裝的 bundle 载入图片
