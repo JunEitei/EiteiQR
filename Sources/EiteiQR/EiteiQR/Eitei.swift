@@ -28,7 +28,7 @@ class Eitei {
             let imageName = name
             
             // 這裡假設圖片是 PNG 格式，可以根據實際情況調整 withExtension 的參數
-            if let imageUrl = bundle.url(forResource: imageName, withExtension: "png"),
+            if let imageUrl = bundle.url(forResource: name, withExtension: "png", subdirectory: "Resource"),
                let image = UIImage(contentsOfFile: imageUrl.path) {
                 // 使用 image
                 return image
