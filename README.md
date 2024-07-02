@@ -100,7 +100,7 @@ import PackageDescription
 
 let package = Package()
 ```
-2. **執行以下三個操作**
+2. **執行下列操作：**
 <table>
     <tr>
         <td>「１」</td>
