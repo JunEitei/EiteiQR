@@ -1,9 +1,7 @@
-# EiteiQR
-
-![CocoaPods](https://img.shields.io/cocoapods/v/EiteiQR.svg)
+# EiteiQR ![CocoaPods](https://img.shields.io/cocoapods/v/EiteiQR.svg)
 
 
-## 使用方法（Cocoapods）
+# 使用方法（Cocoapods）
 
 1. **新建一個Swift項目，類型選擇Storyboard，然後：**
 <table>
@@ -79,9 +77,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
 }
 ```
-5. （Optional）**必要時在Build Settings裡將User Script Sandboxing設置為No。**
 
-6. （Optional）**必要時執行下面的命令以清理Pod緩存：**：
+5. （Optional）**必要時執行下面的命令以清理Pod緩存：**：
 ```ruby
 pod cache clean --all
 pod deintegrate
@@ -89,10 +86,10 @@ pod clean
 rm -rf ~/Library/Developer/Xcode/DerivedData/*
 pod install --repo-update
 ```    
-7.  **運行項目即可！**
+6.  **運行項目即可！**
 
 
-## 使用方法（SPM）
+# 使用方法（SPM）
 
 1. **新建一個Swift項目，類型選擇Storyboard。接著在根目錄新建Package.swift，內容如下：**
 ```swift
