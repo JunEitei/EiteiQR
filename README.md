@@ -115,12 +115,16 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 5. **按順序執行以下操作**
 ```ruby
 把Eitei目錄拷貝到你的目錄中去，刪掉Example-SPM和Example-Cocoapods這兩個文件夾；
-點擊項目的Build Target，在Build Phases一欄找到Link Binary With Libraryies,點擊加號，最下面選擇Add Other的下拉選項；
-Add Package Dependency，在彈出的對話框中，點擊Add Local（亦可搜索eiteiqr拉取遠程的）
-選擇剛才拷貝進去的那個EiteiQR文件夾（參考Example-SPM當中的EiteiQR-3.6.0文件夾）
-
 ```
-
+```ruby
+點擊項目的Build Target，在Build Phases一欄找到Link Binary With Libraryies,點擊加號，最下面選擇Add Other的下拉選項；
+```
+```ruby
+Add Package Dependency，在彈出的對話框中，點擊Add Local（亦可搜索eiteiqr拉取遠程的）
+```
+```ruby
+選擇剛才拷貝進去的那個EiteiQR文件夾（參考Example-SPM當中的EiteiQR-3.6.0文件夾）
+```
 6. （Optional）**可適當增加你自己的應用程式圖標和其他信息。**
 
 7.  **在根目錄添加Package.swift，告訴SPM你要拉取本地的類庫而不是遠端的，添加如下代碼（Example-SPM需要換成你自己的項目名稱）：**
