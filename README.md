@@ -5,9 +5,7 @@
 
 ## 使用方法（Cocoapods）
 
-1. **新建一個Swift項目，類型選擇Storyboard；**
-
-2. **執行以下三個操作**
+1. **新建一個Swift項目，類型選擇Storyboard，然後執行以下三個操作：**
 <table>
     <tr>
         <td>①</td>
@@ -29,7 +27,7 @@
     </tr>
 </table>
 
-3. **右鍵單擊Info.plist，選擇Open as source code，並在最後一個Dict結束標籤之前添加如下代碼：**
+2. **右鍵單擊Info.plist，選擇Open as source code，並在最後一個Dict結束標籤之前添加如下代碼：**
    ```xml
     <key>NSAppleMusicUsageDescription</key>
     <string>Used to scan QR code</string>
@@ -40,7 +38,7 @@
     <key>NSPhotoLibraryUsageDescription</key>
     <string>Used to scan QR code</string>
    ```
-4. **在項目跟目錄放置Podfile，並添加如下內容（“Example-Cocoapods”替換為你的項目名稱），然後在根目錄運行pod install**
+3. **在項目跟目錄放置Podfile，並添加如下內容（“Example-Cocoapods”替換為你的項目名稱），然後在根目錄運行pod install**
 ```ruby
 
 platform :ios, '12.0'
@@ -53,7 +51,7 @@ target 'Example-Cocoapods' do
 
 end
 ```
-5. **完成後打開‘你的項目名.xcworkspace’，並將SceneDelegate.swift替換為如下代碼：**
+4. **完成後打開‘你的項目名.xcworkspace’，並將SceneDelegate.swift替換為如下代碼：**
 ```ruby
 import UIKit
 import EiteiQR
@@ -75,9 +73,9 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
 }
 ```
-6. （Optional）**必要時在Build Settings裡將User Script Sandboxing設置為No。**
+5. （Optional）**必要時在Build Settings裡將User Script Sandboxing設置為No。**
 
-7. （Optional）**必要時執行下面的命令以清理Pod緩存：**：
+6. （Optional）**必要時執行下面的命令以清理Pod緩存：**：
 ```ruby
 pod cache clean --all
 pod deintegrate
