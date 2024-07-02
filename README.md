@@ -113,21 +113,65 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 }
 ```
 5. **按順序執行以下操作**
-```ruby
-把Eitei目錄拷貝到你的目錄中去，刪掉Example-SPM和Example-Cocoapods這兩個文件夾；
+```html
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ruby 代碼表格</title>
+    <style>
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+        }
+        th {
+            background-color: #f2f2f2;
+            text-align: left;
+        }
+    </style>
+</head>
+<body>
+    <table>
+        <tr>
+            <th>步驟</th>
+            <th>描述</th>
+        </tr>
+        <tr>
+            <td>1</td>
+            <td>
+                <pre><code>把Eitei目錄拷貝到你的目錄中去，刪掉Example-SPM和Example-Cocoapods這兩個文件夾；</code></pre>
+            </td>
+        </tr>
+        <tr>
+            <td>2</td>
+            <td>
+                <pre><code>點擊項目的Build Target，在Build Phases一欄找到Link Binary With Libraryies,點擊加號，最下面選擇Add Other的下拉選項；</code></pre>
+            </td>
+        </tr>
+        <tr>
+            <td>3</td>
+            <td>
+                <pre><code>Add Package Dependency，在彈出的對話框中，點擊Add Local（亦可搜索eiteiqr拉取遠程的）</code></pre>
+            </td>
+        </tr>
+        <tr>
+            <td>4</td>
+            <td>
+                <pre><code>選擇剛才拷貝進去的那個EiteiQR文件夾（參考Example-SPM當中的EiteiQR-3.6.0文件夾）</code></pre>
+            </td>
+        </tr>
+    </table>
+</body>
+</html>
 ```
-```ruby
-點擊項目的Build Target，在Build Phases一欄找到Link Binary With Libraryies,點擊加號，最下面選擇Add Other的下拉選項；
-```
-```ruby
-Add Package Dependency，在彈出的對話框中，點擊Add Local（亦可搜索eiteiqr拉取遠程的）
-```
-```ruby
-選擇剛才拷貝進去的那個EiteiQR文件夾（參考Example-SPM當中的EiteiQR-3.6.0文件夾）
-```
-6. （Optional）**可適當增加你自己的應用程式圖標和其他信息。**
+1. （Optional）**可適當增加你自己的應用程式圖標和其他信息。**
 
-7.  **在根目錄添加Package.swift，告訴SPM你要拉取本地的類庫而不是遠端的，添加如下代碼（Example-SPM需要換成你自己的項目名稱）：**
+2.  **在根目錄添加Package.swift，告訴SPM你要拉取本地的類庫而不是遠端的，添加如下代碼（Example-SPM需要換成你自己的項目名稱）：**
 ```ruby
 // swift-tools-version:5.9
 // The swift-tools-version declares the minimum version of Swift required to build this package.
