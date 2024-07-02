@@ -10,19 +10,19 @@
 2. **執行以下三個操作**
 <table>
     <tr>
-        <td>1</td>
+        <td>①</td>
         <td>
             <pre><code>把Main.storyboard和ViewController.swift刪掉</code></pre>
         </td>
     </tr>
     <tr>
-        <td>2</td>
+        <td>②</td>
         <td>
             <pre><code>同時在Info.plist中（最末尾）把Storyboard Name = Main這一行刪除</code></pre>
         </td>
     </tr>
     <tr>
-        <td>3</td>
+        <td>③</td>
         <td>
             <pre><code>點擊TARGETS在Build Settings中把UIKit Main Storyboard File Base Name置為空（否則會閃退）</code></pre>
         </td>
@@ -155,31 +155,31 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 5. **按順序執行以下操作**
 <table>
     <tr>
-        <td><span style="border: 1px solid black; border-radius: 50%; padding: 3px;">1</span></td>
+        <td>①</td>
         <td>
             <pre><code>把Eitei目錄拷貝到你的目錄中去，刪掉Example-SPM和Example-Cocoapods這兩個文件夾</code></pre>
         </td>
     </tr>
     <tr>
-        <td><span style="border: 1px solid black; border-radius: 50%; padding: 3px;">2</span></td>
+        <td>②</td>
         <td>
             <pre><code>點擊項目的Build Target，在Build Phases找到“Link Binary With Libraryies”,點擊加號</code></pre>
         </td>
     </tr>
     <tr>
-        <td>3</td>
+        <td>③</td>
         <td>
             <pre><code>彈出的對話框中點擊Add Other，然後Add Package Dependency</code></pre>
         </td>
     </tr>
     <tr>
-        <td>4</td>
+        <td>④</td>
         <td>
             <pre><code>在彈出的對話框中，點擊Add Local（亦可搜索eiteiqr拉取遠程的）</code></pre>
         </td>
     </tr>
     <tr>
-        <td>5</td>
+        <td>⑤</td>
         <td>
             <pre><code>選擇剛才拷貝進去的那個EiteiQR文件夾（參考Example-SPM當中的EiteiQR-3.6.0文件夾）</code></pre>
         </td>
