@@ -7,7 +7,27 @@
 
 1. **新建一個Swift項目，類型選擇Storyboard；**
 
-2. **把Main.storyboard和ViewController.swift刪掉，同時在Info.plist中把Storyboard Name = Main這一行刪除（在最末尾），然後點擊TARGETS，在Build Settings中把UIKit Main Storyboard File Base Name的值也刪掉（否則會閃退）；**
+2. **執行以下三個操作**
+<table>
+    <tr>
+        <td>1</td>
+        <td>
+            <pre><code>把Main.storyboard和ViewController.swift刪掉</code></pre>
+        </td>
+    </tr>
+    <tr>
+        <td>2</td>
+        <td>
+            <pre><code>同時在Info.plist中（最末尾）把Storyboard Name = Main這一行刪除</code></pre>
+        </td>
+    </tr>
+    <tr>
+        <td>3</td>
+        <td>
+            <pre><code>點擊TARGETS在Build Settings中把UIKit Main Storyboard File Base Name置為空（否則會閃退）</code></pre>
+        </td>
+    </tr>
+</table>
 
 3. **右鍵單擊Info.plist，選擇Open as source code，並在最後一個Dict結束標籤之前添加如下代碼：**
    ```xml
@@ -76,7 +96,27 @@ pod install --repo-update
 
 1. **新建一個Swift項目，類型選擇Storyboard；**
 
-2. **把Main.storyboard和ViewController.swift刪掉，同時在Info.plist中把Storyboard Name = Main這一行刪除（在最末尾），然後點擊TARGETS，在Build Settings中把UIKit Main Storyboard File Base Name的值也刪掉（否則會閃退）；**
+2. **執行以下三個操作**
+<table>
+    <tr>
+        <td>1</td>
+        <td>
+            <pre><code>把Main.storyboard和ViewController.swift刪掉</code></pre>
+        </td>
+    </tr>
+    <tr>
+        <td>2</td>
+        <td>
+            <pre><code>同時在Info.plist中（最末尾）把Storyboard Name = Main這一行刪除</code></pre>
+        </td>
+    </tr>
+    <tr>
+        <td>3</td>
+        <td>
+            <pre><code>點擊TARGETS在Build Settings中把UIKit Main Storyboard File Base Name置為空（否則會閃退）</code></pre>
+        </td>
+    </tr>
+</table>
 
 3. **右鍵單擊Info.plist，選擇Open as source code，並在最後一個Dict結束標籤之前添加如下代碼：**
    ```xml
