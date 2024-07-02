@@ -1,4 +1,4 @@
-# EiteiQR ![CocoaPods](https://img.shields.io/cocoapods/v/EiteiQR.svg)
+# EiteiQR     ![CocoaPods](https://img.shields.io/cocoapods/v/EiteiQR.svg)
 
 
 # 使用方法（Cocoapods）
@@ -20,13 +20,13 @@
     <tr>
         <td>「３」</td>
         <td>
-            <pre><code>點擊TARGETS，在Build Settings中把Main Storyboard File Base Name置為空</code></pre>
+            <pre><code>在Build Settings中把Main Storyboard File Base Name刪掉</code></pre>
         </td>
     </tr>
     <tr>
         <td>「４」</td>
         <td>
-            <pre><code>點擊TARGETS，在Build Settings中把Main Storyboard File Base Name置為空</code></pre>
+            <pre><code>在Build Settings裡將User Script Sandboxing設置為No</code></pre>
         </td>
     </tr>
 </table>
@@ -86,7 +86,7 @@ pod clean
 rm -rf ~/Library/Developer/Xcode/DerivedData/*
 pod install --repo-update
 ```    
-6.  **運行項目即可！**
+6.  **運行項目即可**
 
 
 # 使用方法（SPM）
@@ -117,7 +117,13 @@ let package = Package()
     <tr>
         <td>「３」</td>
         <td>
-            <pre><code>在Build Settings中把UIKit Main Storyboard File Base Name置為空</code></pre>
+            <pre><code>在Build Settings中把UIKit Main Storyboard File Base Name刪掉</code></pre>
+        </td>
+    </tr>
+    <tr>
+        <td>「４」</td>
+        <td>
+            <pre><code>在Build Settings裡將User Script Sandboxing設置為No</code></pre>
         </td>
     </tr>
 </table>
