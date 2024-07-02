@@ -55,7 +55,7 @@ target 'Example-Cocoapods' do
 
 end
 ```
-1. **在根目錄運行pod install，完成後打開xcworkspace檔案，並將SceneDelegate.swift替換為如下代碼：**
+4. **在根目錄運行pod install，完成後打開xcworkspace檔案，並將SceneDelegate.swift替換為如下代碼：**
 ```ruby
 import UIKit
 import EiteiQR
