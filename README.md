@@ -24,7 +24,7 @@
     <tr>
         <td>③</td>
         <td>
-            <pre><code>點擊TARGETS在Build Settings中把UIKit Main Storyboard File Base Name置為空（否則會閃退）</code></pre>
+            <pre><code>點擊TARGETS，在Build Settings中把Main Storyboard File Base Name置為空</code></pre>
         </td>
     </tr>
 </table>
@@ -40,7 +40,7 @@
     <key>NSPhotoLibraryUsageDescription</key>
     <string>Used to scan QR code</string>
    ```
-4. **在項目跟目錄放置Podfile，並添加如下內容（“Example-Cocoapods”替換為你的項目名稱）：**
+4. **在項目跟目錄放置Podfile，並添加如下內容（“Example-Cocoapods”替換為你的項目名稱），然後在根目錄運行pod install**
 ```ruby
 
 platform :ios, '12.0'
@@ -53,9 +53,7 @@ target 'Example-Cocoapods' do
 
 end
 ```
-5. **在根目錄運行pod install，完成後打開Example-Cocoapods.xcworkspace（“Example-Cocoapods”替換為你的項目名稱）；**
-
-6. **SceneDelegate.swift替換為如下代碼：**
+5. **完成後打開‘你的項目名.xcworkspace’，並將SceneDelegate.swift替換為如下代碼：**
 ```ruby
 import UIKit
 import EiteiQR
@@ -77,25 +75,30 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
 }
 ```
-7. （Optional）**有時在Build Settings裡需要將User Script Sandboxing設置為No。**
+6. （Optional）**必要時在Build Settings裡將User Script Sandboxing設置為No。**
 
-8. （Optional）**需要時可以執行下面的命令以清理緩存：**：
+7. （Optional）**必要時執行下面的命令以清理Pod緩存：**：
 ```ruby
 pod cache clean --all
 pod deintegrate
 pod clean
 rm -rf ~/Library/Developer/Xcode/DerivedData/*
 pod install --repo-update
-```
-9. （Optional）**可適當增加你自己的應用程式圖標和其他信息。**
-    
-10. **運行項目即可！**
+```    
+7.  **運行項目即可！**
 
 
 ## 使用方法（SPM）
 
-1. **新建一個Swift項目，類型選擇Storyboard；**
+1. **新建一個Swift項目，類型選擇Storyboard。接著在根目錄新建Package.swift，內容如下**
+```swift
+// swift-tools-version: 5.9
+// The swift-tools-version declares the minimum version of Swift required to build this package.
 
+import PackageDescription
+
+let package = Package()
+```
 2. **執行以下三個操作**
 <table>
     <tr>
@@ -113,7 +116,7 @@ pod install --repo-update
     <tr>
         <td>③</td>
         <td>
-            <pre><code>點擊TARGETS在Build Settings中把UIKit Main Storyboard File Base Name置為空（否則會閃退）</code></pre>
+            <pre><code>在Build Settings中把UIKit Main Storyboard File Base Name置為空</code></pre>
         </td>
     </tr>
 </table>
@@ -152,71 +155,26 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
 }
 ```
-5. **按順序執行以下操作**
+5. **按順序執行以下三步**
 <table>
     <tr>
         <td>①</td>
-        <td>
-            <pre><code>把Eitei目錄拷貝到你的目錄中去，刪掉Example-SPM和Example-Cocoapods這兩個文件夾</code></pre>
-        </td>
-    </tr>
-    <tr>
-        <td>②</td>
         <td>
             <pre><code>點擊項目的Build Target，在Build Phases找到“Link Binary With Libraryies”,點擊加號</code></pre>
         </td>
     </tr>
     <tr>
-        <td>③</td>
+        <td>②</td>
         <td>
             <pre><code>彈出的對話框中點擊Add Other，然後Add Package Dependency</code></pre>
         </td>
     </tr>
     <tr>
-        <td>④</td>
+        <td>③</td>
         <td>
             <pre><code>在彈出的對話框中，點擊Add Local（亦可搜索eiteiqr拉取遠程的）</code></pre>
         </td>
     </tr>
-    <tr>
-        <td>⑤</td>
-        <td>
-            <pre><code>選擇剛才拷貝進去的那個EiteiQR文件夾（參考Example-SPM當中的EiteiQR-3.6.0文件夾）</code></pre>
-        </td>
-    </tr>
 </table>
 
-6. （Optional）**可適當增加你自己的應用程式圖標和其他信息**
-
-7. **在根目錄添加Package.swift，告訴SPM你要拉取本地的類庫而不是遠端的，添加如下代碼（Example-SPM需要換成你自己的項目名稱）：**
-```ruby
-// swift-tools-version:5.9
-// The swift-tools-version declares the minimum version of Swift required to build this package.
-
-import PackageDescription
-
-let package = Package(
-    name: "Example-SPM",
-    defaultLocalization: "en", 
-
-    platforms: [
-        .iOS(.v14),
-        .macOS(.v10_15),
-    ],
-    products: [
-        .library(
-            name: "Example-SPM",
-            targets: ["Example-SPM"]),
-    ],
-    dependencies: [
-        .package(path: "../"),
-    ],
-    targets: [
-        .target(
-            name: "Example-SPM",
-            dependencies: ["EiteiQR"], path: "Example-SPM")
-    ]
-)
-
-```
-8. **運行項目即可！**
+6. **運行項目即可**
