@@ -5,22 +5,28 @@
 
 ## 使用方法（Cocoapods）
 
-1. **新建一個Swift項目，類型選擇Storyboard，然後執行以下三個操作：**
+1. **新建一個Swift項目，類型選擇Storyboard，然後：**
 <table>
     <tr>
-        <td>①</td>
+        <td>「１」</td>
         <td>
             <pre><code>把Main.storyboard和ViewController.swift刪掉</code></pre>
         </td>
     </tr>
     <tr>
-        <td>②</td>
+        <td>「２」</td>
         <td>
             <pre><code>同時在Info.plist中（最末尾）把Storyboard Name = Main這一行刪除</code></pre>
         </td>
     </tr>
     <tr>
-        <td>③</td>
+        <td>「３」</td>
+        <td>
+            <pre><code>點擊TARGETS，在Build Settings中把Main Storyboard File Base Name置為空</code></pre>
+        </td>
+    </tr>
+    <tr>
+        <td>「４」</td>
         <td>
             <pre><code>點擊TARGETS，在Build Settings中把Main Storyboard File Base Name置為空</code></pre>
         </td>
@@ -38,7 +44,7 @@
     <key>NSPhotoLibraryUsageDescription</key>
     <string>Used to scan QR code</string>
    ```
-3. **在項目跟目錄放置Podfile，並添加如下內容（“Example-Cocoapods”替換為你的項目名稱），然後在根目錄運行pod install**
+3. **在項目跟目錄新建Podfile並添加如下內容（“Example-Cocoapods”替換為你的項目名稱），然後在根目錄運行pod install**
 ```ruby
 
 platform :ios, '12.0'
@@ -88,7 +94,7 @@ pod install --repo-update
 
 ## 使用方法（SPM）
 
-1. **新建一個Swift項目，類型選擇Storyboard。接著在根目錄新建Package.swift，內容如下**
+1. **新建一個Swift項目，類型選擇Storyboard。接著在根目錄新建Package.swift，內容如下：**
 ```swift
 // swift-tools-version: 5.9
 // The swift-tools-version declares the minimum version of Swift required to build this package.
@@ -100,19 +106,19 @@ let package = Package()
 2. **執行以下三個操作**
 <table>
     <tr>
-        <td>①</td>
+        <td>「１」</td>
         <td>
             <pre><code>把Main.storyboard和ViewController.swift刪掉</code></pre>
         </td>
     </tr>
     <tr>
-        <td>②</td>
+        <td>「２」</td>
         <td>
             <pre><code>同時在Info.plist中（最末尾）把Storyboard Name = Main這一行刪除</code></pre>
         </td>
     </tr>
     <tr>
-        <td>③</td>
+        <td>「３」</td>
         <td>
             <pre><code>在Build Settings中把UIKit Main Storyboard File Base Name置為空</code></pre>
         </td>
@@ -153,22 +159,22 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
 }
 ```
-5. **按順序執行以下三步**
+5. **按順序執行以下操作：**
 <table>
     <tr>
-        <td>①</td>
+        <td>「１」</td>
         <td>
             <pre><code>點擊項目的Build Target，在Build Phases找到“Link Binary With Libraryies”,點擊加號</code></pre>
         </td>
     </tr>
     <tr>
-        <td>②</td>
+        <td>「２」</td>
         <td>
             <pre><code>彈出的對話框中點擊Add Other，然後Add Package Dependency</code></pre>
         </td>
     </tr>
     <tr>
-        <td>③</td>
+        <td>「３」</td>
         <td>
             <pre><code>在彈出的對話框中，點擊Add Local（亦可搜索eiteiqr拉取遠程的）</code></pre>
         </td>
