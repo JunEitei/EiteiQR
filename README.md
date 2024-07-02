@@ -99,19 +99,19 @@ pod install --repo-update
 2. **執行以下三個操作**
 <table>
     <tr>
-        <td>1</td>
+        <td>①</td>
         <td>
             <pre><code>把Main.storyboard和ViewController.swift刪掉</code></pre>
         </td>
     </tr>
     <tr>
-        <td>2</td>
+        <td>②</td>
         <td>
             <pre><code>同時在Info.plist中（最末尾）把Storyboard Name = Main這一行刪除</code></pre>
         </td>
     </tr>
     <tr>
-        <td>3</td>
+        <td>③</td>
         <td>
             <pre><code>點擊TARGETS在Build Settings中把UIKit Main Storyboard File Base Name置為空（否則會閃退）</code></pre>
         </td>
