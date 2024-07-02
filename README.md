@@ -153,7 +153,6 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 }
 ```
 5. **按順序執行以下操作**
-```html
 <table>
     <tr>
         <td>①</td>
@@ -186,10 +185,10 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         </td>
     </tr>
 </table>
-```
-6. （Optional）**可適當增加你自己的應用程式圖標和其他信息。**
 
-7.  **在根目錄添加Package.swift，告訴SPM你要拉取本地的類庫而不是遠端的，添加如下代碼（Example-SPM需要換成你自己的項目名稱）：**
+6. （Optional）**可適當增加你自己的應用程式圖標和其他信息**
+
+7. **在根目錄添加Package.swift，告訴SPM你要拉取本地的類庫而不是遠端的，添加如下代碼（Example-SPM需要換成你自己的項目名稱）：**
 ```ruby
 // swift-tools-version:5.9
 // The swift-tools-version declares the minimum version of Swift required to build this package.
