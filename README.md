@@ -42,7 +42,7 @@
     <key>NSPhotoLibraryUsageDescription</key>
     <string>Used to scan QR code</string>
    ```
-3. **在項目跟目錄新建Podfile並添加如下內容（“Example-Cocoapods”替換為你的項目名稱），然後在根目錄運行pod install**
+3. **在項目跟目錄新建Podfile並添加如下內容（“Example-Cocoapods”替換為你的項目名稱）：**
 ```ruby
 
 platform :ios, '12.0'
@@ -55,7 +55,7 @@ target 'Example-Cocoapods' do
 
 end
 ```
-4. **完成後打開‘你的項目名.xcworkspace’，並將SceneDelegate.swift替換為如下代碼：**
+1. **在根目錄運行pod install，完成後打開xcworkspace檔案，並將SceneDelegate.swift替換為如下代碼：**
 ```ruby
 import UIKit
 import EiteiQR
@@ -128,7 +128,7 @@ let package = Package()
     </tr>
 </table>
 
-3. **右鍵單擊Info.plist，選擇Open as source code，並在最後一個Dict結束標籤之前添加如下代碼：**
+3. **右鍵單擊Info.plist選擇Open as source code，並在最後一個Dict結束標籤之前添加如下代碼：**
    ```xml
     <key>NSAppleMusicUsageDescription</key>
     <string>Used to scan QR code</string>
@@ -140,7 +140,7 @@ let package = Package()
     <string>Used to scan QR code</string>
    ```
 
-4. **SceneDelegate.swift替換為如下代碼：**
+4. **將SceneDelegate.swift替換為如下代碼：**
 ```ruby
 import UIKit
 import EiteiQR
@@ -162,7 +162,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
 }
 ```
-5. **按順序執行以下操作：**
+5. **順序執行以下操作：**
 <table>
     <tr>
         <td>「１」</td>
