@@ -42,7 +42,7 @@
     <key>NSPhotoLibraryUsageDescription</key>
     <string>Used to scan QR code</string>
    ```
-3. **在項目跟目錄新建Podfile並添加如下內容（“Example-Cocoapods”替換為你的項目名稱）：**
+3. **在項目根目錄新建Podfile並添加如下內容（“Example-Cocoapods”替換為你的項目名稱）：**
 ```ruby
 
 platform :ios, '12.0'
