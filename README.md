@@ -1,4 +1,4 @@
-# EiteiQR     ![CocoaPods](https://img.shields.io/cocoapods/v/EiteiQR.svg)
+# EiteiQR（二維碼掃描器）     ![CocoaPods](https://img.shields.io/cocoapods/v/EiteiQR.svg)
 
 
 # 使用方法（Cocoapods）
