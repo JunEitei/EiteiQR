@@ -1,7 +1,7 @@
-# EiteiQR（二維碼掃描器）     ![CocoaPods](https://img.shields.io/cocoapods/v/EiteiQR.svg)
+# EiteiQR（二維碼工具）     ![CocoaPods](https://img.shields.io/cocoapods/v/EiteiQR.svg)
 
 
-# 使用方法（Cocoapods）
+# 集成方法（Cocoapods）
 
 1. **新建一個Swift項目，類型選擇Storyboard，然後：**
 <table>
@@ -89,7 +89,7 @@ pod install --repo-update
 6.  **運行項目即可**
 
 
-# 使用方法（SPM）
+# 集成方法（SPM）
 
 1. **新建一個Swift項目，類型選擇Storyboard。接著在根目錄新建Package.swift，內容如下：**
 ```swift
