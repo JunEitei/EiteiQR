@@ -1,6 +1,6 @@
 # EiteiQR（永程二維碼工具）     ![CocoaPods](https://img.shields.io/cocoapods/v/EiteiQR.svg)
 
-## 永程公司官網：https://yongcheng.jp/
+## 永程官網：https://yongcheng.jp/
 ## 
 
 ## Cocoapods
