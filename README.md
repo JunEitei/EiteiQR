@@ -1,9 +1,13 @@
 # 永程二維碼助手     ![CocoaPods](https://img.shields.io/cocoapods/v/EiteiQR.svg)
 
-## 永程公司官網：https://yongcheng.jp/
-## 
+## https://yongcheng.jp/
 
-## Cocoapods
+## Preview：
+
+<img width="559" alt="截圖 2024-08-07 08 59 01" src="https://github.com/user-attachments/assets/5cc48acc-3d99-4fd0-a50a-ae3e250be341">
+<img width="559" alt="截圖 2024-08-07 08 58 56" src="https://github.com/user-attachments/assets/13685265-b06a-43e8-ade3-d477302cb84b">
+
+## Install via Cocoapods
 
 1. **新建一個Swift項目，類型選擇Storyboard，然後：**
 <table>
@@ -91,7 +95,7 @@ pod install --repo-update
 6.  **運行項目即可**
 
 
-## SPM
+## Install via SPM
 
 1. **新建一個Swift項目，類型選擇Storyboard。接著在根目錄新建Package.swift，內容如下：**
 ```swift
