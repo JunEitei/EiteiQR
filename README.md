@@ -1,9 +1,5 @@
 # 永程二維碼助手     ![CocoaPods](https://img.shields.io/cocoapods/v/EiteiQR.svg)
 
-## https://yongcheng.jp/
-
-## Preview：
-
 <img width="559" alt="截圖 2024-08-07 08 59 01" src="https://github.com/user-attachments/assets/5cc48acc-3d99-4fd0-a50a-ae3e250be341">
 <img width="559" alt="截圖 2024-08-07 08 58 56" src="https://github.com/user-attachments/assets/13685265-b06a-43e8-ade3-d477302cb84b">
 
